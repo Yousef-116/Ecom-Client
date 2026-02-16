@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ShopService } from '../shop.service';
 import { Router } from '@angular/router';
 import { IProduct } from '../../Models/Product';
+import { CurrencyPipe } from '@angular/common';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [],
+  imports: [CurrencyPipe, NgxImageZoomModule],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })
@@ -17,6 +19,8 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
   id: number;
   product: IProduct;
+  MainImage: string;
+  Quantity: number = 1;
   ngOnInit(): void {
     this.id = parseInt(this.router.url.split('/').pop() || '');
     this.loadProduct(this.id);
@@ -26,7 +30,12 @@ export class ProductDetailsComponent implements OnInit {
     this.shopService.getProductDetails(id).subscribe({
       next: (value: IProduct) => {
         this.product = value;
+        this.MainImage = value.photos[0].imageName;
       },
     });
+  }
+
+  ReplaceImage(image: string) {
+    this.MainImage = image;
   }
 }
