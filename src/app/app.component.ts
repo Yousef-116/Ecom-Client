@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { NavBarComponent } from './core/nav-bar/nav-bar.component';
+import { ShopComponent } from './shop/shop.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, NavBarComponent, ShopComponent, RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'Ecom-Client';
+export class AppComponent implements OnInit {
+  constructor() {}
+  ngOnInit(): void {}
 }

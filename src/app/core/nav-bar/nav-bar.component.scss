@@ -1,0 +1,186 @@
+// styles.scss
+$primary-color: #3f51b5;
+$secondary-color: #5c6bc0;
+$accent-color: #ff4081;
+$light-color: #ffffff;
+$dark-color: #212121;
+$navbar-height: 60px;
+$navbar-padding: 1rem;
+$input-border-radius: 0.5rem;
+$transition-duration: 0.3s;
+
+.navbar {
+  background: linear-gradient(45deg, $primary-color, $secondary-color);
+  padding: $navbar-padding;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  .navbar-brand {
+    .logo {
+      height: $navbar-height;
+    }
+  }
+
+  .navbar-nav {
+    .nav-item {
+      .nav-link {
+        color: $light-color;
+        font-size: 1.1rem;
+        padding: 0.75rem 1rem;
+        transition: color $transition-duration ease, background-color $transition-duration ease;
+
+        &:hover {
+          color: rgb(255, 255, 255);
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 0.5rem;
+        }
+      &.active{
+        color: $accent-color;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+      }
+      }
+    }
+  }
+
+  .form-inline {
+    .input-group {
+      .form-control {
+        border-radius: $input-border-radius 0 0 $input-border-radius;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      }
+
+      .btn-light {
+        border-radius: 0 $input-border-radius $input-border-radius 0;
+        border: none;
+        background-color: $accent-color;
+        color: $light-color;
+        transition: background-color $transition-duration ease;
+
+        &:hover {
+          background-color: darken($accent-color, 10%);
+        }
+      }
+    }
+  }
+
+  .dropdown-menu {
+    background-color: $dark-color;
+    border-radius: 0.5rem;
+
+    a {
+      color: $light-color;
+      padding: 0.75rem 1rem;
+      transition: background-color $transition-duration ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar {
+    padding: 0 15px;
+
+    .form-inline {
+      max-width: none;
+    }
+  }
+}
+
+// ------------------------------------
+
+$primary-color: #7961ff;
+$secondary-color: #343a40;
+$background-color: #f8f9fa;
+$text-color: #212529;
+$border-radius: 0.5rem;
+$transition-duration: 0.3s;
+$danger-color: #dc3545;
+$star-color: #ffc107;
+//--------------------------
+
+.card {
+    border: .1px solid #f2eeee;
+    border-radius: 10px;
+    height: 200px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+    }
+  
+    .card-img-top {
+      border-radius: 15px 15px 0 0;
+    }
+  
+    .thumbnails {
+      display: flex;
+      justify-content: start;
+      gap: 0.4rem;
+    }
+  
+    .small-img {
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      border: 1px solid transparent;
+      transition: border-color 0.3s;
+  
+      &:hover {
+        border-color: $primary-color;
+      }
+    }
+  
+    .card-body {
+      position: relative;
+      padding: .7rem;
+      background: white;
+      border-radius: 0 0 15px 15px;
+  
+      .card-title {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+        color: $primary-color;
+      }
+  
+      .card-text {
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+        color: $secondary-color;
+      }
+  
+      .price {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+  
+        .old-price {
+          text-decoration: line-through;
+          color: $danger-color;
+          margin-right: 0.5rem;
+        }
+      }
+  
+      .rating {
+        span {
+          color: $star-color;
+          font-size: 1.1rem;
+        }
+      }
+  
+      .favorite-icon {
+        position: absolute;
+        top: 4rem;
+        right: .3rem;
+       border: none;
+  
+      }
+    }
+  
+  }
+  

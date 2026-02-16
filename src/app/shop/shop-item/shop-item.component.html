@@ -1,0 +1,40 @@
+<div class="card h-100">
+    @if(product.photos.length>0){
+    <img src="http://localhost:5037/{{product.photos[0].imageName}}" class="card-img-top" alt="">
+    }
+    <div class="card-body">
+        <div class="thumbnails mb-3">
+            @for (item of product.photos; track $index) {
+            <img src="http://localhost:5037/{{item.imageName}}" alt="" class="thumbnail-img small-img">
+            }
+        </div>
+        <h5 class="card-title">{{product.name}}</h5>
+        <p class="card-text">{{product.description}}</p>
+        <p class="price">
+            <span class="old-price">{{product.oldPrice|currency}}</span>
+            {{product.newPrice|currency}}
+        </p>
+        <div class="rating mb-3">
+            <!-- @for (item of getArrayofRating(Product.rating); track $index) {
+
+                } -->
+            <i class="fa fa-star " style="color: rgb(243, 255, 82); font-size: 15px;"></i>
+            <i class="fa fa-star " style="color: rgb(243, 255, 82); font-size: 15px;"></i>
+            <i class="fa fa-star " style="color: rgb(243, 255, 82); font-size: 15px;"></i>
+            <i class="fa fa-star " style="color: rgb(243, 255, 82); font-size: 15px;"></i>
+        </div>
+        <button class="btn btn-outline-primary favorite-icon">
+            <i class="fa fa-bookmark"></i>
+        </button>
+        <div class="d-flex justify-content-between align-items-start">
+            <button class="btn btn-dark">
+                <i class="fa fa-shopping-cart"></i>Add to Cart
+            </button>
+
+            <button [routerLink]="['/product-details', product.id]" class="btn btn-success">
+                <i class="fa fa-info-circle"></i> Details
+            </button>
+
+        </div>
+    </div>
+</div>

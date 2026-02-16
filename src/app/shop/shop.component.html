@@ -1,0 +1,85 @@
+@if(ListProduct){
+
+<div class="container mt-5">
+    <div class="row">
+        <h1 class="main-title">Shopping</h1>
+        <section class="col-md-3">
+
+            <div class="sidebar">
+                <h4 class="section-title">Sorting</h4>
+                <div class="custom-select-wrapper mb-4">
+                    <select [(ngModel)]="productParam.SortSelected" (change)="Sort($event)" class="form-select">
+                        @for (item of SortingOption; track $index) {
+                        <option [value]="item.value">{{item.name}}</option>
+                        }
+                    </select>
+
+                </div>
+
+                <h4 class="section-title">Categories</h4>
+                <ul class="list-group custom-list-group">
+
+                    <li [class.active]="productParam.SelectedCategoryId==0" (click)="SelectCategory(0)"
+                        class="list-group-item custom-list-item">
+                        All
+                    </li>
+                    @for (item of ListCategory; track $index) {
+                    <li [class.active]="item.id == productParam.SelectedCategoryId" (click)="SelectCategory(item.id)"
+                        class="list-group-item custom-list-item">
+                        {{item.name}}
+                    </li>
+                    }
+                    <!-- <li [class.active]="ProductParam.CategoryId==0" (click)="SelectedId(0)"
+                        class="list-group-item custom-list-item">
+                        All
+                    </li>
+                -->
+
+                </ul>
+            </div>
+
+        </section>
+        <section class="col-md-9">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="paging-container">
+                    <!-- <span class="text-dark">showing {{product.length}} of
+                        {{ProductParam.pageNumber*ProductParam.pageSize}}</span> -->
+                    <span class="text-dark" *ngIf="totalCount > 0">
+                        Showing {{ startItem }} – {{ endItem }} of {{ totalCount }} results
+                    </span>
+
+                </div>
+                <div class="search-container">
+                    <div class="input-group search-bar">
+                        <input enterkeyhint="search" (keydown.enter)="OnSearch()" [(ngModel)]="productParam.Search"
+                            type="text" class="form-control" placeholder="Search...">
+                        <input (click)="OnSearch()" type="button" class="btn btn-danger" value="Search">
+                        <input (click)="ResetValue()" type="button" class="btn btn-dark" value="Reset">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+
+                @for (item of ListProduct; track $index) {
+                <div class="col-md-4">
+                    <app-shop-item [product]="item"></app-shop-item>
+                </div>
+                }@empty {
+                <div class="container mt-5">
+                    <div class="alert alert-warning">
+                        No products found.
+                    </div>
+                </div>
+                }
+                <div class="d-flex justify-content-center mt-4">
+                    <pagination [boundaryLinks]="true" [itemsPerPage]="productParam.pageSize"
+                        (pageChanged)="OnChangePage($event)" [totalItems]="totalCount">
+                    </pagination>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+}
