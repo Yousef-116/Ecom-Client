@@ -2,6 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { IProduct } from '../../Models/Product';
 import { RouterModule } from '@angular/router';
+import { BasketService } from '../../basket/basket.service';
 
 @Component({
   selector: 'app-shop-item',
@@ -13,6 +14,11 @@ import { RouterModule } from '@angular/router';
 export class ShopItemComponent {
   @Input({ required: true }) product!: IProduct;
 
+  constructor(private service: BasketService) {}
+  SetBasketValue() {
+    console.log('Adding to basket: ', this.product.name);
+    this.service.addItemToBasket(this.product);
+  }
   //   constructor(private _service: BasketService) {}
   //   @Input() Product: IProduct;
   //   SetBasketValue() {

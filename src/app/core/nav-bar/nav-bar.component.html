@@ -29,7 +29,8 @@
 
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/basket">
-                        <i matBadgeColor="warn" class="material-icons">shopping_cart</i>
+                        <i [matBadge]="(basket$ | async)?.basketItems?.length || 0" matBadgeColor="warn"
+                            class="material-icons">shopping_cart</i>
                     </a>
                 </li>
 

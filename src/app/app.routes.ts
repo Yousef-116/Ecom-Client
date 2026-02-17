@@ -17,5 +17,13 @@ export const routes: Routes = [
       );
     },
   },
+  {
+    path: 'basket',
+    loadComponent() {
+      return import('./basket/basket/basket.component').then(
+        (c) => c.BasketComponent,
+      );
+    },
+  },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

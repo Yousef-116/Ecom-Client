@@ -110,7 +110,7 @@ export class ShopComponent implements OnInit {
 //   this.getCategory();
 // }
 
-// Cateogry: ICateogry[];
+// category: Icategory[];
 // TotatlCount: number;
 // ProductParam = new ProductParam();
 
@@ -137,7 +137,7 @@ export class ShopComponent implements OnInit {
 // getCategory() {
 //   this.shopService.getCategory().subscribe({
 //     next: (value) => {
-//       this.Cateogry = value;
+//       this.category = value;
 //     },
 //   });
 // }
