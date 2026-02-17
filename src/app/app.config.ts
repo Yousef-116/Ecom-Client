@@ -4,9 +4,20 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { loaderInterceptor } from './core/Interceptor/loader.interceptor';
+import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideToastr({
+      positionClass: 'toast-top-right',
+      timeOut: 1500,
+      extendedTimeOut: 1000,
+      progressBar: true,
+      closeButton: true,
+      tapToDismiss: true,
+      disableTimeOut: false,
+    }),
+
     provideAnimations(),
     provideRouter(routes),
     provideHttpClient(withInterceptors([loaderInterceptor])),

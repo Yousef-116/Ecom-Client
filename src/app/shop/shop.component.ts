@@ -8,18 +8,13 @@ import { ICategory } from '../Models/Category';
 import { FormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ProductParams } from '../Models/ProductParams';
-
-// import { ShopService } from './shop.service';
-// import { ICateogry } from '../shared/Models/Category';
-// import { IPagnation } from '../shared/Models/Pagnation';
-// import { IProduct } from '../shared/Models/Product';
-// import { ProductParam } from '../shared/Models/ProductParam';
-// import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-shop',
   standalone: true,
   imports: [ShopItemComponent, FormsModule, PaginationModule, CommonModule],
+
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss'],
 })
@@ -28,7 +23,10 @@ export class ShopComponent implements OnInit {
     this.getAllProduct();
     this.getCategory();
   }
-  constructor(private shopService: ShopService) {}
+  constructor(
+    private shopService: ShopService,
+    private tost: ToastrService,
+  ) {}
 
   //Get All Product
   ListProduct: IProduct[];
@@ -40,9 +38,7 @@ export class ShopComponent implements OnInit {
       next: (value: IPagnation) => {
         this.ListProduct = value.data;
         this.totalCount = value.totalCount;
-        //this.productParam.pageNumber = value.pageNumber;
-        //this.productParam.pageSize = value.pageSize;
-        //this.Product = this.ListProduct[0];
+        // this.tost.success('Products Loaded Successfully', 'SUCCESS');
       },
     });
   }
