@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import { Basket, IBasket, IBasketItem } from '../Models/Basket';
+import { Basket, IBasket, IBasketItem, IBasketTotal } from '../Models/Basket';
 import { IProduct } from '../Models/Product';
 
 @Injectable({
@@ -13,13 +13,25 @@ export class BasketService {
   BaseURL = 'http://localhost:5037/api/';
   private basketSource = new BehaviorSubject<IBasket>(null);
   basket$ = this.basketSource.asObservable();
+  private basketTotalSource = new BehaviorSubject<IBasketTotal>(null);
+  basketTotal$ = this.basketTotalSource.asObservable();
+
+  calculateTotal() {
+    const basket = this.GetCurrentValue();
+    const shipping = 0;
+    const subtotal = basket.basketItems.reduce((acc, item) => {
+      return item.price * item.quantity + acc;
+    }, 0);
+    const total = subtotal + shipping;
+    this.basketTotalSource.next({ shipping, subtotal, total });
+  }
 
   GetBasket(id: string) {
     return this.http.get(this.BaseURL + 'Baskets/get_basket?id=' + id).pipe(
       map((value: IBasket) => {
         this.basketSource.next(value);
         //console.log(value);
-
+        this.calculateTotal();
         return value;
       }),
     );
@@ -30,6 +42,7 @@ export class BasketService {
       .subscribe({
         next: (value: IBasket) => {
           this.basketSource.next(value);
+          this.calculateTotal();
           // console.log(value);
         },
         error(err) {

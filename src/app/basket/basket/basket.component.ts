@@ -4,12 +4,13 @@ import { RouterLink } from '@angular/router';
 import { IBasket, IBasketItem } from '../../Models/Basket';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { async, asyncScheduler, Observable } from 'rxjs';
+import { OrderTotalComponent } from '../../Shared/order-total/order-total.component';
 // import { IBasket, IBasketItem } from '../../shared/Models/Basket';
 
 @Component({
   selector: 'app-basket',
   standalone: true,
-  imports: [RouterLink, CurrencyPipe, CommonModule],
+  imports: [RouterLink, CurrencyPipe, CommonModule, OrderTotalComponent],
   templateUrl: './basket.component.html',
   styleUrl: './basket.component.scss',
 })

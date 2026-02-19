@@ -49,4 +49,10 @@ export class NavBarComponent implements OnInit {
       console.log('No Basket ID found in localStorage');
     }
   }
+
+  visible: boolean = false;
+
+  ToggleDropDown() {
+    this.visible = !this.visible;
+  }
 }
