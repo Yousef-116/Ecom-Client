@@ -8,7 +8,6 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { map } from 'rxjs/operators';
 import { IBasket } from '../../Models/Basket';
 import { InteropObservable, Observable } from 'rxjs';
-
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
@@ -26,31 +25,28 @@ import { InteropObservable, Observable } from 'rxjs';
 })
 export class NavBarComponent implements OnInit {
   basket$: Observable<IBasket>;
+
+  constructor(public basketService: BasketService) {
+    // Initialize directly from the service
+    this.basket$ = this.basketService.basket$;
+  }
+
   ngOnInit(): void {
     var basketId = localStorage.getItem('basketId');
     if (basketId) {
-      //console.log('Basket ID found in localStorage: ', basketId);
+      console.log('Basket ID found in localStorage: ', basketId);
       this.basketService.GetBasket(basketId).subscribe({
         next: (value) => {
           console.log('Basket loaded successfully: ', value);
-          this.basket$ = this.basketService.basket$;
+          // Don't set basket$ here - it's already set from the constructor
+          // The basketSource will automatically update through the observable
+        },
+        error: (error) => {
+          console.error('Error loading basket:', error);
         },
       });
     } else {
-      //console.log('No Basket ID found in localStorage');
+      console.log('No Basket ID found in localStorage');
     }
-  }
-  // get basketCount(): number {
-  //   return (
-  //     this.basket?.basketItems?.reduce((acc, item) => acc + item.quantity, 0) ??
-  //     0
-  //   );
-  // }
-
-  constructor(public basketService: BasketService) {}
-  visible: boolean = false;
-
-  ToggleDropDown() {
-    this.visible = !this.visible;
   }
 }

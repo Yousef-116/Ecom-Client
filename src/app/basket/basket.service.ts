@@ -38,6 +38,52 @@ export class BasketService {
       });
   }
 
+  DeleteBasketItem(basket: IBasket) {
+    return this.http
+      .delete(this.BaseURL + 'Baskets/delete_basket/' + basket.id)
+      .subscribe({
+        next: (value) => {
+          this.basketSource.next(null);
+          localStorage.removeItem('basketId');
+        },
+        error(err) {
+          console.log(err);
+        },
+      });
+  }
+
+  incrementBasketItemQuantity(item: IBasketItem) {
+    const basket = this.GetCurrentValue();
+    const itemIndex = basket.basketItems.findIndex((i) => i.id === item.id);
+    basket.basketItems[itemIndex].quantity++;
+    this.SetBasket(basket);
+  }
+
+  DecrementBasketItemQuantity(item: IBasketItem) {
+    const basket = this.GetCurrentValue();
+    const itemIndex = basket.basketItems.findIndex((i) => i.id === item.id);
+    if (basket.basketItems[itemIndex].quantity > 1) {
+      basket.basketItems[itemIndex].quantity--;
+      this.SetBasket(basket);
+    } else {
+      this.removeItemFormBasket(item);
+    }
+  }
+
+  removeItemFormBasket(item: IBasketItem) {
+    const basket = this.GetCurrentValue();
+
+    basket.basketItems = basket.basketItems.filter((i) => i.id !== item.id);
+
+    if (basket.basketItems.length > 0) {
+      this.SetBasket(basket);
+    } else {
+      this.basketSource.next(null);
+      this.DeleteBasketItem(basket).unsubscribe();
+      localStorage.removeItem('basketId'); // remove instantly
+    }
+  }
+
   GetCurrentValue() {
     return this.basketSource.value;
   }
@@ -90,9 +136,11 @@ export class BasketService {
       quantity: quantity,
       imageName: product.photos[0].imageName,
       categoryName: product.categoryName,
+      description: product.description,
     };
   }
 }
+
 //{
 //   constructor(private http: HttpClient) {}
 //   BaseURL = environment.baseURL;
@@ -133,7 +181,7 @@ export class BasketService {
 //     const basket = this.GetCurrentValue();
 //     const shipping = this.shipPrice;
 //     const subtotal = basket.basketItems.reduce((a, c) => {
-//       return c.price * c.qunatity + a;
+//       return c.price * c.quantity + a;
 //     }, 0);
 //     const total = shipping + subtotal;
 //     this.basketSourceTotal.next({ shipping, subtotal, total });
@@ -190,10 +238,10 @@ export class BasketService {
 //   ): IBasketItem[] {
 //     const index = basketItems.findIndex((i) => i.id === itemToAdd.id);
 //     if (index == -1) {
-//       itemToAdd.qunatity = quantity;
+//       itemToAdd.quantity = quantity;
 //       basketItems.push(itemToAdd);
 //     } else {
-//       basketItems[index].qunatity += quantity;
+//       basketItems[index].quantity += quantity;
 //     }
 //     return basketItems;
 //   }
@@ -212,7 +260,7 @@ export class BasketService {
 //       image: product.photos[0].imageName,
 //       name: product.name,
 //       price: product.newPrice,
-//       qunatity: quantity,
+//       quantity: quantity,
 //       description: product.description,
 //     };
 //   }
@@ -220,15 +268,15 @@ export class BasketService {
 //   incrementBasketItemQuantity(item: IBasketItem) {
 //     const basket = this.GetCurrentValue();
 //     const itemIndex = basket.basketItems.findIndex((i) => i.id === item.id);
-//     basket.basketItems[itemIndex].qunatity++;
+//     basket.basketItems[itemIndex].quantity++;
 //     this.SetBasket(basket);
 //   }
 
 //   DecrementBasketItemQuantity(item: IBasketItem) {
 //     const basket = this.GetCurrentValue();
 //     const itemIndex = basket.basketItems.findIndex((i) => i.id === item.id);
-//     if (basket.basketItems[itemIndex].qunatity > 1) {
-//       basket.basketItems[itemIndex].qunatity--;
+//     if (basket.basketItems[itemIndex].quantity > 1) {
+//       basket.basketItems[itemIndex].quantity--;
 //       this.SetBasket(basket);
 //     } else {
 //       this.removeItemFormBasket(item);
@@ -241,11 +289,11 @@ export class BasketService {
 //       if (basket.basketItems.length > 0) {
 //         this.SetBasket(basket);
 //       } else {
-//         this.DeleteBaskeItem(basket);
+//         this.DeleteBasketItem(basket);
 //       }
 //     }
 //   }
-//   DeleteBaskeItem(basket: IBasket) {
+//   DeleteBasketItem(basket: IBasket) {
 //     return this.http
 //       .delete(this.BaseURL + '/Baskets/delete-basket-item/' + basket.id)
 //       .subscribe({

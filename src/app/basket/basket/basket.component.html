@@ -1,8 +1,11 @@
-<!-- @if (basket.id===null) { -->
-<div class="text-center tect-danger">
+@if (basket$ | async; as basket) {
+
+@if (!basket) {
+<div class="text-center text-danger">
     <h4>Your basket is empty</h4>
 </div>
-<!-- }@else { -->
+}
+@else {
 <div class="container pt-4 flex-contaier">
     <div class="basket-container">
         <table class="table table-hover custom-table">
@@ -18,39 +21,39 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- @for (item of basket.basketItems; track $index) { -->
+                @for (item of basket.basketItems; track item.id) {
                 <tr>
                     <td>
-                        <!-- <a routerLink="/shop/product-details/{{item.id}}" class="text-dark text-decoration-none">
+                        <a [routerLink]="['/product-details', item.id]" class="text-dark text-decoration-none">
                             {{item.name}}
-                        </a> -->
+                        </a>
                     </td>
                     <td>
-                        <img src="https://localhost:44344/" class="product-image img-fluid" alt="">
+                        <img [src]="'http://localhost:5037/' + item.imageName" class="product-image img-fluid" alt="">
                     </td>
                     <td class="description">
-                        <!-- {{item.description}} -->
+                        {{item.description}}
                     </td>
-                    <!-- <td>{{item.price|currency}}</td> -->
+                    <td>{{item.price|currency}}</td>
                     <td>
                         <div class="d-flex justify-content-center align-items-center">
-                            <button class="btn btn-sm text-info">
+                            <button (click)="incrementQuantity(item)" class="btn btn-sm text-info">
                                 <i class="fa fa-plus"></i>
                             </button>
-                            <!-- <span class="mx-2"> {{item.qunatity}}</span> -->
-                            <button class="btn btn-sm text-danger">
+                            <span class="mx-2"> {{item.quantity}}</span>
+                            <button (click)="decrementQuantity(item)" class="btn btn-sm text-danger">
                                 <i class="fa fa-minus"></i>
                             </button>
                         </div>
                     </td>
-                    <!-- <td>{{(item.qunatity*item.price)|currency}}</td> -->
+                    <td>{{(item.quantity*item.price)|currency}}</td>
                     <td>
-                        <button class="btn btn-danger">
+                        <button (click)="removeItem(item)" class="btn btn-danger">
                             <i class="fa fa-trash"></i>
                         </button>
                     </td>
                 </tr>
-                <!-- } -->
+                }
             </tbody>
         </table>
 
@@ -62,4 +65,5 @@
         </a>
     </div>
 </div>
-<!-- } -->
+}
+}
