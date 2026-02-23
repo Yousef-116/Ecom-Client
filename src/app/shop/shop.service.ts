@@ -17,7 +17,8 @@ import { ProductParams } from '../Models/ProductParams';
 export class ShopService {
   constructor(private http: HttpClient) {}
 
-  baseURL = 'http://localhost:5037/api';
+  baseURL = 'https://localhost:7097/api';
+
   //Product: IProduct[];
 
   getProduct(productParam: ProductParams) {

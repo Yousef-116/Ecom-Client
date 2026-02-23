@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ProductParams } from '../Models/ProductParams';
 import { ToastrService } from 'ngx-toastr';
+import { cwd } from 'node:process';
 
 @Component({
   selector: 'app-shop',
@@ -20,7 +21,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ShopComponent implements OnInit {
   ngOnInit(): void {
-    this.getAllProduct();
+    try {
+      this.getAllProduct();
+    } catch (error) {
+      this.tost.error('Failed to load products', 'ERROR');
+      console.log(error);
+    }
     this.getCategory();
   }
   constructor(

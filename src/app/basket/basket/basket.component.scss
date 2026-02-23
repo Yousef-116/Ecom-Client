@@ -77,8 +77,6 @@
   padding: 20px;
 }
 
-
-/* From Uiverse.io by Ratinax */ 
 .radio-input {
 display: flex;
 scale: 0.15;
@@ -133,4 +131,63 @@ transition: transform 0.3s;
 50% {
   scale: 2;
 }
+}
+
+.checkout-wrapper {
+  text-align: center;
+  margin-top: 20px;
+
+  .pixel-checkout-btn {
+    width: 100%;
+    background: #000; // Black background
+    color: #fff;       // White text
+    border: none;
+    padding: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-transform: uppercase;
+    
+    // Pixelated "Double Border" effect
+    box-shadow: 
+      0 0 0 2px #fff, 
+      0 0 0 4px #000;
+    
+    margin: 10px 0;
+    transition: all 0.1s steps(2); // Steps(2) makes the animation "choppy" like an old game
+
+    &:hover {
+      background: #333;
+      transform: scale(1.02);
+    }
+
+    &:active {
+      background: #000;
+      transform: scale(0.98);
+      // Invert colors on click for a "flash" effect
+      filter: invert(1); 
+    }
+  }
+
+  .receipt-footer {
+    font-size: 0.7rem;
+    margin-top: 15px;
+    letter-spacing: 2px;
+    opacity: 0.8;
+  }
+}
+
+// Optional: Add a "Dotted" border style to the button instead of solid
+.pixel-checkout-btn.alt-style {
+  background: transparent;
+  color: #000;
+  border: 3px dashed #000;
+  box-shadow: none;
+  
+  &:hover {
+    background: #000;
+    color: #fff;
+  }
 }

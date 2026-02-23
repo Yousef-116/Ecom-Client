@@ -57,11 +57,16 @@
         </table>
 
     </div>
-    <div class="order-summary-container">
+    <div class="order-summary-container me-5">
         <app-order-total></app-order-total>
-        <a routerLink="/checkout" class="btn btn-dark w-100 mt-3">
-            Proceed to checkout
-        </a>
+        <div class="receipt-edge bottom"></div>
+        <div class="checkout-wrapper">
+            <div class="pixel-divider">**************************</div>
+            <button routerLink="/checkout" class="pixel-checkout-btn">
+                <span class="pixel-icon">▶</span> PROCEED TO CHECKOUT <span class="pixel-icon">◀</span>
+            </button>
+            <p class="receipt-footer">THANK YOU FOR YOUR VISIT</p>
+        </div>
     </div>
 </div>
 }

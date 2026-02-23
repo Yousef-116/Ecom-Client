@@ -8,6 +8,9 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { map } from 'rxjs/operators';
 import { IBasket } from '../../Models/Basket';
 import { InteropObservable, Observable } from 'rxjs';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
@@ -25,9 +28,10 @@ import { InteropObservable, Observable } from 'rxjs';
 })
 export class NavBarComponent implements OnInit {
   basket$: Observable<IBasket>;
-
-  constructor(public basketService: BasketService) {
-    // Initialize directly from the service
+  constructor(
+    public basketService: BasketService,
+    // @Inject(PLATFORM_ID) private platformId: Object,
+  ) {
     this.basket$ = this.basketService.basket$;
   }
 
@@ -50,6 +54,26 @@ export class NavBarComponent implements OnInit {
     }
   }
 
+  // ngOnInit(): void {
+  //   if (isPlatformBrowser(this.platformId)) {
+  //     const basketId = localStorage.getItem('basketId');
+
+  //     if (basketId) {
+  //       console.log('Basket ID found in localStorage:', basketId);
+
+  //       this.basketService.GetBasket(basketId).subscribe({
+  //         next: (value) => {
+  //           console.log('Basket loaded successfully:', value);
+  //         },
+  //         error: (error) => {
+  //           console.error('Error loading basket:', error);
+  //         },
+  //       });
+  //     } else {
+  //       console.log('No Basket ID found in localStorage');
+  //     }
+  //   }
+  // }
   visible: boolean = false;
 
   ToggleDropDown() {

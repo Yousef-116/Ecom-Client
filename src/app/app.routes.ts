@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { ProductDetailsComponent } from './shop/product-details/product-details.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,6 +13,14 @@ export const routes: Routes = [
     loadComponent() {
       return import('./shop/product-details/product-details.component').then(
         (c) => c.ProductDetailsComponent,
+      );
+    },
+  },
+  {
+    path: 'checkout',
+    loadComponent() {
+      return import('./checkout/checkout.component').then(
+        (c) => c.CheckoutComponent,
       );
     },
   },

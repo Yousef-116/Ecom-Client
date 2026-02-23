@@ -10,21 +10,13 @@ import { IProduct } from '../Models/Product';
 export class BasketService {
   constructor(private http: HttpClient) {}
 
-  BaseURL = 'http://localhost:5037/api/';
+  //BaseURL = 'https://localhost:5037/api/';
+  BaseURL = 'https://localhost:7097/api/';
+
   private basketSource = new BehaviorSubject<IBasket>(null);
   basket$ = this.basketSource.asObservable();
   private basketTotalSource = new BehaviorSubject<IBasketTotal>(null);
   basketTotal$ = this.basketTotalSource.asObservable();
-
-  calculateTotal() {
-    const basket = this.GetCurrentValue();
-    const shipping = 0;
-    const subtotal = basket.basketItems.reduce((acc, item) => {
-      return item.price * item.quantity + acc;
-    }, 0);
-    const total = subtotal + shipping;
-    this.basketTotalSource.next({ shipping, subtotal, total });
-  }
 
   GetBasket(id: string) {
     return this.http.get(this.BaseURL + 'Baskets/get_basket?id=' + id).pipe(
@@ -65,6 +57,15 @@ export class BasketService {
       });
   }
 
+  calculateTotal() {
+    const basket = this.GetCurrentValue();
+    const shipping = 0;
+    const subtotal = basket.basketItems.reduce((acc, item) => {
+      return item.price * item.quantity + acc;
+    }, 0);
+    const total = subtotal + shipping;
+    this.basketTotalSource.next({ shipping, subtotal, total });
+  }
   incrementBasketItemQuantity(item: IBasketItem) {
     const basket = this.GetCurrentValue();
     const itemIndex = basket.basketItems.findIndex((i) => i.id === item.id);
