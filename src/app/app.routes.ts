@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { AccountShellComponent } from './identity/account-shell.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,6 +16,21 @@ export const routes: Routes = [
         (c) => c.ProductDetailsComponent,
       );
     },
+  },
+  {
+    path: 'account',
+    component: AccountShellComponent,
+    children: [
+      {
+        path: 'register',
+        loadComponent: () =>
+          import('./identity/register/register.component').then(
+            (c) => c.RegisterComponent,
+          ),
+      },
+
+      // { path: '', redirectTo: 'login', pathMatch: 'full' }
+    ],
   },
   {
     path: 'checkout',

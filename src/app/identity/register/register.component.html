@@ -1,0 +1,63 @@
+<section class="auth-wrapper">
+    <div class="form-card">
+        <div class="form-header">
+            <h2>Create Account</h2>
+            <p>Join us today! It only takes a minute.</p>
+        </div>
+
+        <form [formGroup]="RegisterData" class="modern-form">
+
+            <div class="form-field">
+                <label for="userName">Username</label>
+                <div class="input-wrapper">
+                    <input type="text" id="userName" formControlName="userName" placeholder="e.g. jdoe88"
+                        [class.is-invalid]="userName.invalid && userName.touched" />
+                    @if (userName.invalid && userName.touched) {
+                    <span class="error-message">Username is required</span>
+                    }
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label for="displayName">Display Name</label>
+                <div class="input-wrapper">
+                    <input type="text" id="displayName" formControlName="displayName" placeholder="John Doe"
+                        [class.is-invalid]="DisplayName.invalid && DisplayName.touched" />
+                    @if (DisplayName.invalid && DisplayName.touched) {
+                    <span class="error-message">Please enter your display name</span>
+                    }
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label for="userEmail">Email Address</label>
+                <div class="input-wrapper">
+                    <input type="Email" id="userEmail" formControlName="Email" placeholder="name@company.com"
+                        [class.is-invalid]="email.invalid && email.touched" />
+                    @if (email.invalid && email.touched) {
+                    <span class="error-message">Please enter a valid email address</span>
+                    }
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" formControlName="password" placeholder="••••••••"
+                        [class.is-invalid]="Password.invalid && Password.touched" />
+                    @if (Password.invalid && Password.touched) {
+                    <span class="error-message">Password must be at least 6 characters</span>
+                    }
+                </div>
+            </div>
+
+            <button type="submit" [disabled]="RegisterData.invalid" class="submit-btn">
+                Register Now
+            </button>
+
+            <p class="form-footer">
+                Already have an account? <a href="#">Log in</a>
+            </p>
+        </form>
+    </div>
+</section>
