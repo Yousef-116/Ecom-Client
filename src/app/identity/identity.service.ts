@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IActive, IRegister } from '../Models/Account';
+import { IActive, ILogin, IRegister } from '../Models/Account';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +18,12 @@ export class IdentityService {
 
   active(values: IActive) {
     return this.http.post(this.baseURL + 'Account/active-account', values, {
+      responseType: 'text',
+    });
+  }
+
+  login(values: ILogin) {
+    return this.http.post(this.baseURL + 'Account/login', values, {
       responseType: 'text',
     });
   }

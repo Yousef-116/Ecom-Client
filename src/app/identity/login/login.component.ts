@@ -1,22 +1,21 @@
 import { Component } from '@angular/core';
+import { IdentityService } from '../identity.service';
+import { ToastrService } from 'ngx-toastr';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
-  ɵInternalFormsSharedModule,
 } from '@angular/forms';
-import { IdentityService } from '../identity.service';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-login',
   standalone: true,
-  imports: [ɵInternalFormsSharedModule, ReactiveFormsModule],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
+  imports: [ReactiveFormsModule],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
 })
-export class RegisterComponent {
+export class LoginComponent {
   constructor(
     private identityService: IdentityService,
     private toast: ToastrService,
@@ -24,22 +23,12 @@ export class RegisterComponent {
     this.initFormControls();
     this.initFormGroups();
   }
-  RegisterData!: FormGroup;
+  LoginData!: FormGroup;
 
-  userName!: FormControl;
-  DisplayName!: FormControl;
   email!: FormControl;
   Password!: FormControl;
 
   initFormControls() {
-    this.userName = new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-    ]);
-    this.DisplayName = new FormControl('', [
-      Validators.required,
-      Validators.minLength(2),
-    ]);
     this.email = new FormControl('', [Validators.required, Validators.email]);
     this.Password = new FormControl('', [
       Validators.required,
@@ -48,21 +37,19 @@ export class RegisterComponent {
   }
 
   initFormGroups() {
-    this.RegisterData = new FormGroup({
-      userName: this.userName, // Changed from 'name' to 'userName'
-      Email: this.email, // Changed from 'email' to 'userEmail'
-      password: this.Password, // Changed from 'password' to 'userPass'
-      displayName: this.DisplayName,
+    this.LoginData = new FormGroup({
+      email: this.email,
+      password: this.Password,
     });
   }
 
   onSubmit() {
-    if (this.RegisterData.valid) {
-      console.log(this.RegisterData.value);
+    if (this.LoginData.valid) {
+      console.log(this.LoginData.value);
       // You can perform further actions here, such as sending the data to a server
-      this.identityService.register(this.RegisterData.value).subscribe({
+      this.identityService.login(this.LoginData.value).subscribe({
         next: (response) => {
-          console.log('Registration successful:', response);
+          console.log('Login successful:', response);
           this.toast.success(response);
         },
         error: (error) => {

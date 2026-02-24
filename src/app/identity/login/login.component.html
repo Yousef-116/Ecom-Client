@@ -1,0 +1,42 @@
+<section class="auth-wrapper">
+    <div class="form-card">
+        <div class="form-header">
+            <h2>Login</h2>
+            <p>Welcome back! Please enter your details.</p>
+        </div>
+
+        <form [formGroup]="LoginData" class="modern-form" (ngSubmit)="onSubmit()">
+
+
+            <div class="form-field">
+                <label for="userEmail">Email Address</label>
+                <div class="input-wrapper">
+                    <input type="Email" id="userEmail" formControlName="email" placeholder="name@company.com"
+                        [class.is-invalid]="email.invalid && email.touched" />
+                    @if (email.invalid && email.touched) {
+                    <span class="error-message">Please enter a valid email address</span>
+                    }
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" formControlName="password" placeholder="••••••••"
+                        [class.is-invalid]="Password.invalid && Password.touched" />
+                    @if (Password.invalid && Password.touched) {
+                    <span class="error-message">Password must be at least 6 characters</span>
+                    }
+                </div>
+            </div>
+
+            <button type="submit" [disabled]="LoginData.invalid" class="submit-btn">
+                Login
+            </button>
+
+            <p class="form-footer">
+                if you Don't have an Account <a href="#">Register</a>
+            </p>
+        </form>
+    </div>
+</section>

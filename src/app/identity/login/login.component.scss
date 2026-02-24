@@ -1,0 +1,162 @@
+// Variables for easy tweaking
+$primary: #6366f1; // Modern Indigo
+$error: #ef4444;
+$success: #22c55e;
+$text-main: #1f2937;
+$text-muted: #6b7280;
+
+.auth-wrapper {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #f9fafb; // Light grey background to make the white card pop
+}
+
+.form-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 450px;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  .form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    h2 {
+      font-size: 1.875rem;
+      font-weight: 800;
+      color: $text-main;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: $text-muted;
+      font-size: 0.95rem;
+    }
+  }
+}
+
+.modern-form {
+  .form-field {
+    margin-bottom: 1.25rem;
+
+    label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: $text-main;
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: all 0.2s ease-in-out;
+      outline: none;
+
+      &::placeholder {
+        color: #9ca3af;
+      }
+
+      &:focus {
+        border-color: $primary;
+        box-shadow: 0 0 0 4px rgba($primary, 0.1);
+      }
+
+      // Validation States
+      &.is-invalid {
+        border-color: $error;
+        background-color: rgba($error, 0.02);
+        &:focus { box-shadow: 0 0 0 4px rgba($error, 0.1); }
+      }
+
+      &.is-valid {
+        border-color: $success;
+      }
+    }
+  }
+
+  .submit-btn {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.8rem;
+    background-color: $primary;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.1s, background-color 0.2s;
+
+    &:hover:not(:disabled) {
+      background-color: darken($primary, 10%);
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      filter: grayscale(1);
+    }
+  }
+
+  .form-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: $text-muted;
+
+    a {
+      color: $primary;
+      text-decoration: none;
+      font-weight: 600;
+      &:hover { text-decoration: underline; }
+    }
+  }
+}
+
+// Add this to your existing modern-form styles
+.error-message {
+  display: block;
+  color: #ef4444; // text-danger
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 0.4rem;
+  padding-left: 0.2rem;
+  
+  // Optional: Add a subtle entrance animation
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Ensure the input turns red as well
+input.is-invalid {
+  border-color: #ef4444 !important;
+  background-color: #fffafb; // Very subtle red tint
+  
+  &:focus {
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1) !important;
+  }
+}

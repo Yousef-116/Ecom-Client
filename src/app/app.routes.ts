@@ -37,6 +37,13 @@ export const routes: Routes = [
             (c) => c.ActiveComponent,
           ),
       },
+      {
+        path: 'login',
+        loadComponent: () =>
+          import('./identity/login/login.component').then(
+            (c) => c.LoginComponent,
+          ),
+      },
 
       // { path: '', redirectTo: 'login', pathMatch: 'full' }
     ],
