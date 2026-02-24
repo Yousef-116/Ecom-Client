@@ -1,9 +1,24 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { IActive, IRegister } from '../Models/Account';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class IdentityService {
+  baseURL = 'http://localhost:5037/api/';
+  //baseURL = 'https://localhost:7097/api/';
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
+  register(values: IRegister) {
+    return this.http.post(this.baseURL + 'Account/register', values, {
+      responseType: 'text',
+    });
+  }
+
+  active(values: IActive) {
+    return this.http.post(this.baseURL + 'Account/active-account', values, {
+      responseType: 'text',
+    });
+  }
 }

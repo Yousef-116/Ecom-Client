@@ -1,11 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IProduct } from '../Models/Product';
-import { IPagnation } from '../Models/Pagnation';
 import { ICategory } from '../Models/Category';
 import { ProductParams } from '../Models/ProductParams';
-// import { IPagnation } from '../shared/Models/Pagnation';
-// import { ICateogry } from '../shared/Models/Category';
+import { IPagination } from '../Models/Pagination';
+
 // import { ProductParam } from '../shared/Models/ProductParam';
 // import { IProduct } from '../shared/Models/Product';
 // import { environment } from '../../environments/environment.development';
@@ -17,7 +16,8 @@ import { ProductParams } from '../Models/ProductParams';
 export class ShopService {
   constructor(private http: HttpClient) {}
 
-  baseURL = 'https://localhost:7097/api';
+  //baseURL = 'https://localhost:7097/api';
+  baseURL = 'http://localhost:5037/api';
 
   //Product: IProduct[];
 
@@ -36,7 +36,7 @@ export class ShopService {
     param = param.append('PageNumber', productParam.pageNumber);
     param = param.append('PageSize', productParam.pageSize);
 
-    return this.http.get<IPagnation>(this.baseURL + '/Product/get-all', {
+    return this.http.get<IPagination>(this.baseURL + '/Product/get-all', {
       params: param,
     });
   }
@@ -66,7 +66,7 @@ export class ShopService {
   //   return this.http.get<IPagnation>(this.baseURL+"Products/get-all",{params:param});
   // }
   // getCategory(){
-  //   return this.http.get<ICateogry[]>(this.baseURL+"Categories/get-all")
+  //
   // }
   // getProductDetails(id:number){
   //   return this.http.get<IProduct>(this.baseURL+"Products/get-by-id/"+id)

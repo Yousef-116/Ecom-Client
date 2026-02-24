@@ -5,12 +5,12 @@
             <p>Join us today! It only takes a minute.</p>
         </div>
 
-        <form [formGroup]="RegisterData" class="modern-form">
+        <form [formGroup]="RegisterData" class="modern-form" (ngSubmit)="onSubmit()">
 
             <div class="form-field">
                 <label for="userName">Username</label>
                 <div class="input-wrapper">
-                    <input type="text" id="userName" formControlName="userName" placeholder="e.g. jdoe88"
+                    <input type="text" id="userName" formControlName="userName" placeholder="e.g. David123"
                         [class.is-invalid]="userName.invalid && userName.touched" />
                     @if (userName.invalid && userName.touched) {
                     <span class="error-message">Username is required</span>

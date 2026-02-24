@@ -10,8 +10,8 @@ import { IProduct } from '../Models/Product';
 export class BasketService {
   constructor(private http: HttpClient) {}
 
-  //BaseURL = 'https://localhost:5037/api/';
-  BaseURL = 'https://localhost:7097/api/';
+  BaseURL = 'http://localhost:5037/api/';
+  //BaseURL = 'https://localhost:7097/api/';
 
   private basketSource = new BehaviorSubject<IBasket>(null);
   basket$ = this.basketSource.asObservable();

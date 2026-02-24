@@ -22,10 +22,19 @@ export const routes: Routes = [
     component: AccountShellComponent,
     children: [
       {
+        //account/register
         path: 'register',
         loadComponent: () =>
           import('./identity/register/register.component').then(
             (c) => c.RegisterComponent,
+          ),
+      },
+      {
+        //account/active
+        path: 'active',
+        loadComponent: () =>
+          import('./identity/active/active.component').then(
+            (c) => c.ActiveComponent,
           ),
       },
 

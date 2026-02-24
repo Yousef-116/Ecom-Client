@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ShopService } from './shop.service';
-import { IPagnation } from '../Models/Pagnation';
+import { IPagination } from '../Models/Pagination';
 import { IProduct } from '../Models/Product';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ShopItemComponent } from './shop-item/shop-item.component';
 import { ICategory } from '../Models/Category';
 import { FormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ProductParams } from '../Models/ProductParams';
 import { ToastrService } from 'ngx-toastr';
-import { cwd } from 'node:process';
 
 @Component({
   selector: 'app-shop',
@@ -41,7 +40,7 @@ export class ShopComponent implements OnInit {
   //Product: IProduct;
   getAllProduct() {
     this.shopService.getProduct(this.productParam).subscribe({
-      next: (value: IPagnation) => {
+      next: (value: IPagination) => {
         this.ListProduct = value.data;
         this.totalCount = value.totalCount;
         // this.tost.success('Products Loaded Successfully', 'SUCCESS');
@@ -116,15 +115,13 @@ export class ShopComponent implements OnInit {
 //   this.getCategory();
 // }
 
-// category: Icategory[];
-// TotatlCount: number;
 // ProductParam = new ProductParam();
 
 // getAllProduct() {
 //   this.shopService.getProduct(this.ProductParam).subscribe({
 //     next: (value: IPagnation) => {
 //       this.product = value.data;
-//       this.TotatlCount = value.totalCount;
+//
 //       this.ProductParam.pageNumber = value.pageNumber;
 //       this.ProductParam.pageSize = value.pageSize;
 //       this.toast.success('Product Loaded Successfully', 'SUCCESS');
@@ -148,9 +145,9 @@ export class ShopComponent implements OnInit {
 //   });
 // }
 
-// SelectedId(categoryid: number) {
-//   this.ProductParam.CategoryId = categoryid;
-//   this.ProductParam.pageNumber = 1;
+// SelectedId(categoryId: number) {
+//   this.productParam.SelectedCategoryId = categoryId;
+//   this.productParam.pageNumber = 1;
 //   this.getAllProduct();
 // }
 
