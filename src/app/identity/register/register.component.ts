@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { IdentityService } from '../identity.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -20,6 +21,7 @@ export class RegisterComponent {
   constructor(
     private identityService: IdentityService,
     private toast: ToastrService,
+    private route: Router,
   ) {
     this.initFormControls();
     this.initFormGroups();
@@ -64,6 +66,7 @@ export class RegisterComponent {
         next: (response) => {
           console.log('Registration successful:', response);
           this.toast.success(response);
+          this.route.navigateByUrl('/account/login');
         },
         error: (error) => {
           console.log('Full error:', error);

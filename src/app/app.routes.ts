@@ -44,8 +44,15 @@ export const routes: Routes = [
             (c) => c.LoginComponent,
           ),
       },
+      {
+        path: 'Reset-Password',
+        loadComponent: () =>
+          import('./identity/reset-password/reset-password.component').then(
+            (c) => c.ResetPasswordComponent,
+          ),
+      },
 
-      // { path: '', redirectTo: 'login', pathMatch: 'full' }
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
     ],
   },
   {

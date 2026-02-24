@@ -2,7 +2,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import { IActive } from '../../Models/Account';
 import { IdentityService } from '../identity.service';
 import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-active',
@@ -17,6 +17,7 @@ export class ActiveComponent implements AfterViewInit {
     private identityService: IdentityService,
     private toaster: ToastrService,
     private router: ActivatedRoute,
+    private route: Router,
   ) {}
   ngAfterViewInit(): void {
     //throw new Error('Method not implemented.');
@@ -30,6 +31,7 @@ export class ActiveComponent implements AfterViewInit {
     this.identityService.active(this.activeParams).subscribe({
       next: (response) => {
         this.toaster.success(response);
+        this.route.navigateByUrl('/account/login');
       },
       error: (error) => {
         this.toaster.error(error);
