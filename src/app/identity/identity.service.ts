@@ -2,13 +2,15 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IActive, ILogin, IRegister, IResetPassword } from '../Models/Account';
 import { cwd } from 'node:process';
+import { Environment } from '../environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IdentityService {
-  baseURL = 'http://localhost:5037/api/';
+  //baseURL = 'http://localhost:5037/api/';
   //baseURL = 'https://localhost:7097/api/';
+  baseURL = Environment.baseURL;
   constructor(private http: HttpClient) {}
 
   register(values: IRegister) {

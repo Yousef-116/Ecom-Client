@@ -58,7 +58,7 @@ export const routes: Routes = [
   {
     path: 'checkout',
     loadComponent() {
-      return import('./checkout/checkout.component').then(
+      return import('./checkout/checkout/checkout.component').then(
         (c) => c.CheckoutComponent,
       );
     },

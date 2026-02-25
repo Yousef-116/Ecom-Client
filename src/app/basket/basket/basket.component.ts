@@ -15,6 +15,13 @@ import { OrderTotalComponent } from '../../Shared/order-total/order-total.compon
   styleUrl: './basket.component.scss',
 })
 export class BasketComponent implements OnInit {
+  constructor(private basketService: BasketService) {}
+  basket$!: Observable<IBasket | null>;
+
+  ngOnInit(): void {
+    this.basket$ = this.basketService.basket$;
+  }
+
   removeItem(item: IBasketItem) {
     this.basketService.removeItemFormBasket(item);
   }
@@ -23,12 +30,5 @@ export class BasketComponent implements OnInit {
   }
   incrementQuantity(item: IBasketItem) {
     this.basketService.incrementBasketItemQuantity(item);
-  }
-
-  constructor(private basketService: BasketService) {}
-  basket$!: Observable<IBasket | null>;
-
-  ngOnInit(): void {
-    this.basket$ = this.basketService.basket$;
   }
 }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { Basket, IBasket, IBasketItem, IBasketTotal } from '../Models/Basket';
 import { IProduct } from '../Models/Product';
+import { Environment } from '../environment';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +11,9 @@ import { IProduct } from '../Models/Product';
 export class BasketService {
   constructor(private http: HttpClient) {}
 
-  BaseURL = 'http://localhost:5037/api/';
+  //BaseURL = 'http://localhost:5037/api/';
   //BaseURL = 'https://localhost:7097/api/';
+  BaseURL = Environment.baseURL;
 
   private basketSource = new BehaviorSubject<IBasket>(null);
   basket$ = this.basketSource.asObservable();
@@ -19,7 +21,7 @@ export class BasketService {
   basketTotal$ = this.basketTotalSource.asObservable();
 
   GetBasket(id: string) {
-    return this.http.get(this.BaseURL + 'Baskets/get_basket?id=' + id).pipe(
+    return this.http.get(this.BaseURL + '/Baskets/get_basket?id=' + id).pipe(
       map((value: IBasket) => {
         this.basketSource.next(value);
         //console.log(value);
@@ -30,7 +32,7 @@ export class BasketService {
   }
   SetBasket(basket: IBasket) {
     return this.http
-      .post(this.BaseURL + 'Baskets/update_basket', basket)
+      .post(this.BaseURL + '/Baskets/update_basket', basket)
       .subscribe({
         next: (value: IBasket) => {
           this.basketSource.next(value);
@@ -45,7 +47,7 @@ export class BasketService {
 
   DeleteBasketItem(basket: IBasket) {
     return this.http
-      .delete(this.BaseURL + 'Baskets/delete_basket/' + basket.id)
+      .delete(this.BaseURL + '/Baskets/delete_basket/' + basket.id)
       .subscribe({
         next: (value) => {
           this.basketSource.next(null);

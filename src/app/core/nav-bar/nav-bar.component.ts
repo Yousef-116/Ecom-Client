@@ -28,10 +28,7 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class NavBarComponent implements OnInit {
   basket$: Observable<IBasket>;
-  constructor(
-    public basketService: BasketService,
-    // @Inject(PLATFORM_ID) private platformId: Object,
-  ) {
+  constructor(public basketService: BasketService) {
     this.basket$ = this.basketService.basket$;
   }
 
@@ -42,8 +39,6 @@ export class NavBarComponent implements OnInit {
       this.basketService.GetBasket(basketId).subscribe({
         next: (value) => {
           console.log('Basket loaded successfully: ', value);
-          // Don't set basket$ here - it's already set from the constructor
-          // The basketSource will automatically update through the observable
         },
         error: (error) => {
           console.error('Error loading basket:', error);

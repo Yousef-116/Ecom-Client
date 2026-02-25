@@ -4,6 +4,7 @@ import { IProduct } from '../Models/Product';
 import { ICategory } from '../Models/Category';
 import { ProductParams } from '../Models/ProductParams';
 import { IPagination } from '../Models/Pagination';
+import { Environment } from '../environment';
 
 // import { ProductParam } from '../shared/Models/ProductParam';
 // import { IProduct } from '../shared/Models/Product';
@@ -17,7 +18,8 @@ export class ShopService {
   constructor(private http: HttpClient) {}
 
   //baseURL = 'https://localhost:7097/api';
-  baseURL = 'http://localhost:5037/api';
+  //baseURL = 'http://localhost:5037/api';
+  baseURL = Environment.baseURL;
 
   //Product: IProduct[];
 
