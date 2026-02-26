@@ -14,13 +14,13 @@ export class IdentityService {
   constructor(private http: HttpClient) {}
 
   register(values: IRegister) {
-    return this.http.post(this.baseURL + 'Account/register', values, {
+    return this.http.post(this.baseURL + '/Account/register', values, {
       responseType: 'text',
     });
   }
 
   active(values: IActive) {
-    return this.http.post(this.baseURL + 'Account/active-account', values, {
+    return this.http.post(this.baseURL + '/Account/active-account', values, {
       responseType: 'text',
     });
   }

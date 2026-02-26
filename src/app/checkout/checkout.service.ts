@@ -8,7 +8,14 @@ import { Environment } from '../environment';
 export class CheckoutService {
   baseURL = Environment.baseURL;
   constructor(private http: HttpClient) {}
-  // updateAddress(form: any) {
+
+  updateAddress(form: any) {
+    return this.http.put(this.baseURL + '/Account/update-address', form, {
+      withCredentials: true,
+    });
+  }
+
+  // updateAddress(form: an) {
   //   return this.http.put(this.baseURL + 'Account/update-address', form);
   // }
   // getAddress() {
