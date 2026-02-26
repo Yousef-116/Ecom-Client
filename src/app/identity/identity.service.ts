@@ -1,6 +1,12 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IActive, ILogin, IRegister, IResetPassword } from '../Models/Account';
+import {
+  IActive,
+  IAuthResponse,
+  ILogin,
+  IRegister,
+  IResetPassword,
+} from '../Models/Account';
 import { cwd } from 'node:process';
 import { Environment } from '../environment';
 
@@ -26,10 +32,15 @@ export class IdentityService {
   }
 
   login(values: ILogin) {
-    return this.http.post(this.baseURL + 'Account/login', values, {
-      responseType: 'text',
-    });
+    return this.http.post<IAuthResponse>(
+      this.baseURL + '/Account/login',
+      values,
+      {
+        withCredentials: true,
+      },
+    );
   }
+
   //http://localhost:5037/api/Account/send-email-forget-password?email=xoxij17800%40ostahie.com
   forgotPassword(email: string) {
     let param = new HttpParams();

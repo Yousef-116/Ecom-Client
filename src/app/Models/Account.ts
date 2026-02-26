@@ -20,3 +20,8 @@ export interface IResetPassword {
   password: string;
   token: string;
 }
+
+export interface IAuthResponse {
+  message: string;
+  token: string;
+}

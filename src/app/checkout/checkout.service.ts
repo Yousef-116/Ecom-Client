@@ -10,10 +10,14 @@ export class CheckoutService {
   constructor(private http: HttpClient) {}
 
   updateAddress(form: any) {
-    return this.http.put(this.baseURL + '/Account/update-address', form, {
-      withCredentials: true,
-    });
+    return this.http.put(this.baseURL + '/Account/update-address', form);
   }
+
+  // updateAddress(form: any) {
+  //   return this.http.put(this.baseURL + '/Account/update-address', form, {
+  //     withCredentials: true,
+  //   });
+  // }
 
   // updateAddress(form: an) {
   //   return this.http.put(this.baseURL + 'Account/update-address', form);

@@ -45,17 +45,19 @@ export class StepperComponent {
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', Validators.required],
   });
-
   UpdateAddress() {
-    if (this.Address.valid) {
-      this.checkoutService.updateAddress(this.Address.value).subscribe({
-        next(value) {
-          console.log(this.Address.value);
-          console.log('Address updated');
-        },
-      });
-    } else {
+    if (this.Address.invalid) {
       console.log('Address Not Valid');
+      return;
     }
+
+    this.checkoutService.updateAddress(this.Address.value).subscribe({
+      next: () => {
+        console.log('Address updated jk successfully');
+      },
+      error: (error) => {
+        console.error('Update failed', error);
+      },
+    });
   }
 }

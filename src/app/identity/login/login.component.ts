@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IAuthResponse } from '../../Models/Account';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,6 @@ export class LoginComponent {
     this.initFormGroups();
   }
   LoginData!: FormGroup;
-
   email!: FormControl;
   Password!: FormControl;
 
@@ -47,33 +47,39 @@ export class LoginComponent {
       password: this.Password,
     });
   }
-
   onSubmit() {
-    if (this.LoginData.valid) {
-      console.log(this.LoginData.value);
-      // You can perform further actions here, such as sending the data to a server
-      this.identityService.login(this.LoginData.value).subscribe({
-        next: (response) => {
-          console.log('Login successful:', response);
-          this.toast.success(response);
-          this.route.navigateByUrl('/');
-        },
-        error: (error) => {
-          console.log('Full error:', error);
-          console.log('Error body:', error.error);
-
-          if (typeof error.error === 'string') {
-            this.toast.error(error.error);
-          } else if (error.error?.message) {
-            this.toast.error(error.error.message);
-          } else {
-            this.toast.error('Something went wrong');
-          }
-        },
-      });
-    } else {
+    if (this.LoginData.invalid) {
       console.log('Form is invalid');
+      return;
     }
+
+    this.identityService.login(this.LoginData.value).subscribe({
+      next: (response: IAuthResponse) => {
+        // ✅ Save token
+        localStorage.setItem('token', response.token);
+
+        console.log('Login successful:', response);
+
+        // ✅ Show message from backend
+        this.toast.success(response.message);
+
+        // ✅ Navigate
+        this.route.navigateByUrl('/');
+      },
+
+      error: (error) => {
+        console.log('Full error:', error);
+        console.log('Error body:', error.error);
+
+        if (typeof error.error === 'string') {
+          this.toast.error(error.error);
+        } else if (error.error?.message) {
+          this.toast.error(error.error.message);
+        } else {
+          this.toast.error('Something went wrong');
+        }
+      },
+    });
   }
 
   onForgotPassword() {
