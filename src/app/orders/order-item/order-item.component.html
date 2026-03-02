@@ -1,1 +1,81 @@
-<p>order-item works!</p>
+<div class="checkout-wrapper pt-4">
+    <div class="basket-section">
+        <h2 class="section-title">Review Your Order</h2>
+        <div class="table-responsive">
+            <table class="custom-modern-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th></th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of order.orderItems; track item.productItemId) {
+                    <tr>
+                        <td class="product-name">
+                            <a [routerLink]="['/product-details', item.productItemId]">
+                                {{item.productName}}
+                            </a>
+                        </td>
+                        <td>
+                            <img [src]="'http://localhost:5037/' + item.mainImage" class="item-img" alt="">
+                        </td>
+                        <td class="text-muted">{{item.price | currency}}</td>
+                        <td>
+                            <span class="qty-badge">{{item.quantity}}</span>
+                        </td>
+                        <td class="fw-bold">{{(item.quantity * item.price) | currency}}</td>
+                        <td></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="summary-section">
+        <div class="modern-receipt">
+            <div class="receipt-inner">
+                <h3 class="summary-title">Order Summary</h3>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span class="value">{{order.subTotal | currency}}</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span class="value text-success">+ {{ order.total - order.subTotal | currency}}</span>
+                </div>
+
+                <hr class="divider">
+
+                <div class="summary-row total-row">
+                    <span class="label">Total Amount</span>
+                    <span class="total-value">{{order.total | currency}}</span>
+                </div>
+
+                <div class="status-box" [ngClass]="{
+                    'status-pending': order.status == 'Pending',
+                    'status-failed': order.status == 'PaymentFailed',
+                    'status-success': order.status == 'PaymentReceived'
+                }">
+                    <span class="status-dot"></span>
+                    <span class="status-text">{{order.status}}</span>
+                </div>
+
+                <div class="barcode-area">
+                    <div class="barcode-svg">
+                        <span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <small class="serial">#4002-881-2026</small>
+                </div>
+            </div>
+            <div class="receipt-footer-cut"></div>
+        </div>
+    </div>
+</div>

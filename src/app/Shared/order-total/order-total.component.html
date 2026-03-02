@@ -1,56 +1,3 @@
-<!-- <div class="order-summary bg-light text-uppercase text-info p-3 text-center">
-    Order Summary
-</div>
-<div class="order-details p-3">
-    <p style="font-style: italic;">Shipping will be added on total price</p>
-    @if (basketTotal) {
-    <ng-container>
-        <ul class="list-unstyled mb-4">
-            <li class="d-flex justify-content-between border-bottom py-3">
-                <strong class="text-muted">Order SubTotal</strong>
-                <strong>{{basketTotal.subtotal|currency}}</strong>
-            </li>
-            <li class="d-flex justify-content-between border-bottom py-3">
-                <strong class="text-muted">Order shipping</strong>
-                <strong>{{basketTotal.shipping|currency}}</strong>
-            </li>
-            <li class="d-flex justify-content-between border-bottom py-3">
-                <strong class="text-muted">Order total</strong>
-                <strong>{{basketTotal.total|currency}}</strong>
-            </li>
-        </ul>
-    </ng-container>
-    }
-</div> -->
-<!-- <div class="summary-card">
-    <div class="summary-header">
-        <h3>Order Summary</h3>
-        <p class="shipping-disclaimer">Shipping calculated at checkout</p>
-    </div>
-    @if (basketTotal) {
-    <div class="summary-body">
-        <div class="summary-row">
-            <span class="label">Subtotal</span>
-            <span class="value">{{basketTotal.subtotal | currency}}</span>
-        </div>
-
-        <div class="summary-row">
-            <span class="label">Shipping</span>
-            <span class="value accent">{{basketTotal.shipping | currency}}</span>
-        </div>
-
-        <hr class="divider">
-
-        <div class="summary-row total">
-            <span class="label">Total</span>
-            <span class="value high-contrast">{{basketTotal.total | currency}}</span>
-        </div>
-
-        <button class="checkout-btn">Proceed to Checkout</button>
-    </div>
-    }
-</div> -->
-
 <div class="receipt-container">
     <div class="receipt-edge top"></div>
 
@@ -92,13 +39,4 @@
             <span class="serial-no">#4002-881-2026</span>
         </div>
     </div>
-
-    <!-- <div class="receipt-edge bottom"></div>
-    <div class="checkout-wrapper">
-        <div class="pixel-divider">**************************</div>
-        <button class="pixel-checkout-btn">
-            <span class="pixel-icon">▶</span> PROCEED TO CHECKOUT <span class="pixel-icon">◀</span>
-        </button>
-        <p class="receipt-footer">THANK YOU FOR YOUR VISIT</p>
-    </div> -->
 </div>

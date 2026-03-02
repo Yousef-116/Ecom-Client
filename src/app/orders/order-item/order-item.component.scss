@@ -1,0 +1,188 @@
+.checkout-wrapper {
+  display: flex;
+  gap: 30px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+// --- Left Table Styles ---
+.basket-section {
+  flex: 3; // Takes 75% space
+  
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #2d3436;
+  }
+}
+
+.custom-modern-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px; // Space between rows
+
+  thead th {
+    padding: 12px;
+    color: #636e72;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #f1f2f6;
+  }
+
+  tbody tr {
+    background: #fff;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    td {
+      padding: 16px;
+      vertical-align: middle;
+      border-top: 1px solid #f1f2f6;
+      border-bottom: 1px solid #f1f2f6;
+
+      &:first-child { border-left: 1px solid #f1f2f6; border-radius: 8px 0 0 8px; }
+      &:last-child { border-right: 1px solid #f1f2f6; border-radius: 0 8px 8px 0; }
+    }
+  }
+
+  .item-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .product-name a {
+    font-weight: 600;
+    color: #2d3436;
+    text-decoration: none;
+    &:hover { color: #0984e3; }
+  }
+
+  .qty-badge {
+    background: #f1f2f6;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+}
+
+// --- Right Receipt Styles ---
+.summary-section {
+  flex: 1; // Takes 25% space
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+.modern-receipt {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  overflow: hidden;
+  position: relative;
+
+  .receipt-inner {
+    padding: 24px;
+  }
+
+  .summary-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-align: center;
+    color: #2d3436;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    color: #636e72;
+    font-size: 0.95rem;
+
+    .value {
+      font-weight: 600;
+      color: #2d3436;
+    }
+  }
+
+  .divider {
+    border: 0;
+    border-top: 1px dashed #dfe6e9;
+    margin: 20px 0;
+  }
+
+  .total-row {
+    margin-bottom: 24px;
+    .label { font-weight: 700; color: #2d3436; }
+    .total-value { font-size: 1.4rem; color: #0984e3; font-weight: 800; }
+  }
+}
+
+// --- Status Badges ---
+.status-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  &.status-pending { background: #fff9e6; color: #f39c12; .status-dot { background: #f39c12; } }
+  &.status-success { background: #e6fffa; color: #27ae60; .status-dot { background: #27ae60; } }
+  &.status-failed { background: #fff5f5; color: #e74c3c; .status-dot { background: #e74c3c; } }
+}
+
+// --- Minimalist Barcode ---
+.barcode-area {
+  text-align: center;
+  .barcode-svg {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    height: 30px;
+    margin-bottom: 5px;
+    span {
+      background: #2d3436;
+      width: 2px;
+      height: 100%;
+      &:nth-child(2n) { width: 4px; }
+      &:nth-child(3n) { height: 70%; }
+    }
+  }
+  .serial { color: #b2bec3; font-size: 0.7rem; }
+}
+
+// Decorative zig-zag bottom for the receipt
+.receipt-footer-cut {
+  background: white;
+  height: 10px;
+  width: 100%;
+  background-image: linear-gradient(135deg, transparent 75%, #f1f2f6 75%),
+                    linear-gradient(225deg, transparent 75%, #f1f2f6 75%);
+  background-size: 10px 20px;
+}
+
+@media (max-width: 992px) {
+  .checkout-wrapper { flex-direction: column; }
+  .summary-section { position: relative; width: 100%; }
+}

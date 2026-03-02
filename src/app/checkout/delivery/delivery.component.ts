@@ -11,14 +11,13 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
 import { BasketService } from '../../basket/basket.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-delivery',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    MatFormField,
-    MatLabel,
     MatFormFieldModule,
     MatInputModule,
     MatStepperModule,
@@ -41,6 +40,7 @@ export class DeliveryComponent implements OnInit {
   constructor(
     private checkoutService: CheckoutService,
     private basketService: BasketService,
+    private toaster: ToastrService,
   ) {}
 
   SetDeliveryMethods() {
@@ -54,7 +54,7 @@ export class DeliveryComponent implements OnInit {
     this.checkoutService.getDeliveryMethod().subscribe({
       next: (value) => {
         console.log('Get Delivery Done' + value);
-        //this.toaster.success('Address updated successfully', 'SUCCESS');
+        this.toaster.success('Address updated successfully', 'SUCCESS');
         this.deliveryMethods = value;
       },
       error: (error) => {

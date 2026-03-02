@@ -1,12 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { IOrder } from '../../Models/Orders';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { OrdersService } from '../orders.service';
+import { CurrencyPipe, NgClass } from '@angular/common';
+import { OrderTotalComponent } from '../../Shared/order-total/order-total.component';
 
 @Component({
   selector: 'app-order-item',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, CurrencyPipe, NgClass],
   templateUrl: './order-item.component.html',
-  styleUrl: './order-item.component.scss'
+  styleUrl: './order-item.component.scss',
 })
-export class OrderItemComponent {
+export class OrderItemComponent implements OnInit {
+  order: IOrder;
+  id: number = 0;
+  constructor(
+    private route: ActivatedRoute,
+    private orderService: OrdersService,
+  ) {}
 
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((param) => {
+      this.id = +param['id'];
+
+      this.orderService.getCurrentOrderForUser(this.id).subscribe({
+        next: (value) => {
+          console.log('Get Order Done', value);
+          this.order = value;
+        },
+        error: (error) => {
+          console.error('Get Order failed', error);
+        },
+      });
+    });
+  }
 }

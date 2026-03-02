@@ -1,9 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Environment } from '../environment';
+import { IOrder } from '../Models/Orders';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrdersService {
-
-  constructor() { }
+  constructor(protected http: HttpClient) {}
+  BaseURL = Environment.baseURL;
+  getCurrentOrderForUser(id: number) {
+    return this.http.get<IOrder>(this.BaseURL + '/Orders/GetOrderById/' + id);
+  }
 }
