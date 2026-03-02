@@ -1,0 +1,41 @@
+<!-- <form [formGroup]="delivery">
+
+    <div>
+        <button mat-button matStepperNext>Save Next -></button>
+    </div>
+
+    <div>
+        <button mat-button matStepperPrevious>Back</button>
+    </div>
+
+</form> -->
+
+
+<form [formGroup]="delivery">
+    <h3 class="section-title">Select Delivery Method</h3>
+
+    <mat-radio-group (change)="SetDeliveryMethods()" formControlName="delivery" class="delivery-grid">
+        @for (method of deliveryMethods; track method.id) {
+        <mat-radio-button [value]="method.id" class="delivery-card">
+            <div class="card-content">
+                <div class="card-header">
+                    <span class="method-name">{{ method.name }}</span>
+                    <span class="method-price">{{ method.price | currency }}</span>
+                </div>
+                <p class="method-desc">{{ method.description }}</p>
+                <div class="method-time">
+                    <mat-icon>schedule</mat-icon>
+                    <span>{{ method.deleveryTime }}</span>
+                </div>
+            </div>
+        </mat-radio-button>
+        }
+    </mat-radio-group>
+
+    <div class="stepper-actions">
+        <button mat-stroked-button matStepperPrevious>Back</button>
+        <button mat-flat-button color="primary" matStepperNext [disabled]="!delivery.valid">
+            Next Step
+        </button>
+    </div>
+</form>

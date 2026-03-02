@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Environment } from '../environment';
+import { IDelivery } from '../Models/Delivery';
+import { ICreateOrder } from '../Models/Orders';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +13,20 @@ export class CheckoutService {
 
   updateAddress(form: any) {
     return this.http.put(this.baseURL + '/Account/update-address', form);
+  }
+
+  getAddress() {
+    return this.http.get(this.baseURL + '/Account/GetAddress');
+  }
+
+  getDeliveryMethod() {
+    return this.http.get<IDelivery[]>(
+      this.baseURL + '/Orders/delivery-methods',
+    );
+  }
+
+  CreateOrder(order: ICreateOrder) {
+    return this.http.post(this.baseURL + '/Orders/create-order', order);
   }
 
   // updateAddress(form: any) {

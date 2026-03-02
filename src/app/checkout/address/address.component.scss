@@ -1,0 +1,53 @@
+.address-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+.section-title {
+  margin-bottom: 24px;
+  font-weight: 500;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.address-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); // 6-column grid for maximum flexibility
+  gap: 12px;
+
+  // Helpers for grid spans
+  .full-width { grid-column: span 6; }
+  .half-width { grid-column: span 3; }
+  .city-field { grid-column: span 3; }
+  .state-field { grid-column: span 1; }
+  .zip-field { grid-column: span 2; }
+}
+
+// Responsive adjustments
+@media (max-width: 600px) {
+  .address-grid {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.actions {
+  margin-top: 32px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.next-btn {
+  padding: 0 24px;
+  height: 48px;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+mat-icon[matPrefix] {
+  margin-right: 8px;
+  color: #757575;
+}

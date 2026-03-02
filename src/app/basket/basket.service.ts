@@ -4,6 +4,7 @@ import { BehaviorSubject, map } from 'rxjs';
 import { Basket, IBasket, IBasketItem, IBasketTotal } from '../Models/Basket';
 import { IProduct } from '../Models/Product';
 import { Environment } from '../environment';
+import { IDelivery } from '../Models/Delivery';
 
 @Injectable({
   providedIn: 'root',
@@ -58,10 +59,15 @@ export class BasketService {
         },
       });
   }
+  ShippingCost: number;
+  SetDeliveryMethod(delivery: IDelivery) {
+    this.ShippingCost = delivery.price;
+    this.calculateTotal();
+  }
 
   calculateTotal() {
     const basket = this.GetCurrentValue();
-    const shipping = 0;
+    const shipping = this.ShippingCost;
     const subtotal = basket.basketItems.reduce((acc, item) => {
       return item.price * item.quantity + acc;
     }, 0);

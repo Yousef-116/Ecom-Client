@@ -1,0 +1,64 @@
+.delivery-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.delivery-card {
+  width: 100%;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.2s ease-in-out;
+
+  &.mat-mdc-radio-checked {
+    border-color: #3f51b5; // Primary color
+    background-color: #f5f7ff;
+  }
+
+  &:hover {
+    border-color: #3f51b5;
+    background-color: #fafafa;
+  }
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 8px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.method-desc {
+  margin: 4px 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.method-time {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: #3f51b5;
+  
+  mat-icon {
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+  }
+}
+
+.stepper-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
