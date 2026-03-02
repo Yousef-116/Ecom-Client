@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Environment } from '../environment';
 import { IDelivery } from '../Models/Delivery';
-import { ICreateOrder } from '../Models/Orders';
+import { ICreateOrder, IOrder } from '../Models/Orders';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +26,7 @@ export class CheckoutService {
   }
 
   CreateOrder(order: ICreateOrder) {
-    return this.http.post(this.baseURL + '/Orders/create-order', order);
+    return this.http.post<IOrder>(this.baseURL + '/Orders/create-order', order);
   }
 
   // updateAddress(form: any) {

@@ -64,6 +64,13 @@ export const routes: Routes = [
     },
   },
   {
+    path: 'checkout/success',
+    loadComponent: () =>
+      import('./checkout/success/success.component').then(
+        (c) => c.SuccessComponent,
+      ),
+  },
+  {
     path: 'basket',
     loadComponent() {
       return import('./basket/basket/basket.component').then(
@@ -71,5 +78,22 @@ export const routes: Routes = [
       );
     },
   },
+  {
+    path: 'order',
+    loadComponent() {
+      return import('./orders/order/order.component').then(
+        (c) => c.OrderComponent,
+      );
+    },
+  },
+  {
+    path: 'order/item',
+    loadComponent() {
+      return import('./orders/order-item/order-item.component').then(
+        (c) => c.OrderItemComponent,
+      );
+    },
+  },
+
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

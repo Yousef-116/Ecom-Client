@@ -51,7 +51,7 @@ export class StepperComponent {
     nameOnCard: ['', Validators.required],
   });
 
-  isLinear = false;
+  isLinear = true;
   // constructor(
   //   private _formBuilder: FormBuilder,
   //   private checkoutService: CheckoutService,
