@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IOrder, IOrderItem } from '../../Models/Orders';
 import { RouterLink } from '@angular/router';
 import { CurrencyPipe, DatePipe, NgClass } from '@angular/common';
+import { OrdersService } from '../orders.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-order',
@@ -10,7 +12,24 @@ import { CurrencyPipe, DatePipe, NgClass } from '@angular/common';
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss',
 })
-export class OrderComponent {
+export class OrderComponent implements OnInit {
+  constructor(
+    private orderService: OrdersService,
+    private toaster: ToastrService,
+  ) {}
+  ngOnInit(): void {
+    this.orderService.getAllOrdersForUser().subscribe({
+      next: (value) => {
+        console.log('Get All Orders for User Done' + value);
+        this.toaster.success('GET All orders Done', 'SUCCESS');
+        this.orders = value;
+      },
+      error: (error) => {
+        console.error('Get Orders failed', error);
+      },
+    });
+  }
+
   orders: IOrder[] = [];
   getFirstImageOrderItem(order: IOrderItem[]) {
     return order.length > 0 ? order[0].mainImage : null;

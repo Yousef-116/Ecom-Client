@@ -12,4 +12,8 @@ export class OrdersService {
   getCurrentOrderForUser(id: number) {
     return this.http.get<IOrder>(this.BaseURL + '/Orders/GetOrderById/' + id);
   }
+
+  getAllOrdersForUser() {
+    return this.http.get<IOrder[]>(this.BaseURL + '/Orders/GetOrdersForUser');
+  }
 }

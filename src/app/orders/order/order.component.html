@@ -1,4 +1,91 @@
-<div class="container mt-5">
+<div class="container mt-5 px-4">
+    <div class="header-section mb-4">
+        <h2 class="fw-bold">Order History</h2>
+        <p class="text-muted">Track and manage your recent purchases</p>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="premium-table-card">
+                <div class="table-responsive">
+                    <table class="table custom-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Items</th>
+                                <th>Purchased On</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (item of orders; track item.id) {
+                            <tr class="align-middle order-row">
+                                <td class="order-number">
+                                    <a routerLink="/order/item" [queryParams]="{id:item.id}">#{{item.id}}</a>
+                                </td>
+                                <td>
+                                    <div class="stack-container">
+                                        <div class="image-stack">
+                                            <img class="main-img"
+                                                src="http://localhost:5037/{{getFirstImageOrderItem(item.orderItems)}}"
+                                                alt="Product">
+                                            @if (item.orderItems.length > 1) {
+                                            <div class="stack-badge">+{{item.orderItems.length - 1}}</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="order-date">
+                                    <span class="d-block fw-medium">{{item.orderDate | date:'mediumDate'}}</span>
+                                    <small class="text-muted">{{item.orderDate | date:'shortTime'}}</small>
+                                </td>
+                                <td>
+                                    <span class="status-pill" [ngClass]="{
+                      'status-pending': item.status === 'Pending',
+                      'status-failed': item.status === 'PaymentFailed',
+                      'status-success': item.status === 'PaymentReceived'
+                  }">
+                                        <span class="status-dot"></span>
+                                        {{item.status}}
+                                    </span>
+                                </td>
+                                <td class="order-total fw-bold">{{item.total | currency}}</td>
+                                <td class="text-center">
+                                    <button routerLink="/order/item" [queryParams]="{id:item.id}"
+                                        class="btn-action-info">
+                                        <i class="fa fa-chevron-right"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ImageModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="container mt-5">
     <div class="row">
         <div class="col-12">
             <div class="table-container">
@@ -56,19 +143,19 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <!-- <h5 class="modal-title" id="exampleModalLongTitle"></h5> -->
+                <h5 class="modal-title" id="exampleModalLongTitle"></h5> 
                 <button type="button" class="close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <!-- @for (item of UrlImageModal; track $index) { -->
-                <!-- <img src="http://localhost:5037/{{item}}" width="400" class="order-images" alt=""> -->
-                <!-- } -->
+                @for (item of UrlImageModal; track $index) {
+                <img src="http://localhost:5037/{{item}}" width="400" class="order-images" alt="">
+                }
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary">Close</button>
             </div>
         </div>
     </div>
-</div>
+</div> -->
