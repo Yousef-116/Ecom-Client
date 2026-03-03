@@ -21,6 +21,12 @@ export class BasketService {
   private basketTotalSource = new BehaviorSubject<IBasketTotal>(null);
   basketTotal$ = this.basketTotalSource.asObservable();
 
+  deleteBasket() {
+    this.basketSource.next(null);
+    this.basketTotalSource.next(null);
+    localStorage.removeItem('basketId');
+  }
+
   GetBasket(id: string) {
     return this.http.get(this.BaseURL + '/Baskets/get_basket?id=' + id).pipe(
       map((value: IBasket) => {

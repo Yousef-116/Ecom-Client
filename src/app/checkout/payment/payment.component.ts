@@ -37,6 +37,8 @@ export class PaymentComponent implements OnInit {
         this.router.navigate(['/checkout/success'], {
           queryParams: { orderId: value.id },
         });
+
+        this.basketService.deleteBasket();
       },
       error(err) {
         console.log('Fail Create Order' + err);

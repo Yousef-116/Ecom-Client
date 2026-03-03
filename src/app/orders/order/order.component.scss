@@ -84,7 +84,7 @@
   }
 }
 
-/* Status Pills (Glassmorphism) */
+/* Status Pills */
 .status-pill {
   display: inline-flex;
   align-items: center;
@@ -132,4 +132,35 @@
     color: white;
     box-shadow: 0 4px 12px rgba(9, 132, 227, 0.3);
   }
+}
+
+
+.image-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 10px;
+
+  .gallery-item {
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      display: block;
+    }
+  }
+}
+
+/* Ensure the close button works with modern Bootstrap 5 */
+.btn-close {
+    filter: grayscale(1) invert(0);
 }

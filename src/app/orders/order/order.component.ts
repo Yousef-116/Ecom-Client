@@ -30,6 +30,17 @@ export class OrderComponent implements OnInit {
     });
   }
 
+  urlImageModal: string[] = [];
+
+  /**
+   * Sets the images for the modal and the modal will be triggered by
+   * the data-bs-toggle attribute in the HTML
+   */
+  openImageModal(items: IOrderItem[]) {
+    // Map the order items to get an array of image strings
+    this.urlImageModal = items.map((item) => item.mainImage);
+  }
+
   orders: IOrder[] = [];
   getFirstImageOrderItem(order: IOrderItem[]) {
     return order.length > 0 ? order[0].mainImage : null;

@@ -27,7 +27,17 @@
                                 </td>
                                 <td>
                                     <div class="stack-container">
-                                        <div class="image-stack">
+                                        <!-- <div class="image-stack">
+                                            <img class="main-img"
+                                                src="http://localhost:5037/{{getFirstImageOrderItem(item.orderItems)}}"
+                                                alt="Product">
+                                            @if (item.orderItems.length > 1) {
+                                            <div class="stack-badge">+{{item.orderItems.length - 1}}</div>
+                                            }
+                                        </div> -->
+                                        <div class="image-stack" style="cursor: pointer;"
+                                            (click)="openImageModal(item.orderItems)" data-bs-toggle="modal"
+                                            data-bs-target="#ImageModal">
                                             <img class="main-img"
                                                 src="http://localhost:5037/{{getFirstImageOrderItem(item.orderItems)}}"
                                                 alt="Product">
@@ -44,7 +54,7 @@
                                 <td>
                                     <span class="status-pill" [ngClass]="{
                       'status-pending': item.status === 'Pending',
-                      'status-failed': item.status === 'PaymentFailed',
+                      'status-failed': item.status === 'PaymentFaild',
                       'status-success': item.status === 'PaymentReceived'
                   }">
                                         <span class="status-dot"></span>
@@ -68,18 +78,27 @@
     </div>
 </div>
 
-<div class="modal fade" id="ImageModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+<div class="modal fade" id="ImageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title fw-bold">Order Items Images</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <div class="image-gallery-grid">
+                    @for (img of urlImageModal; track $index) {
+                    <div class="gallery-item">
+                        <img [src]="'http://localhost:5037/' + img" class="img-fluid rounded shadow-sm"
+                            alt="Order Item">
+                    </div>
+                    } @empty {
+                    <p class="text-center text-muted">No images found for this order.</p>
+                    }
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary">Close</button>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
