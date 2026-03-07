@@ -29,6 +29,12 @@ export class CheckoutService {
     return this.http.post<IOrder>(this.baseURL + '/Orders/create-order', order);
   }
 
+  updateOrderStatus(orderId: number, status: number) {
+    return this.http.put(`${this.baseURL}/Orders/update-status/${orderId}`, {
+      status,
+    });
+  }
+
   // updateAddress(form: any) {
   //   return this.http.put(this.baseURL + '/Account/update-address', form, {
   //     withCredentials: true,

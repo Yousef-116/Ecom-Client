@@ -36,6 +36,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './delivery.component.scss',
 })
 export class DeliveryComponent implements OnInit {
+  @Input() delivery: FormGroup;
   deliveryMethods: IDelivery[];
   constructor(
     private checkoutService: CheckoutService,
@@ -80,5 +81,4 @@ export class DeliveryComponent implements OnInit {
   // UpdateDelivery() {
   //   throw new Error('Method not implemented.');
   // }
-  @Input() delivery: FormGroup;
 }

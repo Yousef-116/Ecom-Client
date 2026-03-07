@@ -22,6 +22,7 @@
     "@angular/platform-server": "^17.3.12",
     "@angular/router": "^17.0.0",
     "@angular/ssr": "^17.3.17",
+    "@stripe/stripe-js": "^8.9.0",
     "bootstrap": "^5.3.8",
     "font-awesome": "^4.7.0",
     "material-icons": "^1.13.14",
