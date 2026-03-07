@@ -27,6 +27,22 @@ export class BasketService {
     localStorage.removeItem('basketId');
   }
 
+  CreatePaymentIntent(deliveryMethodId: number) {
+    return this.http
+      .post(
+        this.BaseURL +
+          `/Payments/Create?basketId=${this.GetCurrentValue().id}&deliveryId=${deliveryMethodId}`,
+        {},
+      )
+      .pipe(
+        map((value: IBasket) => {
+          this.basketSource.next(value);
+          console.log('From BasketService' + value);
+          console.log(value);
+        }),
+      );
+  }
+
   GetBasket(id: string) {
     return this.http.get(this.BaseURL + '/Baskets/get_basket?id=' + id).pipe(
       map((value: IBasket) => {

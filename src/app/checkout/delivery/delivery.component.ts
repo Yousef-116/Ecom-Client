@@ -43,6 +43,20 @@ export class DeliveryComponent implements OnInit {
     private toaster: ToastrService,
   ) {}
 
+  CreatePayment() {
+    const id = this.deliveryMethods.find(
+      (m) => m.id == this.delivery.value.delivery,
+    ).id;
+    this.basketService.CreatePaymentIntent(id).subscribe({
+      next: (res) => {
+        this.toaster.success('Payment Intent Created', 'SUCCESS');
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
   SetDeliveryMethods() {
     var deliveryMethod = this.deliveryMethods.find(
       (d) => d.id == this.delivery.value.delivery,

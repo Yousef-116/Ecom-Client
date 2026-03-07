@@ -1,6 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 export interface IBasket {
   id: string;
+  paymentIntentId?: string;
+  clientSecret?: string;
   basketItems: IBasketItem[];
 }
 
@@ -21,6 +23,8 @@ export class Basket implements IBasket {
   constructor() {
     this.id = uuidv4();
   }
+  paymentIntentId: string;
+  clientSecret: string;
 }
 
 export interface IBasketTotal {
