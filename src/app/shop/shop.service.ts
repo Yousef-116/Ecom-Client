@@ -38,7 +38,7 @@ export class ShopService {
     param = param.append('PageNumber', productParam.pageNumber);
     param = param.append('PageSize', productParam.pageSize);
 
-    return this.http.get<IPagination>(this.baseURL + '/Product/get-all', {
+    return this.http.get<IPagination>(this.baseURL + '/Products/get-all', {
       params: param,
     });
   }
@@ -48,7 +48,7 @@ export class ShopService {
   }
 
   getProductDetails(id: number) {
-    return this.http.get<IProduct>(this.baseURL + '/Product/get-by-id/' + id);
+    return this.http.get<IProduct>(this.baseURL + '/Products/get-by-id/' + id);
   }
   // baseURL = environment.baseURL;
 

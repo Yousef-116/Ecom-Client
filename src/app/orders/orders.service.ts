@@ -10,10 +10,20 @@ export class OrdersService {
   constructor(protected http: HttpClient) {}
   BaseURL = Environment.baseURL;
   getCurrentOrderForUser(id: number) {
-    return this.http.get<IOrder>(this.BaseURL + '/Orders/GetOrderById/' + id);
+    return this.http.get<IOrder>(
+      this.BaseURL + '/Orders/get-order-by-id/' + id,
+      {
+        withCredentials: true,
+      },
+    );
   }
 
   getAllOrdersForUser() {
-    return this.http.get<IOrder[]>(this.BaseURL + '/Orders/GetOrdersForUser');
+    return this.http.get<IOrder[]>(
+      this.BaseURL + '/Orders/get-orders-for-user',
+      {
+        withCredentials: true,
+      },
+    );
   }
 }

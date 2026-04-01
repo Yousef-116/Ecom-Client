@@ -20,22 +20,31 @@ export class ActiveComponent implements AfterViewInit {
     private route: Router,
   ) {}
   ngAfterViewInit(): void {
-    //throw new Error('Method not implemented.');
     this.router.queryParams.subscribe((params) => {
-      this.activeParams = {
-        email: params['email'],
-        token: params['code'],
-      };
-    });
+      const email = params['email'];
+      const code = decodeURIComponent(params['code']);
 
-    this.identityService.active(this.activeParams).subscribe({
-      next: (response) => {
-        this.toaster.success(response);
-        this.route.navigateByUrl('/account/login');
-      },
-      error: (error) => {
-        this.toaster.error(error);
-      },
+      console.log('Email:', email);
+      console.log('Decoded Code:', code);
+
+      this.activeParams = {
+        email: email, // Try changing to 'Email'
+        token: code, // Try changing to 'Token' or 'Code' based on your DTO
+      };
+
+      console.log('Sending params:', this.activeParams);
+
+      this.identityService.active(this.activeParams).subscribe({
+        next: (response) => {
+          console.log('Activation success:', response);
+          this.toaster.success(response);
+          this.route.navigateByUrl('/account/login');
+        },
+        error: (error) => {
+          console.error('Activation error details:', error);
+          this.toaster.error(error.error?.message || 'Activation failed');
+        },
+      });
     });
   }
 }

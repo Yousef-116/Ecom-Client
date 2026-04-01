@@ -9,6 +9,7 @@ import {
 } from '../Models/Account';
 import { cwd } from 'node:process';
 import { Environment } from '../environment';
+import { catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,20 +21,30 @@ export class IdentityService {
   constructor(private http: HttpClient) {}
 
   register(values: IRegister) {
-    return this.http.post(this.baseURL + '/Account/register', values, {
+    return this.http.post(this.baseURL + '/Account/Register', values, {
       responseType: 'text',
     });
   }
 
   active(values: IActive) {
-    return this.http.post(this.baseURL + '/Account/active-account', values, {
-      responseType: 'text',
-    });
+    console.log('Sending activation request with:', values);
+    return this.http
+      .post(this.baseURL + '/Account/active-account', values, {
+        responseType: 'text',
+        withCredentials: true,
+      })
+      .pipe(
+        catchError((error) => {
+          console.error('Activation error:', error);
+          console.error('Error details:', error.error);
+          return throwError(() => error);
+        }),
+      );
   }
 
   login(values: ILogin) {
     return this.http.post<IAuthResponse>(
-      this.baseURL + '/Account/login',
+      this.baseURL + '/Account/Login',
       values,
       {
         withCredentials: true,

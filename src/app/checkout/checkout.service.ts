@@ -12,11 +12,15 @@ export class CheckoutService {
   constructor(private http: HttpClient) {}
 
   updateAddress(form: any) {
-    return this.http.put(this.baseURL + '/Account/update-address', form);
+    return this.http.put(this.baseURL + '/Account/update-address', form, {
+      withCredentials: true,
+    });
   }
 
   getAddress() {
-    return this.http.get(this.baseURL + '/Account/GetAddress');
+    return this.http.get(this.baseURL + '/Account/get-address-for-user', {
+      withCredentials: true,
+    });
   }
 
   getDeliveryMethod() {

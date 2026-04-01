@@ -44,7 +44,7 @@ export class BasketService {
   }
 
   GetBasket(id: string) {
-    return this.http.get(this.BaseURL + '/Baskets/get_basket?id=' + id).pipe(
+    return this.http.get(this.BaseURL + '/Baskets/get-basket?id=' + id).pipe(
       map((value: IBasket) => {
         this.basketSource.next(value);
         //console.log(value);
@@ -55,7 +55,7 @@ export class BasketService {
   }
   SetBasket(basket: IBasket) {
     return this.http
-      .post(this.BaseURL + '/Baskets/update_basket', basket)
+      .post(this.BaseURL + '/Baskets/update-basket', basket)
       .subscribe({
         next: (value: IBasket) => {
           this.basketSource.next(value);
@@ -70,7 +70,7 @@ export class BasketService {
 
   DeleteBasketItem(basket: IBasket) {
     return this.http
-      .delete(this.BaseURL + '/Baskets/delete_basket/' + basket.id)
+      .delete(this.BaseURL + '/Baskets/delete-basket/' + basket.id)
       .subscribe({
         next: (value) => {
           this.basketSource.next(null);
