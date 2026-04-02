@@ -60,6 +60,8 @@ export class LoginComponent {
 
         console.log('Login successful:', response);
 
+        this.identityService.loadUserName();
+
         // ✅ Show message from backend
         this.toast.success(response.message);
 

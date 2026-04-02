@@ -9,7 +9,7 @@ import {
 } from '../Models/Account';
 import { cwd } from 'node:process';
 import { Environment } from '../environment';
-import { catchError, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -59,15 +59,70 @@ export class IdentityService {
 
     param = param.append('email', email);
 
-    return this.http.get(this.baseURL + 'Account/send-email-forget-password', {
+    return this.http.get(this.baseURL + '/Account/send-email-forget-password', {
       params: param,
       responseType: 'text',
     });
   }
 
   resetPassword(resetData: IResetPassword) {
-    return this.http.post(this.baseURL + 'Account/reset-password', resetData, {
+    return this.http.post(this.baseURL + '/Account/reset-password', resetData, {
       responseType: 'text',
     });
+  }
+
+  private userNameSource = new BehaviorSubject<string | null>(null);
+  userName$ = this.userNameSource.asObservable();
+
+  // Set user name
+  setUserName(name: string | null) {
+    this.userNameSource.next(name);
+  }
+
+  // Clear user
+  clearUser() {
+    this.userNameSource.next(null);
+  }
+
+  isAuthenticated() {
+    return this.http.get(this.baseURL + '/Account/IsUserAuth', {
+      withCredentials: true,
+    });
+  }
+
+  loadUserName() {
+    this.http
+      .get(this.baseURL + '/Account/get-user-name', { withCredentials: true })
+      .subscribe({
+        next: (res) => {
+          console.log('Full loadUserName response:', res); // 👈 Add this log
+          // Check the actual response structure
+          if (res && typeof res === 'object') {
+            // Try different possible structures
+            const userName =
+              (res as any).data ||
+              (res as any).userName ||
+              (res as any).name ||
+              null;
+            this.userNameSource.next(userName);
+          } else {
+            this.userNameSource.next(null);
+          }
+        },
+        error: (err) => {
+          console.error('Error loading user name:', err);
+          this.userNameSource.next(null);
+        },
+      });
+  }
+
+  logout() {
+    return this.http
+      .get(this.baseURL + '/Account/Logout', { withCredentials: true })
+      .pipe(
+        tap(() => {
+          this.userNameSource.next(null);
+        }),
+      );
   }
 }

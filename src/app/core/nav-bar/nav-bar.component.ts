@@ -1,77 +1,74 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AsyncPipe, NgClass } from '@angular/common';
+import { NgClass, AsyncPipe, NgIf } from '@angular/common';
 import { BasketService } from '../../basket/basket.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { IBasket } from '../../Models/Basket';
-import { InteropObservable, Observable } from 'rxjs';
-import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { IdentityService } from '../../identity/identity.service';
 
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
   imports: [
     RouterLink,
-    NgClass,
     RouterLinkActive,
+    NgClass,
+    NgIf, // ✅ needed for *ngIf
     MatIconModule,
     MatButtonModule,
     MatBadgeModule,
-    AsyncPipe,
+    AsyncPipe, // ✅ needed for | async
   ],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss',
 })
 export class NavBarComponent implements OnInit {
   basket$: Observable<IBasket>;
-  constructor(public basketService: BasketService) {
+  userName$: Observable<string | null>;
+  visible: boolean = false;
+
+  constructor(
+    public basketService: BasketService,
+    //private userService: UserService,
+    private userService: IdentityService,
+    @Inject(PLATFORM_ID) private platformId: Object,
+  ) {
     this.basket$ = this.basketService.basket$;
+    this.userName$ = this.userService.userName$;
   }
 
   ngOnInit(): void {
-    var basketId = localStorage.getItem('basketId');
-    if (basketId) {
-      console.log('Basket ID found in localStorage: ', basketId);
-      this.basketService.GetBasket(basketId).subscribe({
-        next: (value) => {
-          console.log('Basket loaded successfully: ', value);
-        },
-        error: (error) => {
-          console.error('Error loading basket:', error);
-        },
-      });
-    } else {
-      console.log('No Basket ID found in localStorage');
+    // Load basket if exists
+    if (isPlatformBrowser(this.platformId)) {
+      const basketId = localStorage.getItem('basketId');
+      if (basketId) {
+        this.basketService.GetBasket(basketId).subscribe();
+      }
     }
+
+    // Load user
+    this.userService.isAuthenticated().subscribe({
+      next: (isAuth) => {
+        if (isAuth) this.userService.loadUserName();
+        console.log('User authenticated:', isAuth);
+        this.userName$.subscribe((name) => {
+          console.log('User name changed to:', name);
+        });
+      },
+      error: () => this.userService.clearUser(), // ✅ safe,
+    });
   }
-
-  // ngOnInit(): void {
-  //   if (isPlatformBrowser(this.platformId)) {
-  //     const basketId = localStorage.getItem('basketId');
-
-  //     if (basketId) {
-  //       console.log('Basket ID found in localStorage:', basketId);
-
-  //       this.basketService.GetBasket(basketId).subscribe({
-  //         next: (value) => {
-  //           console.log('Basket loaded successfully:', value);
-  //         },
-  //         error: (error) => {
-  //           console.error('Error loading basket:', error);
-  //         },
-  //       });
-  //     } else {
-  //       console.log('No Basket ID found in localStorage');
-  //     }
-  //   }
-  // }
-  visible: boolean = false;
 
   ToggleDropDown() {
     this.visible = !this.visible;
+  }
+
+  logout() {
+    this.userService.logout();
+    this.visible = false;
   }
 }

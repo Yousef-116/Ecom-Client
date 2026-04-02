@@ -38,6 +38,7 @@ export const routes: Routes = [
           ),
       },
       {
+        //account/login
         path: 'login',
         loadComponent: () =>
           import('./identity/login/login.component').then(
