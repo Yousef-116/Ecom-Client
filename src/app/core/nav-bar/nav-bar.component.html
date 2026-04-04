@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top transition-all">
     <div class="container">
         <a class="navbar-brand" routerLink="/">
             <img src="./favicon.ico" alt="Logo" class="logo">
@@ -17,12 +17,12 @@
                 <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Best Seller</a></li>
             </ul>
-            <form class="form-inline mx-auto">
-                <div class="input-group">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-light" type="submit"><i class="material-icons">search</i></button>
-                    </div>
+            <form class="form-inline mx-auto px-lg-4 w-100 d-none d-lg-block" style="max-width: 500px;">
+                <div class="input-group search-bar w-100">
+                    <input class="form-control" type="search" placeholder="Search products..." aria-label="Search">
+                    <button class="btn btn-light" type="submit">
+                        <i class="material-icons">search</i>
+                    </button>
                 </div>
             </form>
             <ul class="navbar-nav ml-auto align-items-center">

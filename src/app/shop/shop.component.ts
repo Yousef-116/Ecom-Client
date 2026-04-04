@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ProductParams } from '../Models/ProductParams';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-shop',
@@ -20,17 +21,31 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ShopComponent implements OnInit {
   ngOnInit(): void {
-    try {
-      this.getAllProduct();
-    } catch (error) {
-      this.tost.error('Failed to load products', 'ERROR');
-      console.log(error);
-    }
+    this.route.queryParams.subscribe({
+      next: (params) => {
+        if (params['categoryId']) {
+          this.productParam.SelectedCategoryId = +params['categoryId'];
+          // Remove the query parameter from the URL
+          this.router.navigate([], {
+            relativeTo: this.route,
+            queryParams: { categoryId: null },
+            queryParamsHandling: 'merge'
+          });
+        }
+        this.getAllProduct();
+      },
+      error: (error) => {
+        this.tost.error('Failed to load products', 'ERROR');
+        console.log(error);
+      },
+    });
     this.getCategory();
   }
   constructor(
     private shopService: ShopService,
     private tost: ToastrService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   //Get All Product

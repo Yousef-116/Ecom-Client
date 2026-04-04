@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NavBarComponent } from './core/nav-bar/nav-bar.component';
+import { FooterComponent } from './core/footer/footer.component';
 import { ShopComponent } from './shop/shop.component';
 import { NgxSpinnerComponent } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     // ShopComponent,
     RouterOutlet,
     NgxSpinnerComponent,
+    FooterComponent,
     // BrowserAnimationsModule,
   ],
   templateUrl: './app.component.html',
