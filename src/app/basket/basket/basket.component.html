@@ -62,7 +62,7 @@
         <div class="receipt-edge bottom"></div>
         <div class="checkout-wrapper">
             <div class="pixel-divider">**************************</div>
-            <button routerLink="/checkout" class="pixel-checkout-btn">
+            <button (click)="redirectToCheckout()" class="pixel-checkout-btn">
                 <span class="pixel-icon">▶</span> PROCEED TO CHECKOUT <span class="pixel-icon">◀</span>
             </button>
             <p class="receipt-footer">THANK YOU FOR YOUR VISIT</p>

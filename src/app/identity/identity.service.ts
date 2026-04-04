@@ -87,6 +87,7 @@ export class IdentityService {
   isAuthenticated() {
     return this.http.get(this.baseURL + '/Account/IsUserAuth', {
       withCredentials: true,
+      responseType: 'text'
     });
   }
 

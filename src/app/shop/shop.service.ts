@@ -17,8 +17,6 @@ import { Environment } from '../environment';
 export class ShopService {
   constructor(private http: HttpClient) {}
 
-  //baseURL = 'https://localhost:7097/api';
-  //baseURL = 'http://localhost:5037/api';
   baseURL = Environment.baseURL;
 
   //Product: IProduct[];
@@ -66,9 +64,6 @@ export class ShopService {
   //   param=param.append("pageNumber",productParam.pageNumber)
   //   param=param.append("pageSize",productParam.pageSize)
   //   return this.http.get<IPagnation>(this.baseURL+"Products/get-all",{params:param});
-  // }
-  // getCategory(){
-  //
   // }
   // getProductDetails(id:number){
   //   return this.http.get<IProduct>(this.baseURL+"Products/get-by-id/"+id)

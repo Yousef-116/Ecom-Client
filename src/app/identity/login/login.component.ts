@@ -56,7 +56,7 @@ export class LoginComponent {
     this.identityService.login(this.LoginData.value).subscribe({
       next: (response: IAuthResponse) => {
         // ✅ Save token
-        localStorage.setItem('token', response.token);
+        //localStorage.setItem('token', response.token);
 
         console.log('Login successful:', response);
 

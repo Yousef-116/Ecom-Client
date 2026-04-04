@@ -7,10 +7,12 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { BasketService } from '../../basket/basket.service';
 
+import { RatingComponent } from './rating/rating.component';
+
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CurrencyPipe, NgxImageZoomModule, ToastrModule, RouterLink],
+  imports: [CurrencyPipe, NgxImageZoomModule, ToastrModule, RouterLink, RatingComponent],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })

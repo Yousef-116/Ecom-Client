@@ -1,0 +1,23 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Environment } from '../environment';
+import { AddProductRatingDTO, ProductRatingDTO } from '../Models/rating';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class RatingService {
+  baseURL = Environment.baseURL;
+
+  constructor(private http: HttpClient) { }
+
+  getRatingsByProductId(productId: number) {
+    return this.http.get<ProductRatingDTO[]>(this.baseURL + `/ProductRatings/get-by-product/${productId}`);
+  }
+
+  addRating(rating: AddProductRatingDTO) {
+    return this.http.post(this.baseURL + '/ProductRatings/add-rating', rating, {
+      responseType: 'text'
+    });
+  }
+}

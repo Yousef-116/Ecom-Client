@@ -5,6 +5,9 @@ import { IBasket, IBasketItem } from '../../Models/Basket';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { async, asyncScheduler, Observable } from 'rxjs';
 import { OrderTotalComponent } from '../../Shared/order-total/order-total.component';
+import { IdentityService } from '../../identity/identity.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 // import { IBasket, IBasketItem } from '../../shared/Models/Basket';
 
 @Component({
@@ -15,7 +18,12 @@ import { OrderTotalComponent } from '../../Shared/order-total/order-total.compon
   styleUrl: './basket.component.scss',
 })
 export class BasketComponent implements OnInit {
-  constructor(private basketService: BasketService) {}
+  constructor(
+    private basketService: BasketService,
+    private identityService: IdentityService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
   basket$!: Observable<IBasket | null>;
 
   ngOnInit(): void {
@@ -30,5 +38,21 @@ export class BasketComponent implements OnInit {
   }
   incrementQuantity(item: IBasketItem) {
     this.basketService.incrementBasketItemQuantity(item);
+  }
+
+  redirectToCheckout() {
+    this.identityService.userName$.subscribe({
+      next: (user) => {
+        if (user) {
+          this.router.navigateByUrl('/checkout');
+        } else {
+          this.toastr.warning('Please login first to proceed to checkout', 'Login Required');
+          this.router.navigateByUrl('/account/login');
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

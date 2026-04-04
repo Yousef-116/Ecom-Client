@@ -115,20 +115,9 @@
 </div>
 } -->
 <div class="container my-4">
+    @if (product) {
     <div class="row">
-        <p class="dispaly-5">Product Review</p>
-        <!-- @for (item of reviews; track $index) { -->
-        <div class="col-md-4 mb-4">
-            <div class="review-card rounded p-3 shadow-sm border">
-                <div class="d-flex align-items-center mb-2">
-                    <img src="https://static.vecteezy.com/system/resources/previews/015/271/883/original/business-man-flat-icon-design-human-resource-and-businessman-icon-concept-man-icon-in-trendy-flat-style-symbol-for-your-web-site-design-logo-app-vector.jpg"
-                        width="70" class="rounded-circle me-3" alt="">
-                    <!-- <h5 class=" text-info p-2 " style="font-size: 15px;">{{item.userName}}</h5> -->
-                    <!-- <h6 class="text-danger">Time-Review: {{item.reviewTime|date}}</h6> -->
-                </div>
-                <!-- <P class="review-text">{{item.content}}</P> -->
-            </div>
-        </div>
-        <!-- } -->
+        <app-rating [productId]="product.id"></app-rating>
     </div>
+    }
 </div>

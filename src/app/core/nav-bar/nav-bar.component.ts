@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgClass, AsyncPipe, NgIf } from '@angular/common';
 import { BasketService } from '../../basket/basket.service';
 import { MatIconModule } from '@angular/material/icon';
@@ -35,6 +35,7 @@ export class NavBarComponent implements OnInit {
     public basketService: BasketService,
     //private userService: UserService,
     private userService: IdentityService,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
   ) {
     this.basket$ = this.basketService.basket$;
@@ -52,9 +53,10 @@ export class NavBarComponent implements OnInit {
 
     // Load user
     this.userService.isAuthenticated().subscribe({
-      next: (isAuth) => {
-        if (isAuth) this.userService.loadUserName();
-        console.log('User authenticated:', isAuth);
+      next: (res) => {
+        // A successful response (200 OK) means the user is authenticated
+        this.userService.loadUserName();
+        console.log('User authenticated');
         this.userName$.subscribe((name) => {
           console.log('User name changed to:', name);
         });
@@ -68,7 +70,14 @@ export class NavBarComponent implements OnInit {
   }
 
   logout() {
-    this.userService.logout();
-    this.visible = false;
+    this.userService.logout().subscribe({
+      next: () => {
+        this.router.navigateByUrl('/');
+        this.visible = false;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

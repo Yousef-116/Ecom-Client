@@ -9,7 +9,9 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error) => {
       if (error.status === 401) {
-        router.navigate(['/account/login']);
+        if (!req.url.includes('IsUserAuth')) { // i dont sure about it
+          router.navigate(['/account/login']);
+        }
       }
 
       return throwError(() => error);
