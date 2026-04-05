@@ -1,0 +1,72 @@
+<div class="about-me-container py-10">
+    <div class="container">
+        <!-- Profile Header -->
+        <div class="profile-header text-center mb-5 animate-fade-in">
+            <div class="profile-image-container">
+                <!-- Profile picture commented out for future use -->
+                <!-- <img src="assets/images/profile.jpg" alt="Profile Picture" class="profile-img"> -->
+                <div class="profile-placeholder">
+                    <i class="material-icons profile-icon">account_circle</i>
+                </div>
+            </div>
+            <h1 class="display-4 font-weight-bold text-gradient mt-4">{{ personalInfo.name }}</h1>
+            <p class="lead text-muted">{{ personalInfo.education.degree }} | Aspiring Full Stack Developer</p>
+            <div class="contact-links mt-3">
+                <a [href]="'mailto:' + personalInfo.email" class="contact-item">
+                    <i class="material-icons">email</i> {{ personalInfo.email }}
+                </a>
+                <span class="px-2">|</span>
+                <span class="contact-item">
+                    <i class="material-icons">location_on</i> {{ personalInfo.location }}
+                </span>
+                <span class="px-2">|</span>
+                <span class="contact-item">
+                    <i class="material-icons">phone</i> {{ personalInfo.phone }}
+                </span>
+            </div>
+            <div class="social-links mt-4">
+                <a [href]="personalInfo.linkedin" target="_blank" class="btn btn-outline-primary mx-2">
+                    <i class="fa fa-linkedin"></i> LinkedIn
+                </a>
+                <a [href]="personalInfo.github" target="_blank" class="btn btn-outline-dark mx-2">
+                    <i class="fa fa-github"></i> GitHub
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Left Column: Summary and Education -->
+            <div class="col-lg-5">
+                <div class="glass-card mb-4 animate-slide-up">
+                    <h3 class="section-title"><i class="material-icons">person_outline</i> Summary</h3>
+                    <p class="summary-text text-justify">{{ personalInfo.summary }}</p>
+                </div>
+
+                <div class="glass-card mb-4 animate-slide-up delay-100">
+                    <h3 class="section-title"><i class="material-icons">school</i> Education</h3>
+                    <div class="education-item">
+                        <h5 class="mb-1 text-primary">{{ personalInfo.education.degree }}</h5>
+                        <p class="mb-0 font-italic text-muted">{{ personalInfo.education.period }}</p>
+                        <p class="mb-2">{{ personalInfo.education.university }}</p>
+                        <span class="badge badge-success gpa-badge">GPA: {{ personalInfo.education.gpa }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Skills -->
+            <div class="col-lg-7">
+                <div class="glass-card animate-slide-up delay-200">
+                    <h3 class="section-title"><i class="material-icons">code</i> Professional Skills</h3>
+                    <div class="skills-grid mt-4">
+                        <div *ngFor="let category of personalInfo.skills" class="skill-category-card">
+                            <h5 class="skill-category-title">{{ category.category }}</h5>
+                            <div class="skill-tags">
+                                <span *ngFor="let skill of category.items" class="skill-tag pulse-hover">{{ skill }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
