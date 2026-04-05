@@ -1,36 +1,37 @@
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top transition-all">
     <div class="container">
-        <a class="navbar-brand" routerLink="/">
-            <img src="./favicon.ico" alt="Logo" class="logo">
-            &nbsp;
-            <i class="text-white ">E-Com</i>
+        <a class="navbar-brand d-flex align-items-center" routerLink="/">
+            <img src="assets/images/logo.png" alt="Logo" class="logo me-2">
+            <span class="brand-text text-white font-weight-bold">E-Com</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
 
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse " id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a routerLink="/" class="nav-link" routerLinkActive="active"
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item px-2"><a routerLink="/" class="nav-link" routerLinkActive="active"
                         [routerLinkActiveOptions]="{exact:true}">Home</a></li>
-                <li class="nav-item"><a routerLink="/shop" class="nav-link" routerLinkActive="active">Shopping</a></li>
-                <li class="nav-item"><a routerLink="/about-me" class="nav-link" routerLinkActive="active">About Me</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Best Seller</a></li>
+                <li class="nav-item px-2"><a routerLink="/shop" class="nav-link" routerLinkActive="active">Shopping</a>
+                </li>
+                <li class="nav-item px-2"><a routerLink="/about-me" class="nav-link" routerLinkActive="active">About
+                        Me</a></li>
+                <li class="nav-item px-2"><a class="nav-link" href="#">Best Seller</a></li>
             </ul>
 
-            <ul class="navbar-nav ml-auto align-items-center">
-
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/basket">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item px-2">
+                    <a class="nav-link basket-link" routerLink="/basket">
                         <i [matBadge]="(basket$ | async)?.basketItems?.length || 0" matBadgeColor="warn"
                             class="material-icons">shopping_cart</i>
                     </a>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button">
-                        <i class="material-icons">account_circle</i>
-                        <span *ngIf="userName$ | async as name">{{ name }}</span>
+                <li class="nav-item dropdown px-2 text-white">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown"
+                        role="button">
+                        <i class="material-icons me-1">account_circle</i>
+                        <span *ngIf="userName$ | async as name" class="user-name">{{ name }}</span>
                     </a>
 
                     <div [ngClass]="{'show': visible}" class="dropdown-menu dropdown-menu-right">
