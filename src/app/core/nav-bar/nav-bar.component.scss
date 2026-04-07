@@ -19,12 +19,12 @@ $dark-bg: #1a1a1a;
     align-items: center;
 
     .logo {
-      height: 48px;
-      width: 48px;
+      height: 50px;
+      width: 42px;
       margin-right: 12px;
-      border-radius: 12px;
-      object-fit: cover;
-      box-shadow: 0 0 15px rgba(0, 198, 255, 0.3);
+      border-radius: 0;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px rgba(0, 198, 255, 0.5));
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
@@ -39,7 +39,7 @@ $dark-bg: #1a1a1a;
 
     &:hover .logo {
       transform: scale(1.1) rotate(5deg);
-      box-shadow: 0 0 25px rgba(0, 198, 255, 0.5);
+      filter: drop-shadow(0 0 12px rgba(0, 198, 255, 0.8));
     }
   }
 

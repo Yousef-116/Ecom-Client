@@ -1,152 +1,218 @@
+$info-color: #0dcaf0;
+$dark-bg: #121212;
+$card-bg: rgba(255, 255, 255, 0.03);
+$glass-bg: rgba(30, 30, 30, 0.6);
+$border-color: rgba(255, 255, 255, 0.08);
+$text-muted: rgba(255, 255, 255, 0.5);
+$transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+:host {
+    background-color: $dark-bg;
+    color: #fff;
+    display: block;
+    min-height: 100vh;
+}
+
 .hero-section {
-  .hero-slide {
-    height: 70vh;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.4);
-    }
+    .hero-slide {
+        height: 85vh;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        display: flex;
+        align-items: center;
 
-    .container {
-      position: relative;
-      z-index: 2;
-    }
-  }
-
-  ::ng-deep {
-    .carousel-indicators {
-      bottom: 30px;
-      
-      li {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        margin: 0 5px;
-        background-color: rgba(255, 255, 255, 0.5);
-        border: none;
-        
-        &.active {
-          background-color: #0dcaf0;
-          width: 30px;
-          border-radius: 6px;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);
         }
-      }
+
+        .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-glass-card {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 40px;
+            max-width: 650px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+
+            h1 {
+                font-size: 4rem;
+                font-weight: 800;
+                line-height: 1;
+                margin-bottom: 1.5rem;
+                background: linear-gradient(45deg, #fff, $info-color);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            p {
+                font-size: 1.25rem;
+                color: rgba(255, 255, 255, 0.8);
+                margin-bottom: 2.5rem;
+                line-height: 1.6;
+            }
+        }
     }
 
-    .carousel-control-prev, .carousel-control-next {
-      width: 5%;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+    ::ng-deep {
+        .carousel-indicators {
+            bottom: 40px;
+            li {
+                width: 10px;
+                height: 10px;
+                background-color: rgba(255, 255, 255, 0.3);
+                &.active {
+                    background-color: $info-color;
+                    width: 40px;
+                }
+            }
+        }
     }
+}
+
+.feature-item {
+    background: $card-bg;
+    border: 1px solid $border-color;
+    border-radius: 24px;
+    padding: 2rem !important;
+    transition: $transition;
+    height: 100%;
 
     &:hover {
-      .carousel-control-prev, .carousel-control-next {
-        opacity: 1;
-      }
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(13, 202, 240, 0.3);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+
+        .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: $info-color;
+            color: #121212 !important;
+            box-shadow: 0 0 20px rgba(13, 202, 240, 0.4);
+        }
     }
-  }
+
+    .feature-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        background: rgba(13, 202, 240, 0.1);
+        color: $info-color;
+        margin-bottom: 1.5rem !important;
+        transition: $transition;
+    }
+
+    h6 { font-size: 1.1rem; font-weight: 700; color: #fff; }
+    p { font-size: 0.85rem; color: $text-muted; }
 }
 
-.feature-icon {
-  width: 70px;
-  height: 70px;
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+.section-title-modern {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 0;
+    position: relative;
+    padding-left: 20px;
 
-.feature-item:hover .feature-icon {
-  transform: translateY(-10px) rotate(10deg);
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 6px;
+        height: 80%;
+        background: $info-color;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(13, 202, 240, 0.5);
+    }
 }
-
-.bg-light-info { background-color: rgba(13, 202, 240, 0.1); }
-.bg-light-success { background-color: rgba(25, 135, 84, 0.1); }
-.bg-light-warning { background-color: rgba(255, 193, 7, 0.1); }
-.bg-light-danger { background-color: rgba(220, 53, 69, 0.1); }
 
 .category-card {
-  transition: all 0.3s ease;
-  overflow: hidden;
-  border-color: #f8f9fa !important;
-
-  .category-icon {
-    width: 60px;
-    height: 60px;
-    background-color: #f0faff;
-    transition: all 0.3s ease;
-  }
-
-  &:hover {
-    transform: translateY(-8px);
-    border-color: #0dcaf0 !important;
-    background-color: #0dcaf0 !important;
+    background: $card-bg;
+    border: 1px solid $border-color !important;
+    border-radius: 24px !important;
+    padding: 2.5rem !important;
+    transition: $transition;
+    text-decoration: none;
 
     .category-icon {
-      background-color: #fff;
-      color: #0dcaf0 !important;
+        width: 70px;
+        height: 70px;
+        background: rgba(255, 255, 255, 0.05) !important;
+        color: $info-color !important;
+        border-radius: 50%;
+        margin-bottom: 1.5rem !important;
+        transition: $transition;
     }
 
-    h6 {
-      color: #fff !important;
+    h6 { color: #fff !important; transition: $transition; }
+
+    &:hover {
+        background: $info-color !important;
+        transform: translateY(-10px);
+        border-color: transparent !important;
+
+        .category-icon {
+            background: #fff !important;
+            color: $info-color !important;
+            transform: scale(1.1);
+        }
+
+        h6 { color: #121212 !important; font-weight: 800; }
     }
-  }
 }
 
 .promo-banner {
-  background: linear-gradient(135deg, #0dcaf0 0%, #0081a7 100%);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 15px 35px rgba(13, 202, 240, 0.2);
+    background: linear-gradient(135deg, #0dcaf0 0%, #0081a7 100%);
+    border-radius: 35px !important;
+    padding: 4rem !important;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    
+    .badge {
+        background: #121212 !important;
+        color: $info-color !important;
+        border: 1px solid rgba(13, 202, 240, 0.3);
+    }
 
-  &::after {
-    content: '';
-    position: absolute;
-    top: -50px;
-    right: -50px;
-    width: 200px;
-    height: 200px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-  }
+    .search-bar {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px !important;
+        padding: 8px;
 
-  img {
-    height: 300px;
-    transform: scale(1.1);
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
-  }
-}
+        input {
+            background: transparent !important;
+            color: #fff !important;
+            font-weight: 500;
+            
+            &::placeholder { color: rgba(255, 255, 255, 0.6); }
+        }
 
-.cursor-pointer { cursor: pointer; }
-.transition-all { transition: all 0.3s ease; }
-
-.border-info {
-  border-color: #0dcaf0 !important;
+        .btn-dark {
+            background: #121212 !important;
+            border-radius: 15px !important;
+            padding: 0.8rem 2rem !important;
+            
+            &:hover { background: #000 !important; transform: scale(1.02); }
+        }
+    }
 }
 
 @media (max-width: 768px) {
-  .hero-slide {
-    height: 50vh !important;
-    
-    h1 {
-      font-size: 2.5rem !important;
-    }
-  }
-  
-  .promo-banner {
-    padding: 2.5rem !important;
-    
-    h2 {
-      font-size: 1.8rem !important;
-    }
-  }
+    .hero-slide { height: 70vh !important; }
+    .hero-glass-card { padding: 2rem !important; h1 { font-size: 2.5rem !important; } }
+    .promo-banner { padding: 2.5rem !important; h2 { font-size: 2rem !important; } }
 }

@@ -5,6 +5,7 @@ export interface IProduct {
   oldPrice: number;
   newPrice: number;
   photos: IPhoto[];
+  categoryId: number;
   categoryName: string;
 }
 

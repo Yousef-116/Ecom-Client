@@ -1,13 +1,13 @@
-<section class="auth-wrapper">
-    <div class="form-card">
+<section class="auth-wrapper animate__animated animate__fadeIn">
+    <div class="form-card shadow-2xl">
         <div class="form-header">
-            <h2>Create Account</h2>
-            <p>Join us today! It only takes a minute.</p>
+            <h2 class="animate__animated animate__slideInDown delay-100">Create Account</h2>
+            <p class="animate__animated animate__fadeIn delay-200">Join our community and exclusive experience.</p>
         </div>
 
         <form [formGroup]="RegisterData" class="modern-form" (ngSubmit)="onSubmit()">
 
-            <div class="form-field">
+            <div class="form-field animate__animated animate__fadeInUp delay-300">
                 <label for="userName">Username</label>
                 <div class="input-wrapper">
                     <input type="text" id="userName" formControlName="userName" placeholder="e.g. David123"
@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <div class="form-field">
+            <div class="form-field animate__animated animate__fadeInUp delay-300">
                 <label for="displayName">Display Name</label>
                 <div class="input-wrapper">
                     <input type="text" id="displayName" formControlName="displayName" placeholder="John Doe"
@@ -29,10 +29,10 @@
                 </div>
             </div>
 
-            <div class="form-field">
+            <div class="form-field full-width animate__animated animate__fadeInUp delay-400">
                 <label for="userEmail">Email Address</label>
                 <div class="input-wrapper">
-                    <input type="Email" id="userEmail" formControlName="Email" placeholder="name@company.com"
+                    <input type="email" id="userEmail" formControlName="Email" placeholder="name@company.com"
                         [class.is-invalid]="email.invalid && email.touched" />
                     @if (email.invalid && email.touched) {
                     <span class="error-message">Please enter a valid email address</span>
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="form-field">
+            <div class="form-field full-width animate__animated animate__fadeInUp delay-500">
                 <label for="password">Password</label>
                 <div class="input-wrapper">
                     <input type="password" id="password" formControlName="password" placeholder="••••••••"
@@ -51,12 +51,13 @@
                 </div>
             </div>
 
-            <button type="submit" [disabled]="RegisterData.invalid" class="submit-btn">
-                Register Now
+            <button type="submit" [disabled]="RegisterData.invalid" 
+                class="submit-btn shadow-lg animate__animated animate__fadeInUp delay-600">
+                Register Account
             </button>
 
-            <p class="form-footer">
-                Already have an account? <a href="#">Log in</a>
+            <p class="form-footer animate__animated animate__fadeIn delay-700">
+                Already have an Account? <a routerLink="/login">Sign In</a>
             </p>
         </form>
     </div>

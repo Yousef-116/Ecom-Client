@@ -3,5 +3,5 @@ export class ProductParams {
   SortSelected: string = 'Name';
   Search: string = '';
   pageNumber: number = 1;
-  pageSize: number = 3;
+  pageSize: number = 12;
 }

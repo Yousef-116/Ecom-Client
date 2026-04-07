@@ -2,31 +2,38 @@
 <section class="hero-section position-relative overflow-hidden mb-5">
   <carousel [interval]="5000" [showIndicators]="true" [isAnimated]="true">
     <slide>
-      <div class="hero-slide d-flex align-items-center" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
-        <div class="container text-white">
-          <div class="row">
-            <div class="col-lg-6">
-              <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInUp">Modern Trends <br> For Modern Life</h1>
-              <p class="lead mb-5 animate__animated animate__fadeInUp animate__delay-1s">
-                Explore our curated collection of premium products. 
-                Quality meets style in every piece we offer.
-              </p>
-              <a routerLink="/shop" class="btn btn-info btn-lg px-5 py-3 rounded-pill fw-bold animate__animated animate__fadeInUp animate__delay-2s shadow-lg border-0">
-                Shop Collection <i class="fa fa-arrow-right ms-2"></i>
-              </a>
+      <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+        <div class="container h-100 d-flex align-items-center">
+            <div class="hero-glass-card animate__animated animate__zoomIn">
+                <span class="text-info font-weight-700 uppercase tracking-widest mb-3 d-block">Premium Collection 2026</span>
+                <h1>Modern Trends <br> For Modern Life</h1>
+                <p>
+                  Explore our curated collection of premium products. 
+                  Quality meets style in every piece we offer.
+                </p>
+                <div class="d-flex gap-3">
+                    <a routerLink="/shop" class="btn btn-info btn-lg px-5 py-3 rounded-pill fw-bold shadow-lg border-0">
+                      Shop Now <i class="material-icons ms-2" style="font-size: 20px; vertical-align: middle;">shopping_bag</i>
+                    </a>
+                    <a routerLink="/shop" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill fw-bold border-1 bg-white bg-opacity-10">
+                        Explore
+                    </a>
+                </div>
             </div>
-          </div>
         </div>
       </div>
     </slide>
     <slide>
-      <div class="hero-slide d-flex align-items-center" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
-        <div class="container text-white text-center">
-          <h1 class="display-3 fw-bold mb-4">Summer Sale</h1>
-          <p class="lead mb-5">Up to 50% off on selected items. Limited time offer!</p>
-          <a routerLink="/shop" class="btn btn-warning btn-lg px-5 py-3 rounded-pill fw-bold shadow-lg border-0">
-            View All Offers
-          </a>
+      <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+        <div class="container h-100 d-flex align-items-center justify-content-center">
+            <div class="hero-glass-card text-center animate__animated animate__fadeInUp">
+                <span class="badge bg-danger mb-4 px-3 py-2 fw-bold">SUMMER FLASH SALE</span>
+                <h1>Mid-Season Sale <br> Up to 50% Off</h1>
+                <p>Don't miss out on our biggest sale of the season. Limited time only!</p>
+                <a routerLink="/shop" class="btn btn-info btn-lg px-5 py-3 rounded-pill fw-bold shadow-lg border-0 mt-2">
+                    Grab the Deal <i class="material-icons ms-2" style="font-size: 20px; vertical-align: middle;">bolt</i>
+                </a>
+            </div>
         </div>
       </div>
     </slide>
@@ -34,62 +41,67 @@
 </section>
 
 <!-- Feature Icons -->
-<div class="container mb-5 pb-5 border-bottom">
-  <div class="row g-4 text-center">
+<div class="container mb-5 pb-5">
+  <div class="row g-4">
     <div class="col-md-3 col-6">
-      <div class="feature-item p-3">
-        <div class="feature-icon bg-light-info text-info mb-3 mx-auto">
-          <i class="fa fa-truck fs-3"></i>
+      <div class="feature-item p-4 text-center">
+        <div class="feature-icon mx-auto">
+          <i class="material-icons">local_shipping</i>
         </div>
-        <h6 class="fw-bold mb-1">Free Shipping</h6>
-        <p class="small text-muted mb-0">On orders over $100</p>
+        <h6>Free Shipping</h6>
+        <p>On orders over $100</p>
       </div>
     </div>
     <div class="col-md-3 col-6">
-      <div class="feature-item p-3">
-        <div class="feature-icon bg-light-success text-success mb-3 mx-auto">
-          <i class="fa fa-shield fs-3"></i>
+      <div class="feature-item p-4 text-center">
+        <div class="feature-icon mx-auto">
+            <i class="material-icons">verified_user</i>
         </div>
-        <h6 class="fw-bold mb-1">Secure Payments</h6>
-        <p class="small text-muted mb-0">100% secure payment</p>
+        <h6>Secure Payments</h6>
+        <p>100% secure checkout</p>
       </div>
     </div>
     <div class="col-md-3 col-6">
-      <div class="feature-item p-3">
-        <div class="feature-icon bg-light-warning text-warning mb-3 mx-auto">
-          <i class="fa fa-refresh fs-3"></i>
+      <div class="feature-item p-4 text-center">
+        <div class="feature-icon mx-auto">
+            <i class="material-icons">replay</i>
         </div>
-        <h6 class="fw-bold mb-1">Easy Returns</h6>
-        <p class="small text-muted mb-0">30 days return policy</p>
+        <h6>Easy Returns</h6>
+        <p>30 days return policy</p>
       </div>
     </div>
     <div class="col-md-3 col-6">
-      <div class="feature-item p-3">
-        <div class="feature-icon bg-light-danger text-danger mb-3 mx-auto">
-          <i class="fa fa-headphones fs-3"></i>
+      <div class="feature-item p-4 text-center">
+        <div class="feature-icon mx-auto">
+            <i class="material-icons">headset_mic</i>
         </div>
-        <h6 class="fw-bold mb-1">24/7 Support</h6>
-        <p class="small text-muted mb-0">Dedicated support team</p>
+        <h6>24/7 Support</h6>
+        <p>Dedicated assistance</p>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Browse by Category -->
-<div class="container mb-5">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3 class="fw-bold m-0 border-start border-info border-5 ps-3">Shop by Category</h3>
-    <a routerLink="/shop" class="text-info text-decoration-none fw-bold">View All <i class="fa fa-chevron-right ms-1"></i></a>
+<div class="container mb-5 py-5">
+  <div class="d-flex justify-content-between align-items-end mb-5">
+    <div>
+        <h3 class="section-title-modern">Shop by Category</h3>
+        <p class="text-muted mt-2 mb-0">Browse our wide range of specialized collections.</p>
+    </div>
+    <a routerLink="/shop" class="text-info text-decoration-none fw-bold d-flex align-items-center mb-1">
+        View All <i class="material-icons ms-1" style="font-size: 18px;">arrow_forward</i>
+    </a>
   </div>
   <div class="row g-4">
     @for (category of categories; track category.id) {
     <div class="col-lg-2 col-md-4 col-6">
-      <div class="category-card cursor-pointer text-center p-4 rounded-3 border bg-white shadow-sm transition-all" 
+      <div class="category-card cursor-pointer text-center" 
            [routerLink]="['/shop']" [queryParams]="{categoryId: category.id}">
-        <div class="category-icon text-info mb-3 d-flex justify-content-center align-items-center mx-auto rounded-circle">
-          <i class="fa fa-bookmark fs-2"></i>
+        <div class="category-icon d-flex justify-content-center align-items-center mx-auto">
+          <i class="material-icons" style="font-size: 28px;">label</i>
         </div>
-        <h6 class="fw-bold text-dark mb-0 fs-6">{{category.name}}</h6>
+        <h6 class="fw-bold mb-0">{{category.name}}</h6>
       </div>
     </div>
     }
@@ -97,30 +109,38 @@
 </div>
 
 <!-- Promotional Banner -->
-<div class="container mb-5 pb-4">
-  <div class="promo-banner rounded-4 p-5 d-flex align-items-center">
+<div class="container mb-5 py-5">
+  <div class="promo-banner rounded-4 p-5 d-flex align-items-center overflow-hidden">
     <div class="row w-100 align-items-center">
-      <div class="col-md-7 text-white mb-4 mb-md-0">
-        <span class="badge bg-danger mb-3 p-2 px-3 fw-bold">LIMITED TIME</span>
+      <div class="col-md-7 text-white mb-4 mb-md-0 position-relative" style="z-index: 2;">
+        <span class="badge mb-3 p-2 px-3 fw-bold uppercase tracking-widest text-uppercase">Exclusive Offer</span>
         <h2 class="display-5 fw-bold mb-3">Join our community and get 20% off your first order!</h2>
-        <p class="lead mb-4 opacity-75">Subscribe to our newsletter for exclusive updates and offers.</p>
-        <div class="input-group search-bar max-w-lg">
-          <input type="email" class="form-control p-3 bg-white border-0" placeholder="Your Email Address">
-          <button class="btn btn-dark p-3 px-4 fw-bold shadow-none" type="button">Subscribe</button>
+        <p class="lead mb-4 opacity-75">Subscribe to our newsletter for exclusive updates, early access and offers.</p>
+        
+        <div class="input-group search-bar max-w-lg mt-4">
+          <input type="email" class="form-control p-3 bg-transparent border-0" placeholder="Your Email Address">
+          <button class="btn btn-dark p-3 px-4 fw-bold shadow-none d-flex align-items-center gap-2" type="button">
+              Subscribe <i class="material-icons" style="font-size: 18px;">mail</i>
+          </button>
         </div>
       </div>
-      <div class="col-md-5 text-center d-none d-md-block">
-        <img src="https://cdni.iconscout.com/illustration/premium/thumb/online-shopping-8350811-6670869.png" class="img-fluid" alt="Promo">
+      <div class="col-md-5 text-center d-none d-md-block position-relative" style="z-index: 1;">
+        <img src="https://cdni.iconscout.com/illustration/premium/thumb/online-shopping-8350811-6670869.png" class="img-fluid hero-image animate__animated animate__pulse animate__infinite animate__slow" alt="Promo">
       </div>
     </div>
   </div>
 </div>
 
-<!-- Featured Products -->
-<div class="container mb-5 pb-5">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3 class="fw-bold m-0 border-start border-info border-5 ps-3">Featured Products</h3>
-    <a routerLink="/shop" class="text-info text-decoration-none fw-bold">See More <i class="fa fa-chevron-right ms-1"></i></a>
+<!-- Featured Products Section -->
+<div class="container mb-5 py-5">
+  <div class="d-flex justify-content-between align-items-end mb-5">
+    <div>
+        <h3 class="section-title-modern">Featured Products</h3>
+        <p class="text-muted mt-2 mb-0">Our most popular and highly rated essentials.</p>
+    </div>
+    <a routerLink="/shop" class="text-info text-decoration-none fw-bold d-flex align-items-center mb-1">
+        See More <i class="material-icons ms-1" style="font-size: 18px;">arrow_forward</i>
+    </a>
   </div>
   <div class="row g-4">
     @for (product of featuredProducts; track product.id) {
