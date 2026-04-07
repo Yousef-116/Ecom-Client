@@ -3,7 +3,8 @@
     <div class="container">
         <!-- Breadcrumb / Back Link -->
         <div class="mb-4 d-flex align-items-center">
-            <a routerLink="/shop" class="text-info text-decoration-none d-flex align-items-center opacity-75 hover-opacity-100 transition-all">
+            <a routerLink="/shop"
+                class="text-info text-decoration-none d-flex align-items-center opacity-75 hover-opacity-100 transition-all">
                 <i class="material-icons me-1" style="font-size: 18px;">arrow_back</i>
                 Back to Shop
             </a>
@@ -15,20 +16,16 @@
             <!-- Left Column: Image Gallery -->
             <div class="col-lg-6">
                 <div class="main-img-container shadow-2xl">
-                    <lib-ngx-image-zoom 
-                        [thumbImage]="'http://localhost:5037/'+MainImage"
-                        [fullImage]="'http://localhost:5037/'+MainImage" 
-                        [magnification]="1.5" 
-                        [enableScrollZoom]="true"
-                        [lensWidth]="180" 
-                        [lensHeight]="180" 
-                        [enableLens]="true">
+                    <lib-ngx-image-zoom *ngIf="MainImage" [thumbImage]="'http://localhost:5037/' + MainImage"
+                        [fullImage]="'http://localhost:5037/' + MainImage" [magnification]="1.5"
+                        [enableScrollZoom]="true" [lensWidth]="180" [lensHeight]="180" [enableLens]="true">
                     </lib-ngx-image-zoom>
 
                     <!-- Previews / Thumbnails -->
                     <div class="previews">
                         @for (item of product.photos; track item.imageName) {
-                        <div class="preview-item" [class.active]="MainImage === item.imageName" (click)="ReplaceImage(item.imageName)">
+                        <div class="preview-item" [class.active]="MainImage === item.imageName"
+                            (click)="ReplaceImage(item.imageName)">
                             <img src="http://localhost:5037/{{item.imageName}}" alt="{{product.name}} thumbnail">
                         </div>
                         }
@@ -41,12 +38,19 @@
                 <div class="product-info-section">
                     <div class="category">{{product.categoryName}}</div>
                     <h1 class="product-title">{{product.name}}</h1>
-                    
+
                     <div class="d-flex align-items-center mb-4">
                         <div class="rating d-flex align-items-center bg-warning bg-opacity-10 px-3 py-1 rounded-pill">
                             <i class="material-icons text-warning" style="font-size: 18px;">star</i>
-                            <span class="ms-1 text-warning fw-bold">4.8</span>
-                            <span class="ms-2 text-muted small">(124 Reviews)</span>
+                            <!-- <span class="ms-1 text-warning fw-bold">4.8</span>
+                            <span class="ms-2 text-muted small">(124 Reviews)</span> -->
+                            <span class="ms-1 text-warning fw-bold">
+                                {{averageRating | number:'1.1-1'}}
+                            </span>
+
+                            <span class="ms-2 text-muted small">
+                                ({{reviewsCount}} Reviews)
+                            </span>
                         </div>
                         <div class="ms-3 stock-info">In Stock</div>
                     </div>
@@ -54,7 +58,8 @@
                     <div class="price-area shadow-sm">
                         <div class="old-price-line" *ngIf="product.oldPrice > product.newPrice">
                             <del>{{product.oldPrice | currency}}</del>
-                            <span class="discount-tag">Save {{CalculateDiscountPercentage(product.oldPrice, product.newPrice)}}%</span>
+                            <span class="discount-tag">Save {{CalculateDiscountPercentage(product.oldPrice,
+                                product.newPrice)}}%</span>
                         </div>
                         <h2 class="new-price">{{product.newPrice | currency}}</h2>
                     </div>
@@ -80,9 +85,9 @@
                             <i class="material-icons">shopping_cart</i>
                             Add to Cart
                         </button>
-                        <button class="btn-main btn-wishlist" title="Add to Wishlist">
+                        <!-- <button class="btn-main btn-wishlist" title="Add to Wishlist">
                             <i class="material-icons">bookmark_border</i>
-                        </button>
+                        </button> -->
                     </div>
 
                     <!-- Additional Info Cards -->
@@ -116,7 +121,8 @@
 
         <!-- Rating Section -->
         <div class="mt-5 border-top border-secondary border-opacity-10 pt-5">
-            <app-rating [productId]="product.id"></app-rating>
+            <app-rating [productId]="product.id" (ratingChanged)="onRatingChanged($event)">
+            </app-rating>
         </div>
 
         <!-- Related Products Section -->
@@ -124,7 +130,8 @@
             <div class="section-header">
                 <div>
                     <h2 class="text-white">Related Products</h2>
-                    <p class="text-muted mt-2">You might also like these items from <span class="text-info">{{product.categoryName}}</span>.</p>
+                    <p class="text-muted mt-2">You might also like these items from <span
+                            class="text-info">{{product.categoryName}}</span>.</p>
                 </div>
                 <a routerLink="/shop" [queryParams]="{categoryId: product.categoryId}" class="view-all">
                     View All
@@ -142,10 +149,10 @@
     </div>
 </div>
 } @else {
-    <!-- Skeleton/Loading State can be added here if needed -->
-    <div class="text-center py-5">
-        <div class="spinner-border text-info" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
+<!-- Skeleton/Loading State can be added here if needed -->
+<div class="text-center py-5">
+    <div class="spinner-border text-info" role="status">
+        <span class="visually-hidden">Loading...</span>
     </div>
+</div>
 }

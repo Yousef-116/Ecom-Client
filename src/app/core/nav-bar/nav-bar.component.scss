@@ -55,6 +55,9 @@ $dark-bg: #1a1a1a;
         border-radius: 8px;
         transition: all $transition-duration ease;
         position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         &::after {
           content: '';

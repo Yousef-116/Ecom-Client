@@ -2,7 +2,8 @@
     <!-- Image Section -->
     <div class="image-container">
         @if(product.photos.length > 0){
-        <img src="http://localhost:5037/{{product.photos[0].imageName}}" class="card-img-top" alt="{{product.name}}">
+        <!-- <img src="http://localhost:5037/{{product.photos[0].imageName}}" class="card-img-top" alt="{{product.name}}"> -->
+        <img src="http://localhost:5037/{{selectedImage}}" class="card-img-top" alt="{{product.name}}">
         } @else {
         <div class="d-flex align-items-center justify-content-center h-100 bg-dark text-muted">
             <i class="material-icons" style="font-size: 48px;">image</i>
@@ -19,15 +20,16 @@
         <!-- Thumbnails Overlay (Visible on Hover) -->
         <div class="thumbnails">
             @for (item of product.photos.slice(0, 4); track $index) {
-            <img src="http://localhost:5037/{{item.imageName}}" alt="" class="thumbnail-img">
+            <img src="http://localhost:5037/{{item.imageName}}" alt="" class="thumbnail-img"
+                (click)="changeImage(item.imageName)">
             }
         </div>
     </div>
 
     <!-- Favorite Icon -->
-    <button class="favorite-icon btn" title="Add to Wishlist">
+    <!-- <button class="favorite-icon btn" title="Add to Wishlist">
         <i class="material-icons" style="font-size: 20px;">bookmark_border</i>
-    </button>
+    </button> -->
 
     <!-- Body Section -->
     <div class="card-body">

@@ -2,7 +2,16 @@ $info-color: #0dcaf0;
 $dark-bg: #121212;
 $card-bg: rgba(255, 255, 255, 0.03);
 $border-color: rgba(255, 255, 255, 0.08);
-$text-muted: rgba(255, 255, 255, 0.5);
+$text-muted: rgba(255, 255, 255, 0.7); // instead of 0.5
+
+.text-muted {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.uppercase {
+    color: rgba(255, 255, 255, 0.85); // for labels like Quantity
+}
+
 $transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 :host {
@@ -61,6 +70,8 @@ $transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     font-size: 3.5rem;
     font-weight: 800;
     margin-top: 2rem;
+    //line-height: 70px;
+    padding: 0.5rem;
     background: linear-gradient(45deg, #fff, $info-color);
     -webkit-background-clip: text;
     background-clip: text;
@@ -83,9 +94,14 @@ $transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         gap: 8px;
         transition: $transition;
 
-        i { color: $info-color; font-size: 20px; }
+        i {
+            color: $info-color;
+            font-size: 20px;
+        }
 
-        &:hover { color: #fff; }
+        &:hover {
+            color: #fff;
+        }
     }
 }
 
@@ -125,7 +141,6 @@ $transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid $border-color;
     border-radius: 30px;
     padding: 2.5rem;
-    height: 100%;
     transition: $transition;
 
     &:hover {
@@ -144,7 +159,10 @@ $transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     gap: 12px;
     color: #fff;
 
-    i { color: $info-color; font-size: 28px; }
+    i {
+        color: $info-color;
+        font-size: 28px;
+    }
 }
 
 .summary-text {
@@ -158,9 +176,23 @@ $transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     padding-left: 20px;
     border-left: 2px solid $info-color;
 
-    h5 { font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
-    .period { color: $info-color; font-weight: 600; font-size: 0.9rem; }
-    .uni { color: $text-muted; margin-top: 4px; }
+    h5 {
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 0.5rem;
+    }
+
+    .period {
+        color: $info-color;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .uni {
+        color: $text-muted;
+        margin-top: 4px;
+    }
+
     .gpa {
         background: rgba(13, 202, 240, 0.15);
         color: $info-color;
@@ -176,7 +208,9 @@ $transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 .skill-category-card {
     margin-bottom: 2.5rem;
 
-    &:last-child { margin-bottom: 0; }
+    &:last-child {
+        margin-bottom: 0;
+    }
 
     .skill-category-title {
         color: #fff;
@@ -212,18 +246,37 @@ $transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 @keyframes slideInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .animate-up {
     animation: slideInUp 0.8s ease-out forwards;
 }
 
-.delay-1 { animation-delay: 0.2s; }
-.delay-2 { animation-delay: 0.4s; }
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.delay-2 {
+    animation-delay: 0.4s;
+}
 
 @media (max-width: 992px) {
-    .text-gradient { font-size: 2.5rem; }
-    .contact-links { flex-direction: column; align-items: center; gap: 10px; }
+    .text-gradient {
+        font-size: 2.5rem;
+    }
+
+    .contact-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
 }

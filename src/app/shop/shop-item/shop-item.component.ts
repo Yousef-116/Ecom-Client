@@ -15,15 +15,29 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 export class ShopItemComponent {
   @Input({ required: true }) product!: IProduct;
 
+  selectedImage: string = '';
+
   constructor(
     private service: BasketService,
     private toastr: ToastrService,
   ) {}
+
+  ngOnInit() {
+    if (this.product?.photos?.length > 0) {
+      this.selectedImage = this.product.photos[0].imageName;
+    }
+  }
+
+  changeImage(imageName: string) {
+    this.selectedImage = imageName;
+  }
+
   SetBasketValue() {
     console.log('Adding to basket: ', this.product.name);
     this.service.addItemToBasket(this.product);
     this.toastr.success('Item added to basket', 'Success');
   }
+}
   //   constructor(private _service: BasketService) {}
   //   @Input() Product: IProduct;
   //   SetBasketValue() {
@@ -33,4 +47,4 @@ export class ShopItemComponent {
   //     return Array(rateOfnumber).fill(0).map((x,i)=>i);
   //   }
   // }
-}
+//}

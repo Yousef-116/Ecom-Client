@@ -1,72 +1,76 @@
 <div class="rating-section mb-5">
-    <hr class="my-4">
-    <div class="d-flex align-items-center mb-4">
-        <h3 class="display-6 mb-0 me-3">Product Reviews</h3>
-        <div *ngIf="ratings.length > 0" class="d-flex align-items-center bg-light px-3 py-2 rounded border">
-            <span class="fs-4 fw-bold me-2">{{averageRating | number:'1.1-1'}}</span>
-            <div class="text-warning fs-5">
-                <i class="fa fa-star me-1"></i>
+    <hr>
+
+    <div class="section-header d-flex flex-wrap align-items-center justify-content-between gap-4">
+        <h3 class="display-6 mb-0">Product Reviews</h3>
+
+        <div *ngIf="ratings.length > 0" class="summary-badge">
+            <span class="score">{{averageRating | number:'1.1-1'}}</span>
+            <div class="stars">
+                <i class="fa fa-star"></i>
             </div>
-            <span class="text-muted ms-2">({{ratings.length}} reviews)</span>
+            <span class="count">({{ratings.length}} reviews)</span>
         </div>
     </div>
 
-    <!-- List of Ratings -->
-    <div *ngIf="ratings.length === 0" class="alert alert-light text-center py-4 border">
-        There are no reviews for this product yet. Be the first to leave one!
+    <!-- Empty State -->
+    <div *ngIf="ratings.length === 0" class="empty-state mb-5">
+        <i class="fa fa-comments-o fa-3x mb-3 d-block opacity-25"></i>
+        There are no reviews for this product yet. Be the first to share your experience!
     </div>
 
-    <div class="row mb-4">
-        <div class="col-md-6 mb-3" *ngFor="let rating of ratings">
-            <div class="review-card p-3 shadow-sm border rounded bg-white">
-                <div class="d-flex align-items-center mb-2">
-                    <img src="https://ui-avatars.com/api/?name={{rating.username}}&background=random" 
-                         width="50" class="rounded-circle me-3" alt="Avatar">
-                    <div>
-                        <h5 class="mb-0 text-dark">{{rating.username}}</h5>
-                        <div class="text-warning small">
-                            <i class="fa" 
-                               *ngFor="let star of stars"
-                               [ngClass]="star <= rating.score ? 'fa-star' : 'fa-star-o'"></i>
+    <!-- List of Reviews -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-6" *ngFor="let rating of ratings">
+            <div class="review-card">
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name={{rating.username}}&background=0dcaf0&color=fff&bold=true"
+                        class="avatar" alt="Avatar">
+                    <div class="flex-grow-1">
+                        <h5 class="name">{{rating.username}}</h5>
+                        <div class="stars">
+                            <i class="fa" *ngFor="let star of stars"
+                                [ngClass]="star <= rating.score ? 'fa-star' : 'fa-star-o'"></i>
                         </div>
                     </div>
                 </div>
-                <p class="review-text text-muted mb-0 mt-2">{{rating.message}}</p>
+                <p class="review-text">{{rating.message}}</p>
             </div>
         </div>
     </div>
 
-    <!-- Rating Form -->
-    <div class="add-rating-box p-4 rounded shadow-sm border bg-light mt-4">
-        <h4 class="mb-3">Leave a Review</h4>
-        
+    <!-- Add Rating Form -->
+    <div class="add-rating-box">
+        <h4>Leave a Review</h4>
+
         <ng-container *ngIf="userName; else loginPrompt">
-            <div class="form-group mb-3">
-                <label class="form-label d-block fw-bold">Your Rating</label>
-                <div class="star-rating d-inline-block" (mouseleave)="setHoverScore(0)">
-                    <i class="fa fa-2x cursor-pointer" 
-                       *ngFor="let star of stars"
-                       [ngClass]="star <= (hoverScore || newRatingScore) ? 'fa-star text-warning' : 'fa-star-o text-secondary'"
-                       (mouseenter)="setHoverScore(star)"
-                       (click)="setScore(star)"></i>
+            <div class="mb-4">
+                <label class="form-label">Overall Rating</label>
+                <div class="star-rating" (mouseleave)="setHoverScore(0)">
+                    <i class="fa" *ngFor="let star of stars"
+                        [ngClass]="star <= (hoverScore || newRatingScore) ? 'fa-star' : 'fa-star-o'"
+                        (mouseenter)="setHoverScore(star)" (click)="setScore(star)"></i>
                 </div>
             </div>
 
-            <div class="form-group mb-3">
-                <label for="reviewMessage" class="form-label fw-bold">Message (optional)</label>
-                <textarea id="reviewMessage" class="form-control" rows="3" 
-                          [(ngModel)]="newRatingMessage" placeholder="Tell others what you think about this product..."></textarea>
+            <div class="mb-4">
+                <label for="reviewMessage" class="form-label">Your Message</label>
+                <textarea id="reviewMessage" class="form-control" rows="4" [(ngModel)]="newRatingMessage"
+                    placeholder="Tell us what you love or how we can improve..."></textarea>
             </div>
 
-            <button class="btn btn-primary" (click)="submitRating()">
-                <i class="fa fa-paper-plane me-1"></i> Submit Review
+            <button class="btn btn-submit" [disabled]="!newRatingScore" (click)="submitRating()">
+                <i class="fa fa-paper-plane"></i> Submit Review
             </button>
         </ng-container>
 
         <ng-template #loginPrompt>
-            <div class="text-center py-3">
-                <p class="text-muted">You must be logged in to leave a review.</p>
-                <a routerLink="/account/login" class="btn btn-outline-primary px-4">Log In to Review</a>
+            <div class="login-prompt">
+                <i class="fa fa-lock fa-3x mb-3 d-block opacity-25"></i>
+                <p>You must be signed in to contribute a review.</p>
+                <a routerLink="/account/login" class="btn btn-outline-info btn-login">
+                    Sign In to Review
+                </a>
             </div>
         </ng-template>
     </div>

@@ -19,6 +19,16 @@ import { ProductParams } from '../../Models/ProductParams';
   styleUrl: './product-details.component.scss',
 })
 export class ProductDetailsComponent implements OnInit {
+
+averageRating: number = 0;
+reviewsCount: number = 0;
+
+onRatingChanged(event: any) {
+  this.averageRating = event.avg;
+  this.reviewsCount = event.count;
+}
+
+
   CalculateDiscountPercentage(oldPrice: number, newPrice: number) {
     if (oldPrice === 0) return 0;
     return Math.round(((oldPrice - newPrice) / oldPrice) * 100).toFixed(1);
@@ -87,6 +97,9 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   ReplaceImage(image: string) {
+  this.MainImage = '';
+  setTimeout(() => {
     this.MainImage = image;
-  }
+  }, 50);
+}
 }

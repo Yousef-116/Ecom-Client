@@ -2,8 +2,17 @@ $info-color: #0dcaf0;
 $dark-bg: #121212;
 $card-bg: rgba(255, 255, 255, 0.03);
 $border-color: rgba(255, 255, 255, 0.08);
-$text-muted: rgba(255, 255, 255, 0.5);
+// $text-muted: rgba(255, 255, 255, 0.5);
 $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$text-muted: rgba(255, 255, 255, 0.7); // instead of 0.5
+
+.text-muted {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.uppercase {
+    color: rgba(255, 255, 255, 0.85); // for labels like Quantity
+}
 
 :host {
     background-color: $dark-bg;
@@ -29,7 +38,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         overflow: hidden;
         margin: 0 auto;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        
+
         img {
             max-height: 450px !important;
             object-fit: contain;
@@ -41,6 +50,11 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         border-radius: 50%;
         box-shadow: 0 0 20px rgba(13, 202, 240, 0.3);
     }
+}
+
+::ng-deep .ngxImageZoomContainer {
+    width: 100% !important;
+    height: 400px !important;
 }
 
 .previews {
@@ -57,7 +71,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         cursor: pointer;
         border: 2px solid transparent;
         transition: $transition;
-        background: rgba(0,0,0,0.2);
+        background: rgba(0, 0, 0, 0.2);
 
         img {
             width: 100%;
@@ -67,7 +81,8 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             transition: $transition;
         }
 
-        &:hover img, &.active img {
+        &:hover img,
+        &.active img {
             opacity: 1;
         }
 
@@ -119,7 +134,10 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             color: $text-muted;
             margin-bottom: 0.5rem;
 
-            del { font-size: 1.2rem; }
+            del {
+                font-size: 1.2rem;
+            }
+
             .discount-tag {
                 background: rgba(255, 71, 87, 0.1);
                 color: #ff4757;
@@ -163,7 +181,10 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 color: $info-color;
             }
 
-            &:disabled { opacity: 0.3; cursor: not-allowed; }
+            &:disabled {
+                opacity: 0.3;
+                cursor: not-allowed;
+            }
         }
 
         .qty-val {
@@ -254,7 +275,9 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         align-items: center;
         gap: 10px;
 
-        i { color: $info-color; }
+        i {
+            color: $info-color;
+        }
     }
 
     .description {
@@ -291,8 +314,16 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .tile-content {
-            p { margin: 0; font-size: 0.95rem; font-weight: 600; }
-            span { font-size: 0.8rem; color: $text-muted; }
+            p {
+                margin: 0;
+                font-size: 0.95rem;
+                font-weight: 600;
+            }
+
+            span {
+                font-size: 0.8rem;
+                color: $text-muted;
+            }
         }
     }
 }
@@ -306,13 +337,31 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         align-items: flex-end;
         margin-bottom: 3rem;
 
-        h2 { font-size: 2rem; font-weight: 800; margin: 0; }
-        .view-all { color: $info-color; font-weight: 600; text-decoration: none; }
+        h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .view-all {
+            color: $info-color;
+            font-weight: 600;
+            text-decoration: none;
+        }
     }
 }
 
 @media (max-width: 992px) {
-    .product-info-section { padding-left: 0; margin-top: 3rem; }
-    .main-img-container { position: static; }
-    .info-grid { grid-template-columns: 1fr; }
+    .product-info-section {
+        padding-left: 0;
+        margin-top: 3rem;
+    }
+
+    .main-img-container {
+        position: static;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 // import { RatingService } from '../../../rating.service';
@@ -19,6 +19,7 @@ import { IdentityService } from '../../../identity/identity.service';
 })
 export class RatingComponent implements OnInit, OnChanges {
   @Input() productId!: number;
+  @Output() ratingChanged = new EventEmitter<{ avg: number, count: number }>();
   
   ratings: ProductRatingDTO[] = [];
   userName: string | null = null;
@@ -66,10 +67,15 @@ export class RatingComponent implements OnInit, OnChanges {
   calculateAverage() {
     if (this.ratings.length === 0) {
       this.averageRating = 0;
-      return;
+    } else {
+      const sum = this.ratings.reduce((acc, current) => acc + current.score, 0);
+      this.averageRating = sum / this.ratings.length;
     }
-    const sum = this.ratings.reduce((acc, current) => acc + current.score, 0);
-    this.averageRating = sum / this.ratings.length;
+
+    this.ratingChanged.emit({
+      avg: this.averageRating,
+      count: this.ratings.length
+    });
   }
 
   setScore(score: number) {
