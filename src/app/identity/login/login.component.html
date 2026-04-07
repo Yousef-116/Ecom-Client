@@ -1,12 +1,12 @@
-<section class="auth-wrapper">
-    <div class="form-card">
+<section class="auth-wrapper animate__animated animate__fadeIn">
+    <div class="form-card shadow-2xl">
         <div class="form-header">
-            <h2>Login</h2>
-            <p>Welcome back! Please enter your details.</p>
+            <h2 class="animate__animated animate__slideInDown delay-100">Login</h2>
+            <p class="animate__animated animate__fadeIn delay-200">Welcome back! Please enter your details.</p>
         </div>
 
         <form [formGroup]="LoginData" class="modern-form" (ngSubmit)="onSubmit()">
-            <div class="form-field">
+            <div class="form-field animate__animated animate__fadeInUp delay-300">
                 <label for="userEmail">Email Address</label>
                 <div class="input-wrapper">
                     <input type="email" id="userEmail" formControlName="email" placeholder="name@company.com"
@@ -17,10 +17,10 @@
                 </div>
             </div>
 
-            <div class="form-field">
+            <div class="form-field animate__animated animate__fadeInUp delay-400">
                 <div class="label-row">
                     <label for="password">Password</label>
-                    <a href="javascript:void(0)" (click)="showForgotModal = true" class="forgot-link">Forgot?</a>
+                    <a href="javascript:void(0)" (click)="showForgotModal = true" class="forgot-link">Forgot Password?</a>
                 </div>
                 <div class="input-wrapper">
                     <input type="password" id="password" formControlName="password" placeholder="••••••••"
@@ -31,27 +31,33 @@
                 </div>
             </div>
 
-            <button type="submit" [disabled]="LoginData.invalid" class="submit-btn">Login</button>
+            <button type="submit" [disabled]="LoginData.invalid" class="submit-btn shadow-lg animate__animated animate__fadeInUp delay-500">
+                Sign In
+            </button>
 
-            <p class="form-footer">
-                Don't have an Account? <a routerLink="/register">Register</a>
+            <p class="form-footer animate__animated animate__fadeIn delay-600">
+                Don't have an Account? <a routerLink="/register">Create Account</a>
             </p>
         </form>
     </div>
 
     @if (showForgotModal) {
-    <div class="modal-overlay" (click)="showForgotModal = false">
-        <div class="modal-content" (click)="$event.stopPropagation()">
-            <button class="close-btn" (click)="showForgotModal = false">&times;</button>
-            <h3>Reset Password </h3>
+    <div class="modal-overlay animate__animated animate__fadeIn" (click)="showForgotModal = false">
+        <div class="modal-content animate__animated animate__zoomIn" (click)="$event.stopPropagation()">
+            <button class="close-btn" (click)="showForgotModal = false">
+                <i class="material-icons">close</i>
+            </button>
+            <h3>Reset Password</h3>
             <p>Enter your email and we'll send you a recovery link.</p>
             <form class="modern-form" (ngSubmit)="onForgotPassword()">
                 <div class="form-field">
-                    <input type="email" name="forgotEmail" placeholder="Enter your registered email" class="modal-input"
-                        [(ngModel)]="emailValue" />
+                    <div class="input-wrapper">
+                        <input type="email" name="forgotEmail" placeholder="Enter your registered email" 
+                            class="modal-input text-center" [(ngModel)]="emailValue" />
+                    </div>
                 </div>
 
-                <button class="submit-btn">Send Reset Link</button>
+                <button class="submit-btn shadow-md mt-4">Send Reset Link</button>
             </form>
         </div>
     </div>
