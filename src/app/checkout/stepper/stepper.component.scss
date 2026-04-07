@@ -1,7 +1,42 @@
 .mat-stepper-horizontal {
-  margin-top: 8px;
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.mat-mdc-form-field {
-  margin: 16px;
+// Deep styling to override Angular Material's defaults
+::ng-deep {
+  .mat-step-header {
+    .mat-step-label {
+      color: rgba(255, 255, 255, 0.5) !important;
+      font-weight: 700 !important;
+      font-size: 0.9rem !important;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+
+      &.mat-step-label-active {
+        color: #fff !important;
+      }
+    }
+
+    .mat-step-icon {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+      color: rgba(255, 255, 255, 0.5) !important;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .mat-step-icon-selected, .mat-step-icon-state-edit {
+      background-color: #0dcaf0 !important; // Cyan
+      color: #0a0a0a !important;
+      box-shadow: 0 0 15px rgba(13, 202, 240, 0.4);
+      border: none;
+    }
+  }
+
+  .mat-stepper-horizontal-line {
+    border-top-color: rgba(255, 255, 255, 0.1) !important;
+  }
 }

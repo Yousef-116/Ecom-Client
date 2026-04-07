@@ -1,8 +1,17 @@
 $info-color: #0dcaf0;
-$dark-bg: #121212;
-$card-bg: rgba(255, 255, 255, 0.03);
-$border-color: rgba(255, 255, 255, 0.08);
-$text-muted: rgba(255, 255, 255, 0.5);
+$dark-bg: #0a0a0a;
+$card-bg: rgba(20, 20, 20, 0.6);
+$border-color: rgba(255, 255, 255, 0.1);
+$text-muted: rgba(255, 255, 255, 0.6);
+
+.text-muted {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.uppercase {
+    color: rgba(255, 255, 255, 0.85); // for labels like Quantity
+}
+
 $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 :host {
@@ -19,6 +28,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 .basket-header {
     margin-bottom: 3rem;
+
     h1 {
         font-size: 2.5rem;
         font-weight: 800;
@@ -44,24 +54,28 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 .glass-table-container {
     background: $card-bg;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
     border: 1px solid $border-color;
     border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 
     .table {
         margin-bottom: 0;
         color: #fff;
+        background: transparent !important; // override any bootstrap white background
 
         thead {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.5);
+
             th {
-                border-bottom: 1px solid $border-color;
+                background: transparent !important;
+                border-bottom: 2px solid rgba(255, 255, 255, 0.05);
                 padding: 1.5rem;
                 text-transform: uppercase;
-                font-size: 0.8rem;
-                letter-spacing: 1px;
+                font-size: 0.75rem;
+                font-weight: 800;
+                letter-spacing: 1.5px;
                 color: $info-color;
             }
         }
@@ -70,20 +84,29 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             tr {
                 border-bottom: 1px solid rgba(255, 255, 255, 0.03);
                 transition: background-color 0.2s;
+                background: transparent !important;
 
                 &:hover {
-                    background: rgba(255, 255, 255, 0.02);
+                    background: rgba(255, 255, 255, 0.03) !important;
                 }
 
-                &:last-child { border: none; }
+                &:last-child {
+                    border: none;
+                }
             }
 
             td {
+                background: transparent !important;
                 padding: 1.5rem;
                 vertical-align: middle;
             }
         }
     }
+}
+
+.material-icons {
+    vertical-align: middle;
+    line-height: 1;
 }
 
 .product-cell {
@@ -107,8 +130,16 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .info {
-        h6 { margin: 0; font-weight: 700; color: #fff; }
-        span { font-size: 0.8rem; color: $text-muted; }
+        h6 {
+            margin: 0;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        span {
+            font-size: 0.8rem;
+            color: $text-muted;
+        }
     }
 }
 
@@ -132,10 +163,18 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         justify-content: center;
         transition: $transition;
 
-        &:hover { background: rgba(255, 255, 255, 0.1); color: $info-color; }
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: $info-color;
+        }
 
-        &.btn-plus { color: $info-color; }
-        &.btn-minus { color: #ff4757; }
+        &.btn-plus {
+            color: $info-color;
+        }
+
+        &.btn-minus {
+            color: #ff4757;
+        }
     }
 
     .qty-num {
@@ -174,7 +213,12 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     top: 100px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 
-    h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 2rem; color: #fff; }
+    h3 {
+        font-size: 1.4rem;
+        font-weight: 800;
+        margin-bottom: 2rem;
+        color: #fff;
+    }
 }
 
 .checkout-btn {
@@ -199,19 +243,39 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 10px 20px rgba(13, 202, 240, 0.2);
     }
 
-    i { font-size: 20px; }
+    i {
+        font-size: 20px;
+    }
 }
 
 .empty-state {
     text-align: center;
     padding: 5rem 0;
 
-    i { font-size: 5rem; color: $text-muted; margin-bottom: 2rem; }
-    h2 { font-size: 2rem; font-weight: 800; margin-bottom: 1rem; }
-    p { color: $text-muted; margin-bottom: 2.5rem; }
+    i {
+        font-size: 5rem;
+        color: $text-muted;
+        margin-bottom: 2rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        color: $text-muted;
+        margin-bottom: 2.5rem;
+    }
 }
 
 @media (max-width: 992px) {
-    .flex-container { flex-direction: column; }
-    .summary-card { position: static; }
+    .flex-container {
+        flex-direction: column;
+    }
+
+    .summary-card {
+        position: static;
+    }
 }

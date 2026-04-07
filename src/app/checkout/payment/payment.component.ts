@@ -59,17 +59,33 @@ export class PaymentComponent implements OnInit {
       return;
     }
 
+    const elementStyles = {
+      base: {
+        color: '#ffffff',
+        fontFamily: '"Courier New", Courier, monospace',
+        fontSize: '16px',
+        iconColor: '#0dcaf0',
+        '::placeholder': {
+          color: 'rgba(255, 255, 255, 0.4)',
+        },
+      },
+      invalid: {
+        color: '#ff4757',
+        iconColor: '#ff4757',
+      },
+    };
+
     const elements = this.stripe!.elements();
 
-    this.cardNumber = elements.create('cardNumber');
+    this.cardNumber = elements.create('cardNumber', { style: elementStyles });
     this.cardNumber.mount(this.cardNumberElement.nativeElement);
     this.cardNumber.addEventListener('change', this.cardHandler);
 
-    this.cardExpiry = elements.create('cardExpiry');
+    this.cardExpiry = elements.create('cardExpiry', { style: elementStyles });
     this.cardExpiry.mount(this.cardExpiryElement.nativeElement);
     this.cardExpiry.addEventListener('change', this.cardHandler);
 
-    this.cardCvc = elements.create('cardCvc');
+    this.cardCvc = elements.create('cardCvc', { style: elementStyles });
     this.cardCvc.mount(this.cardCvcElement.nativeElement);
     this.cardCvc.addEventListener('change', this.cardHandler);
   }

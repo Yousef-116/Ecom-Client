@@ -1,35 +1,77 @@
-<!-- <button mat-raised-button matStepperPrevious>back</button>
-<button (click)="CreateOrder()" mat-raised-button matStepperNext>Payment <i class="fa fa-cc-stripe"></i></button> -->
+<div class="payment-container">
+    <h3 class="section-title">Payment Information</h3>
 
+    <form [formGroup]="paymentForm" class="payment-form">
+        <div class="row g-4">
+            <!-- Name on Card -->
+            <div class="col-12">
+                <div class="input-wrapper">
+                    <label class="input-label">Name on Card</label>
+                    <div class="input-inner">
+                        <i class="material-icons prefix-icon">person</i>
+                        <input
+                            [class.is-valid]="paymentForm.get('nameOnCard')?.valid && paymentForm.get('nameOnCard')?.untouched"
+                            [class.is-invalid]="paymentForm.get('nameOnCard')?.invalid && paymentForm.get('nameOnCard')?.touched"
+                            type="text" formControlName="nameOnCard" placeholder="As shown on your card"
+                            class="custom-input">
+                    </div>
+                </div>
+            </div>
 
-<form [formGroup]="paymentForm">
-    <div class="row p-2">
-        <div class="form-group col-12">
-            <input [class.is-valid]="paymentForm.valid && paymentForm.untouched"
-                [class.is-invalid]="paymentForm.invalid && paymentForm.touched" type="text" formControlName="nameOnCard"
-                placeholder="name On Card" class="form-control  py-3">
-            @if(cardErrors){
-            <p class="text-danger">{{cardErrors}}</p>
+            <!-- Card Number -->
+            <div class="col-12">
+                <div class="input-wrapper">
+                    <label class="input-label">Card Number</label>
+                    <div class="stripe-input-container">
+                        <i class="material-icons prefix-icon">credit_card</i>
+                        <div #cardNumber class="stripe-element"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expiry and CVC -->
+            <div class="col-6">
+                <div class="input-wrapper">
+                    <label class="input-label">Expiry Date</label>
+                    <div class="stripe-input-container">
+                        <i class="material-icons prefix-icon">event</i>
+                        <div #cardExpiry class="stripe-element"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="input-wrapper">
+                    <label class="input-label">CVC</label>
+                    <div class="stripe-input-container">
+                        <i class="material-icons prefix-icon">lock</i>
+                        <div #cardCvc class="stripe-element"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if(cardErrors){
+        <div class="error-box mt-3 animate__animated animate__shakeX">
+            <i class="material-icons">error_outline</i>
+            <span>{{cardErrors}}</span>
+        </div>
+        }
+    </form>
+
+    <div class="stepper-actions mt-5">
+        <button mat-stroked-button matStepperPrevious class="back-btn">
+            <i class="material-icons me-2">arrow_back</i>
+            Back
+        </button>
+        <button [disabled]="cardErrors != null || (loader == true)" mat-flat-button class="pay-btn"
+            (click)="submitOrder()">
+            @if (loader == true) {
+            <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+            Processing...
+            } @else {
+            Complete Purchase
+            <i class="fa fa-cc-stripe ms-2"></i>
             }
-        </div>
-        <div class="form-group col-4 p-2">
-            <div #cardNumber class="form-control py-3"></div>
-        </div>
-        <div class="form-group col-4 p-2">
-            <div #cardExpiry class="form-control py-3"></div>
-        </div>
-        <div class="form-group col-4 p-2">
-            <div #cardCvc class="form-control py-3"></div>
-        </div>
+        </button>
     </div>
-
-</form>
-
-
-<button mat-raised-button matStepperPrevious> back</button>
-<button [disabled]="cardErrors!=null" mat-raised-button (click)="submitOrder()"> Payment
-    <i class="fa fa-cc-stripe text-info"></i></button>
-@if (loader==true) {
-
-<i class="fa fa-spinner fa-spin text-danger"></i>
-}
+</div>

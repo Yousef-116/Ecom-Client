@@ -1,18 +1,23 @@
 .receipt-container {
-  width: 320px;
-  background-color: #f9f9f9;
-  filter: drop-shadow(2px 4px 10px rgba(0,0,0,0.1));
-  margin: 20px auto;
+  width: 100%;
+  max-width: 400px;
+  background-color: #1a1a1a; // Darker background
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));
+  margin: 0 auto;
   position: relative;
-  font-family: 'Courier New', Courier, monospace; // Monospace is essential
-  color: #1a1a1a;
-  padding: 10px 0;
+  font-family: 'Courier New', Courier, monospace;
+  color: #f0f0f0; // Off-white text
+  padding: 15px 0;
+  border-radius: 4px;
 
   // Pixel icons style
   .pixel-icon {
     font-style: normal;
     margin-right: 8px;
     font-size: 1.2rem;
+    color: #0dcaf0; // Cyan accent
   }
 
   .receipt-content {
@@ -20,39 +25,55 @@
   }
 
   .pixel-text {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     text-align: center;
     font-weight: 900;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     margin-bottom: 5px;
+    color: #0dcaf0; // Cyan title
+    text-shadow: 0 0 10px rgba(13, 202, 240, 0.3);
   }
 
   .pixel-divider, .tear-line {
     text-align: center;
     letter-spacing: 4px;
-    margin: 10px 0;
+    margin: 15px 0;
     font-weight: bold;
     overflow: hidden;
     white-space: nowrap;
+    color: rgba(255, 255, 255, 0.2);
   }
 
   .shipping-note {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 1px;
   }
 
   .item-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     font-weight: 600;
+    font-size: 0.95rem;
+
+    .price {
+      color: #fff;
+    }
 
     &.total {
-      margin-top: 15px;
-      font-size: 1.2rem;
-      border: 2px solid #000;
-      padding: 10px 5px;
+      margin-top: 20px;
+      font-size: 1.3rem;
+      border: 2px dashed #0dcaf0; // Cyan dashed border
+      padding: 15px 10px;
+      background: rgba(13, 202, 240, 0.05);
+
+      .total-price {
+        color: #0dcaf0;
+        text-shadow: 0 0 10px rgba(13, 202, 240, 0.4);
+      }
     }
   }
 
@@ -61,22 +82,25 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: 3px;
-    margin-top: 30px;
-    height: 40px;
+    gap: 4px;
+    margin-top: 40px;
+    height: 45px;
+    opacity: 0.6;
 
     .bar {
-      width: 3px;
+      width: 2px;
       height: 100%;
-      background: #000;
+      background: #fff;
       &.short { height: 60%; }
     }
 
     .serial-no {
       display: block;
       position: absolute;
-      bottom: 10px;
+      bottom: 5px;
       font-size: 0.6rem;
+      letter-spacing: 1px;
+      color: rgba(255, 255, 255, 0.3);
     }
   }
 
@@ -88,13 +112,13 @@
     background-repeat: repeat-x;
     
     &.top {
-      background-image: radial-gradient(circle at 7px -2px, transparent 8px, #f9f9f9 0px);
+      background-image: radial-gradient(circle at 7px -2px, transparent 8px, #1a1a1a 0px);
       position: absolute;
       top: -9px;
     }
     
     &.bottom {
-      background-image: radial-gradient(circle at 7px 12px, transparent 8px, #f9f9f9 0px);
+      background-image: radial-gradient(circle at 7px 12px, transparent 8px, #1a1a1a 0px);
       position: absolute;
       bottom: -9px;
     }
@@ -106,35 +130,39 @@
 
   .pixel-checkout-btn {
     width: 100%;
-    background: #000; // Black background
-    color: #fff;       // White text
+    background: #0dcaf0;
+    color: #000;
     border: none;
-    padding: 15px;
+    padding: 18px;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 900;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     cursor: pointer;
     text-transform: uppercase;
+    border-radius: 4px;
     
-    // Pixelated "Double Border" effect
     box-shadow: 
-      0 0 0 2px #fff, 
-      0 0 0 4px #000;
+      0 0 0 2px #1a1a1a, 
+      0 0 0 4px #0dcaf0,
+      0 10px 20px rgba(13, 202, 240, 0.2);
     
-    margin: 10px 0;
-    transition: all 0.1s steps(2); // Steps(2) makes the animation "choppy" like an old game
+    margin: 15px 0;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     &:hover {
-      background: #333;
-      transform: scale(1.02);
+      background: #fff;
+      color: #0dcaf0;
+      transform: translateY(-2px);
+      box-shadow: 
+        0 0 0 2px #1a1a1a, 
+        0 0 0 4px #fff,
+        0 15px 25px rgba(13, 202, 240, 0.3);
     }
 
     &:active {
-      background: #000;
       transform: scale(0.98);
-      // Invert colors on click for a "flash" effect
-      filter: invert(1); 
+      filter: brightness(0.8);
     }
   }
 
@@ -142,7 +170,8 @@
     font-size: 0.7rem;
     margin-top: 15px;
     letter-spacing: 2px;
-    opacity: 0.8;
+    opacity: 0.5;
+    color: #fff;
   }
 }
 

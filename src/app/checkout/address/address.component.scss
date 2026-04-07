@@ -1,53 +1,148 @@
 .address-container {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 10px;
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0;
+  color: #fff;
 }
 
 .section-title {
-  margin-bottom: 24px;
-  font-weight: 500;
-  color: #333;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
+  margin-bottom: 30px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0dcaf0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .address-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); // 6-column grid for maximum flexibility
-  gap: 12px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
 
-  // Helpers for grid spans
-  .full-width { grid-column: span 6; }
-  .half-width { grid-column: span 3; }
-  .city-field { grid-column: span 3; }
-  .state-field { grid-column: span 1; }
-  .zip-field { grid-column: span 2; }
+  .full-width {
+    grid-column: span 6;
+  }
+
+  .half-width {
+    grid-column: span 3;
+  }
+
+  .city-field {
+    grid-column: span 3;
+  }
+
+  .state-field {
+    grid-column: span 1;
+  }
+
+  .zip-field {
+    grid-column: span 2;
+  }
 }
 
-// Responsive adjustments
-@media (max-width: 600px) {
-  .address-grid {
-    display: flex;
-    flex-direction: column;
+// Deep styling for Mat Form Fields to make them dark
+::ng-deep {
+  .mat-mdc-form-field {
+    width: 100%;
+    margin-bottom: 5px;
+
+    // Transparent background for the wrapper
+    .mat-mdc-text-field-wrapper {
+      background-color: rgba(255, 255, 255, 0.03) !important;
+      border-radius: 12px !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.06) !important;
+      }
+    }
+
+    // Label styling (Normal state)
+    .mat-mdc-form-field-label {
+      color: rgba(255, 255, 255, 0.6) !important; // Lighter and more visible
+      font-weight: 500 !important;
+    }
+
+    // Outline colors (Normal state)
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: rgba(255, 255, 255, 0.15) !important;
+      border-width: 1.5px !important;
+    }
+
+    // Focused state overrides
+    &.mat-focused {
+      .mat-mdc-form-field-label {
+        color: #0dcaf0 !important;
+      }
+
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: #0dcaf0 !important;
+        border-width: 2px !important;
+      }
+
+      .mat-icon {
+        color: #0dcaf0 !important;
+      }
+    }
+
+    // Input text color
+    input.mat-mdc-input-element {
+      color: #fff !important;
+      caret-color: #0dcaf0 !important;
+    }
+
+    // Icons
+    .mat-icon {
+      color: rgba(255, 255, 255, 0.4) !important;
+      transition: color 0.3s ease;
+    }
+
+    // CSS Variable overrides for MDC internal focus logic
+    --mdc-outlined-text-field-focus-outline-color: #0dcaf0;
+    --mdc-outlined-text-field-outline-color: rgba(255, 255, 255, 0.15);
+    --mdc-outlined-text-field-hover-outline-color: rgba(255, 255, 255, 0.25);
+    --mdc-outlined-text-field-label-text-color: rgba(255, 255, 255, 0.6);
+    --mdc-outlined-text-field-focus-label-text-color: #0dcaf0;
   }
 }
 
 .actions {
-  margin-top: 32px;
+  margin-top: 40px;
   display: flex;
   justify-content: flex-end;
 }
 
 .next-btn {
-  padding: 0 24px;
-  height: 48px;
-  border-radius: 8px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
+  padding: 0 35px !important;
+  height: 56px !important;
+  border-radius: 14px !important;
+  background-color: #0dcaf0 !important;
+  color: #1a1a1a !important;
+  font-weight: 800 !important;
+  font-size: 1.1rem !important;
+  letter-spacing: 1px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 10px 20px rgba(13, 202, 240, 0.2) !important;
 
-mat-icon[matPrefix] {
-  margin-right: 8px;
-  color: #757575;
+  &:hover {
+    background-color: #fff !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 15px 30px rgba(13, 202, 240, 0.3) !important;
+  }
+
+  &:disabled {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: none !important;
+  }
+
+  mat-icon {
+    margin-left: 10px;
+    font-size: 20px;
+    vertical-align: middle;
+  }
 }
