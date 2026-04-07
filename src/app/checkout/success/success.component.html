@@ -1,12 +1,42 @@
-<div class="container mt-5">
-    <div>
-        <i class="fa far fa-check-circle fa-5x" style="color:green;"></i>
-    </div>
-    <div>
-        <h2>Thank you, Your order is Confirmed</h2>
-        <p class="mb-4">Your order will shipping as soon as possible</p>
-        <button class="btn btn-ouline-success" routerLink="/order/item" [queryParams]="{id:orderId}">View
-            Order</button>
+<div class="success-container animate__animated animate__zoomIn">
+    <!-- Checkmark Animation -->
+    <div class="checkmark-wrapper">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+            <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        </svg>
+
+        <!-- Particles for celebration -->
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
     </div>
 
+    <h1>Success!</h1>
+    <div class="order-id">Order #{{orderId}} Confirmed</div>
+    
+    <p>
+        Your order has been placed successfully.<br>
+        A confirmation email with details has been sent to your inbox.
+    </p>
+
+    <div class="d-flex justify-content-center gap-3 mt-4">
+        <button routerLink="/orders" class="btn-main btn-orders shadow-lg">
+            View My Orders
+        </button>
+        <button routerLink="/shop" class="btn-main btn-outline-light border-0 bg-white bg-opacity-10 px-4">
+            Continue Shopping
+        </button>
+    </div>
 </div>

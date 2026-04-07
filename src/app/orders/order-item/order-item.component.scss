@@ -1,188 +1,184 @@
-.checkout-wrapper {
-  display: flex;
-  gap: 30px;
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 0 20px;
+$info-color: #0dcaf0;
+$dark-bg: #121212;
+$card-bg: rgba(255, 255, 255, 0.03);
+$border-color: rgba(255, 255, 255, 0.08);
+$text-muted: rgba(255, 255, 255, 0.5);
+$transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+:host {
+    background-color: $dark-bg;
+    color: #fff;
+    display: block;
+    min-height: 100vh;
+    padding-bottom: 5rem;
 }
 
-// --- Left Table Styles ---
-.basket-section {
-  flex: 3; // Takes 75% space
-  
-  .section-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: #2d3436;
-  }
+.invoice-wrapper {
+    padding-top: 3rem;
 }
 
-.custom-modern-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 12px; // Space between rows
+.invoice-card {
+    background: $card-bg;
+    backdrop-filter: blur(20px);
+    border: 1px solid $border-color;
+    border-radius: 40px;
+    padding: 4rem;
+    position: relative;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
 
-  thead th {
-    padding: 12px;
-    color: #636e72;
-    font-weight: 500;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    border-bottom: 2px solid #f1f2f6;
-  }
-
-  tbody tr {
-    background: #fff;
-    transition: transform 0.2s;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(13, 202, 240, 0.05) 0%, transparent 70%);
+        pointer-events: none;
     }
-
-    td {
-      padding: 16px;
-      vertical-align: middle;
-      border-top: 1px solid #f1f2f6;
-      border-bottom: 1px solid #f1f2f6;
-
-      &:first-child { border-left: 1px solid #f1f2f6; border-radius: 8px 0 0 8px; }
-      &:last-child { border-right: 1px solid #f1f2f6; border-radius: 0 8px 8px 0; }
-    }
-  }
-
-  .item-img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-
-  .product-name a {
-    font-weight: 600;
-    color: #2d3436;
-    text-decoration: none;
-    &:hover { color: #0984e3; }
-  }
-
-  .qty-badge {
-    background: #f1f2f6;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-weight: 600;
-  }
 }
 
-// --- Right Receipt Styles ---
-.summary-section {
-  flex: 1; // Takes 25% space
-  position: sticky;
-  top: 20px;
-  height: fit-content;
-}
-
-.modern-receipt {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  overflow: hidden;
-  position: relative;
-
-  .receipt-inner {
-    padding: 24px;
-  }
-
-  .summary-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 24px;
-    text-align: center;
-    color: #2d3436;
-  }
-
-  .summary-row {
+.invoice-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 12px;
-    color: #636e72;
-    font-size: 0.95rem;
+    align-items: flex-start;
+    margin-bottom: 4rem;
+    border-bottom: 1px solid $border-color;
+    padding-bottom: 2.5rem;
 
-    .value {
-      font-weight: 600;
-      color: #2d3436;
+    .brand-section {
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #fff, $info-color);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+        }
+        p { color: $text-muted; margin-top: 5px; font-weight: 600; letter-spacing: 1px; }
     }
-  }
 
-  .divider {
-    border: 0;
-    border-top: 1px dashed #dfe6e9;
-    margin: 20px 0;
-  }
-
-  .total-row {
-    margin-bottom: 24px;
-    .label { font-weight: 700; color: #2d3436; }
-    .total-value { font-size: 1.4rem; color: #0984e3; font-weight: 800; }
-  }
+    .meta-section {
+        text-align: right;
+        .invoice-id { font-size: 1.2rem; font-weight: 800; color: $info-color; }
+        .date { color: $text-muted; font-size: 0.9rem; margin-top: 5px; }
+    }
 }
 
-// --- Status Badges ---
-.status-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.85rem;
-  margin-bottom: 20px;
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 4rem;
 
-  .status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-  }
-
-  &.status-pending { background: #fff9e6; color: #f39c12; .status-dot { background: #f39c12; } }
-  &.status-success { background: #e6fffa; color: #27ae60; .status-dot { background: #27ae60; } }
-  &.status-failed { background: #fff5f5; color: #e74c3c; .status-dot { background: #e74c3c; } }
+    .info-block {
+        h4 { font-size: 0.8rem; text-transform: uppercase; color: $info-color; letter-spacing: 2px; font-weight: 800; margin-bottom: 1.2rem; }
+        p { margin: 0; color: #fff; line-height: 1.6; }
+        .label { color: $text-muted; font-size: 0.85rem; }
+    }
 }
 
-// --- Minimalist Barcode ---
-.barcode-area {
-  text-align: center;
-  .barcode-svg {
+.invoice-table-container {
+    margin-bottom: 4rem;
+
+    .table {
+        color: #fff;
+        margin-bottom: 0;
+
+        thead {
+            background: rgba(255, 255, 255, 0.03);
+            th { border: none; padding: 1.5rem; font-size: 0.8rem; text-transform: uppercase; color: $text-muted; letter-spacing: 1px; }
+        }
+
+        tbody {
+            tr { border-bottom: 1px solid $border-color; }
+            td { padding: 1.5rem; vertical-align: middle; }
+        }
+    }
+}
+
+.product-info {
     display: flex;
-    justify-content: center;
-    gap: 3px;
-    height: 30px;
-    margin-bottom: 5px;
-    span {
-      background: #2d3436;
-      width: 2px;
-      height: 100%;
-      &:nth-child(2n) { width: 4px; }
-      &:nth-child(3n) { height: 70%; }
+    align-items: center;
+    gap: 15px;
+
+    .item-img {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        object-fit: cover;
+        background: #000;
+        border: 1px solid $border-color;
     }
-  }
-  .serial { color: #b2bec3; font-size: 0.7rem; }
+
+    .item-name { font-weight: 700; color: #fff; text-decoration: none; &:hover { color: $info-color; } }
 }
 
-// Decorative zig-zag bottom for the receipt
-.receipt-footer-cut {
-  background: white;
-  height: 10px;
-  width: 100%;
-  background-image: linear-gradient(135deg, transparent 75%, #f1f2f6 75%),
-                    linear-gradient(225deg, transparent 75%, #f1f2f6 75%);
-  background-size: 10px 20px;
+.invoice-summary {
+    display: flex;
+    justify-content: flex-end;
+
+    .summary-box {
+        width: 350px;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 20px;
+        padding: 2rem;
+        border: 1px solid $border-color;
+
+        .row-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: $text-muted;
+
+            &.total {
+                margin-top: 1.5rem;
+                padding-top: 1.5rem;
+                border-top: 2px dashed $border-color;
+                color: #fff;
+                h3 { font-size: 1.8rem; font-weight: 800; color: $info-color; margin: 0; }
+            }
+        }
+    }
 }
 
-@media (max-width: 992px) {
-  .checkout-wrapper { flex-direction: column; }
-  .summary-section { position: relative; width: 100%; }
+.invoice-footer {
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid $border-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .status-badge {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 20px;
+        border-radius: 30px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+
+        &.pending { background: rgba(255, 193, 7, 0.1); color: #ffc107; }
+        &.success { background: rgba(46, 213, 115, 0.1); color: #2ed573; }
+        &.failed { background: rgba(255, 71, 87, 0.1); color: #ff4757; }
+
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; }
+    }
+
+    .barcode-section {
+        text-align: right;
+        opacity: 0.5;
+        .barcode { font-family: 'Libre Barcode 39', cursive, sans-serif; font-size: 3rem; }
+        .serial { font-family: monospace; font-size: 0.75rem; letter-spacing: 2px; }
+    }
+}
+
+@media (max-width: 768px) {
+    .invoice-card { padding: 2rem; }
+    .info-grid { grid-template-columns: 1fr; gap: 20px; }
+    .invoice-header { flex-direction: column; gap: 20px; text-align: left; .meta-section { text-align: left; } }
 }

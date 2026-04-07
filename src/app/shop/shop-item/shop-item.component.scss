@@ -1,105 +1,219 @@
-$primary-color: #7961ff;
-$secondary-color: #343a40;
-$background-color: #f8f9fa;
-$text-color: #212529;
-$border-radius: 0.5rem;
-$transition-duration: 0.3s;
-$danger-color: #dc3545;
-$star-color: #ffc107;
-//--------------------------
-.card {
-  display: flex;
-  flex-direction: column;
-}
-
-.card-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.card-body .d-flex {
-  margin-top: auto;  // pushes buttons to bottom
-}
+$info-color: #0dcaf0;
+$card-bg: rgba(255, 255, 255, 0.03);
+$border-color: rgba(255, 255, 255, 0.08);
+$transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 .card {
-    border: .1px solid #f2eeee;
-    border-radius: 10px;
-    height: 200px;
-    overflow: hidden;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  
-    &:hover {
-      transform: scale(1.05);
-      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
-    }
-  
+  background: $card-bg;
+  backdrop-filter: blur(10px);
+  border: 1px solid $border-color;
+  border-radius: 24px;
+  overflow: hidden;
+  transition: $transition;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-10px);
+    border-color: rgba(13, 202, 240, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(13, 202, 240, 0.1);
+    
     .card-img-top {
-      border-radius: 15px 15px 0 0;
+      transform: scale(1.1);
     }
-  
-    .thumbnails {
-      display: flex;
-      //justify-content: start;
-      gap: 0.4rem;
+
+    .btn-cart {
+        transform: translateY(0);
+        opacity: 1;
     }
-  
-    .small-img {
-      cursor: pointer;
-      width: 50px;
-      height: 50px;
-      border: 1px solid transparent;
-      transition: border-color 0.3s;
-  
-      &:hover {
-        border-color: $primary-color;
-      }
-    }
-  
-    .card-body {
-      position: relative;
-      padding: .7rem;
-      background: white;
-      border-radius: 0 0 15px 15px;
-  
-      .card-title {
-        font-size: 1.3rem;
-        margin-bottom: 0.8rem;
-        color: $primary-color;
-      }
-  
-      .card-text {
-        font-size: 0.9rem;
-        margin-bottom: 0.8rem;
-        color: $secondary-color;
-      }
-  
-      .price {
-        font-size: 1.1rem;
-        margin-bottom: 0.8rem;
-  
-        .old-price {
-          text-decoration: line-through;
-          color: $danger-color;
-          margin-right: 0.5rem;
-        }
-      }
-  
-      .rating {
-        span {
-          color: $star-color;
-          font-size: 1.1rem;
-        }
-      }
-  
-      .favorite-icon {
-        position: absolute;
-        top: 4rem;
-        right: .3rem;
-       border: none;
-  
-      }
-    }
-  
   }
-  
+
+  .image-container {
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    background: rgba(0,0,0,0.2);
+
+    .card-img-top {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: $transition;
+    }
+
+    .badge-discount {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: $info-color;
+        color: #121212;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-weight: 800;
+        font-size: 0.75rem;
+        z-index: 2;
+    }
+  }
+
+  .card-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-text {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 1.2rem;
+      display: -webkit-box;
+      line-clamp: 2;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.5;
+    }
+
+    .price-wrapper {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .current-price {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: $info-color;
+      }
+
+      .old-price {
+        text-decoration: line-through;
+        color: rgba(255, 255, 255, 0.3);
+        font-size: 0.9rem;
+      }
+    }
+
+    .btn-actions {
+        margin-top: auto;
+        display: flex;
+        gap: 10px;
+
+        .btn-cart {
+            flex: 1;
+            background: $info-color;
+            border: none;
+            color: #121212;
+            font-weight: 700;
+            border-radius: 12px;
+            padding: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: #fff;
+                transform: scale(1.02);
+            }
+
+            i { font-size: 18px; }
+        }
+
+        .btn-details {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0 1rem;
+            border-radius: 12px;
+            transition: $transition;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+        }
+    }
+  }
+
+  .favorite-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: $transition;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: $info-color;
+        transform: scale(1.1);
+    }
+
+    &.active {
+        color: #ff4757;
+    }
+  }
+}
+
+.thumbnails {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    gap: 5px;
+    z-index: 3;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: $transition;
+
+    .thumbnail-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        object-fit: cover;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+        background: #000;
+
+        &:hover {
+            border-color: $info-color;
+        }
+    }
+}
+
+.card:hover .thumbnails {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.6s ease-out forwards;
+}

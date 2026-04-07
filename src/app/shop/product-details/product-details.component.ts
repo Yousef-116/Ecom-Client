@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ShopService } from '../shop.service';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IProduct } from '../../Models/Product';
-import { CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { BasketService } from '../../basket/basket.service';
 
 import { RatingComponent } from './rating/rating.component';
+import { ShopItemComponent } from '../shop-item/shop-item.component';
+import { ProductParams } from '../../Models/ProductParams';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CurrencyPipe, NgxImageZoomModule, ToastrModule, RouterLink, RatingComponent],
+  imports: [CommonModule, NgxImageZoomModule, ToastrModule, RouterLink, RatingComponent, ShopItemComponent],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })
@@ -45,17 +47,21 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     private shopService: ShopService,
-    private router: Router,
+    private route: ActivatedRoute,
     private toastr: ToastrService,
     private basketService: BasketService,
   ) {}
   id: number;
   product: IProduct;
+  relatedProducts: IProduct[] = [];
   MainImage: string;
   Quantity: number = 1;
+
   ngOnInit(): void {
-    this.id = parseInt(this.router.url.split('/').pop() || '');
-    this.loadProduct(this.id);
+    this.route.params.subscribe(params => {
+      this.id = +params['id'];
+      this.loadProduct(this.id);
+    });
   }
 
   loadProduct(id: number) {
@@ -63,7 +69,20 @@ export class ProductDetailsComponent implements OnInit {
       next: (value: IProduct) => {
         this.product = value;
         this.MainImage = value.photos[0].imageName;
+        this.loadRelatedProducts(value.categoryId);
       },
+    });
+  }
+
+  loadRelatedProducts(categoryId: number) {
+    const params = new ProductParams();
+    params.SelectedCategoryId = categoryId;
+    params.pageSize = 4;
+    this.shopService.getProduct(params).subscribe({
+      next: (response) => {
+        // Filter out the current product from related products
+        this.relatedProducts = response.data.filter(p => p.id !== this.id).slice(0, 4);
+      }
     });
   }
 

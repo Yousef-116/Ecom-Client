@@ -1,81 +1,136 @@
-<div class="checkout-wrapper pt-4">
-    <div class="basket-section">
-        <h2 class="section-title">Review Your Order</h2>
-        <div class="table-responsive">
-            <table class="custom-modern-table">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th></th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (item of order.orderItems; track item.productItemId) {
-                    <tr>
-                        <td class="product-name">
-                            <a [routerLink]="['/product-details', item.productItemId]">
-                                {{item.productName}}
-                            </a>
-                        </td>
-                        <td>
-                            <img [src]="'http://localhost:5037/' + item.mainImage" class="item-img" alt="">
-                        </td>
-                        <td class="text-muted">{{item.price | currency}}</td>
-                        <td>
-                            <span class="qty-badge">{{item.quantity}}</span>
-                        </td>
-                        <td class="fw-bold">{{(item.quantity * item.price) | currency}}</td>
-                        <td></td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
+@if (order) {
+<div class="invoice-wrapper py-5">
+    <div class="container">
+        <!-- Back Link -->
+        <div class="mb-4">
+            <a routerLink="/orders" class="text-info text-decoration-none d-flex align-items-center opacity-75 hover-opacity-100 transition-all font-weight-700">
+                <i class="material-icons me-2" style="font-size: 18px;">arrow_back</i>
+                Back to My Orders
+            </a>
         </div>
-    </div>
 
-    <div class="summary-section">
-        <div class="modern-receipt">
-            <div class="receipt-inner">
-                <h3 class="summary-title">Order Summary</h3>
-
-                <div class="summary-row">
-                    <span>Subtotal</span>
-                    <span class="value">{{order.subTotal | currency}}</span>
+        <div class="invoice-card shadow-2xl animate-fade-in">
+            <!-- Header Section -->
+            <div class="invoice-header">
+                <div class="brand-section">
+                    <h1>E-COM</h1>
+                    <p class="text-uppercase tracking-widest small">Digital Invoice</p>
                 </div>
-
-                <div class="summary-row">
-                    <span>Shipping</span>
-                    <span class="value text-success">+ {{ order.total - order.subTotal | currency}}</span>
-                </div>
-
-                <hr class="divider">
-
-                <div class="summary-row total-row">
-                    <span class="label">Total Amount</span>
-                    <span class="total-value">{{order.total | currency}}</span>
-                </div>
-
-                <div class="status-box" [ngClass]="{
-                    'status-pending': order.status == 'Pending',
-                    'status-failed': order.status == 'PaymentFailed',
-                    'status-success': order.status == 'PaymentReceived'
-                }">
-                    <span class="status-dot"></span>
-                    <span class="status-text">{{order.status}}</span>
-                </div>
-
-                <div class="barcode-area">
-                    <div class="barcode-svg">
-                        <span></span><span></span><span></span><span></span><span></span><span></span>
-                    </div>
-                    <small class="serial">#4002-881-2026</small>
+                <div class="meta-section">
+                    <div class="label text-uppercase small font-weight-700 opacity-50 mb-1">Invoice Number</div>
+                    <div class="invoice-id">#ORD-{{order.id}}</div>
+                    <div class="date mt-2">Placed on: <strong class="text-white">{{order.orderDate | date:'longDate'}}</strong></div>
                 </div>
             </div>
-            <div class="receipt-footer-cut"></div>
+
+            <!-- Billing / Shipping Info -->
+            <div class="info-grid">
+                <div class="info-block glass-sm">
+                    <h4>Billing & Shipping Details</h4>
+                    <p class="font-weight-700 fs-5 mb-2">{{order.shippingAddress.firstName}} {{order.shippingAddress.lastName}}</p>
+                    <p class="text-muted small">
+                        {{order.shippingAddress.street}}, {{order.shippingAddress.city}}<br>
+                        {{order.shippingAddress.state}}, {{order.shippingAddress.zipCode}}
+                    </p>
+                </div>
+                <div class="info-block text-lg-end">
+                    <h4>Payment Information</h4>
+                    <div class="status-badge" [ngClass]="{
+                        'pending': order.status == 'Pending',
+                        'success': order.status == 'PaymentReceived',
+                        'failed': order.status == 'PaymentFailed'
+                    }">
+                        <span class="dot"></span>
+                        <span class="status-text">{{order.status}}</span>
+                    </div>
+                    <p class="text-muted small mt-3">Transaction ID: <strong class="text-white">TXN-{{order.id * 881}}</strong></p>
+                </div>
+            </div>
+
+            <!-- Items Table -->
+            <div class="invoice-table-container">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th style="width: 50%;">Product Details</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center">Qty</th>
+                            <th class="text-end">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (item of order.orderItems; track item.productItemId) {
+                        <tr class="transition-all">
+                            <td>
+                                <div class="product-info">
+                                    <div class="img-wrapper shadow-sm">
+                                        <img [src]="'http://localhost:5037/' + item.mainImage" [alt]="item.productName" class="item-img">
+                                    </div>
+                                    <div class="info">
+                                        <a [routerLink]="['/product-details', item.productItemId]" class="item-name">
+                                            {{item.productName}}
+                                        </a>
+                                        <span class="d-block mt-1 opacity-50 small">ID: #{{item.productItemId}}</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-center font-weight-600">{{item.price | currency}}</td>
+                            <td class="text-center font-weight-700 qty-badge">{{item.quantity}}</td>
+                            <td class="text-end font-weight-800 text-info">
+                                {{(item.quantity * item.price) | currency}}
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Summary Box -->
+            <div class="invoice-summary mt-5">
+                <div class="summary-box shadow-lg">
+                    <div class="row-item">
+                        <span>Subtotal</span>
+                        <span class="text-white fw-bold">{{order.subTotal | currency}}</span>
+                    </div>
+                    <div class="row-item">
+                        <span>Shipping & Handling</span>
+                        <span class="text-success fw-bold">+ {{ order.total - order.subTotal | currency}}</span>
+                    </div>
+                    <div class="row-item total">
+                        <div class="label">Amount Paid</div>
+                        <h3>{{order.total | currency}}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer / Barcode -->
+            <div class="invoice-footer">
+                <div class="thank-you">
+                    <p class="text-muted italic mb-0">Thank you for shopping with E-Com store.</p>
+                    <p class="text-info small font-weight-700">Digital Copy - 2026 Edition</p>
+                </div>
+                <div class="barcode-section">
+                    <!-- Simple Mock Barcode with Spans -->
+                    <div class="barcode d-flex align-items-center justify-content-end gap-1" style="height: 40px; opacity: 0.3;">
+                        <span style="width: 2px; height: 100%; background: #fff;"></span>
+                        <span style="width: 1px; height: 100%; background: #fff;"></span>
+                        <span style="width: 4px; height: 100%; background: #fff;"></span>
+                        <span style="width: 2px; height: 100%; background: #fff;"></span>
+                        <span style="width: 1px; height: 100%; background: #fff;"></span>
+                        <span style="width: 3px; height: 100%; background: #fff;"></span>
+                        <span style="width: 1px; height: 100%; background: #fff;"></span>
+                        <span style="width: 2px; height: 100%; background: #fff;"></span>
+                    </div>
+                    <small class="serial">#ORD-{{order.id}}-GEN-2026</small>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+} @else {
+    <div class="text-center py-5">
+        <div class="spinner-border text-info" role="status">
+            <span class="visually-hidden">Loading invoice...</span>
+        </div>
+    </div>
+}

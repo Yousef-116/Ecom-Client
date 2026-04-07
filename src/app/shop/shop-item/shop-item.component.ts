@@ -1,4 +1,4 @@
-import { CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { IProduct } from '../../Models/Product';
 import { RouterModule } from '@angular/router';
@@ -8,7 +8,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-shop-item',
   standalone: true,
-  imports: [CurrencyPipe, RouterModule, ToastrModule],
+  imports: [CommonModule, RouterModule, ToastrModule],
   templateUrl: './shop-item.component.html',
   styleUrls: ['./shop-item.component.scss'],
 })

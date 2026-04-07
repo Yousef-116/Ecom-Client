@@ -1,78 +1,120 @@
 @if (basket$ | async; as basket) {
-@if (!basket) {
-<div class="text-center text-danger">
-    <h4>Your basket is empty</h4>
-</div>
-}
-@else {
-<div class="container pt-4 flex-contaier">
-    <div class="basket-container">
-        <table class="table table-hover custom-table">
-            <thead>
-                <tr class="bg-info text-white">
-                    <th>Product</th>
-                    <th></th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (item of basket.basketItems; track item.id) {
-                <tr>
-                    <td>
-                        <a [routerLink]="['/product-details', item.id]" class="text-dark text-decoration-none">
-                            {{item.name}}
-                        </a>
-                    </td>
-                    <td>
-                        <img [src]="'http://localhost:5037/' + item.imageName" class="product-image img-fluid" alt="">
-                    </td>
-                    <td class="description">
-                        {{item.description}}
-                    </td>
-                    <td>{{item.price|currency}}</td>
-                    <td>
-                        <div class="d-flex justify-content-center align-items-center">
-                            <button (click)="incrementQuantity(item)" class="btn btn-sm text-info">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                            <span class="mx-2"> {{item.quantity}}</span>
-                            <button (click)="decrementQuantity(item)" class="btn btn-sm text-danger">
-                                <i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                    </td>
-                    <td>{{(item.quantity*item.price)|currency}}</td>
-                    <td>
-                        <button (click)="removeItem(item)" class="btn btn-danger">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
-
-    </div>
-    <div class="order-summary-container me-5">
-        <app-order-total></app-order-total>
-        <div class="receipt-edge bottom"></div>
-        <div class="checkout-wrapper">
-            <div class="pixel-divider">**************************</div>
-            <button (click)="redirectToCheckout()" class="pixel-checkout-btn">
-                <span class="pixel-icon">▶</span> PROCEED TO CHECKOUT <span class="pixel-icon">◀</span>
-            </button>
-            <p class="receipt-footer">THANK YOU FOR YOUR VISIT</p>
+<div class="basket-wrapper py-5">
+    <div class="container">
+        @if (!basket || basket.basketItems.length === 0) {
+        <div class="empty-state animate__animated animate__fadeIn">
+            <i class="material-icons opacity-25">shopping_basket</i>
+            <h2 class="text-white">Your basket is empty</h2>
+            <p class="text-muted">Looks like you haven't added anything to your cart yet.</p>
+            <a routerLink="/shop" class="btn btn-info btn-lg px-5 py-3 rounded-pill fw-bold shadow-lg border-0">
+                Explore Products <i class="material-icons ms-2" style="font-size: 20px; vertical-align: middle;">arrow_forward</i>
+            </a>
         </div>
+        } @else {
+        <div class="basket-header">
+            <h1 class="animate__animated animate__fadeInLeft">My Cart</h1>
+            <p class="text-muted mt-2 mb-0">You have <strong class="text-info">{{basket.basketItems.length}}</strong> items in your cart.</p>
+        </div>
+
+        <div class="flex-container">
+            <!-- Table Section -->
+            <div class="basket-main">
+                <div class="glass-table-container shadow-2xl animate__animated animate__fadeInUp">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr>
+                                <th>Product Details</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-end">Subtotal</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (item of basket.basketItems; track item.id) {
+                            <tr class="transition-all">
+                                <td>
+                                    <div class="product-cell">
+                                        <div class="img-wrapper shadow-sm">
+                                            <img [src]="'http://localhost:5037/' + item.imageName" [alt]="item.name">
+                                        </div>
+                                        <div class="info">
+                                            <a [routerLink]="['/product-details', item.id]" class="text-decoration-none">
+                                                <h6>{{item.name}}</h6>
+                                            </a>
+                                            <span class="d-block mt-1 opacity-75">{{item.description | slice:0:60}}...</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-bold">{{item.price | currency}}</td>
+                                <td class="text-center">
+                                    <div class="qty-control mx-auto">
+                                        <button (click)="decrementQuantity(item)" class="btn-qty btn-minus" [disabled]="item.quantity <= 1">
+                                            <i class="material-icons" style="font-size: 18px;">remove</i>
+                                        </button>
+                                        <span class="qty-num">{{item.quantity}}</span>
+                                        <button (click)="incrementQuantity(item)" class="btn-qty btn-plus">
+                                            <i class="material-icons" style="font-size: 18px;">add</i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="text-end fw-bold text-info">
+                                    {{(item.quantity * item.price) | currency}}
+                                </td>
+                                <td class="text-center">
+                                    <button (click)="removeItem(item)" class="btn-remove mx-auto" title="Remove from cart">
+                                        <i class="material-icons" style="font-size: 20px;">delete_outline</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Back to Shop link -->
+                <div class="mt-4">
+                    <a routerLink="/shop" class="text-info text-decoration-none d-flex align-items-center opacity-75 hover-opacity-100 transition-all font-weight-700">
+                        <i class="material-icons me-2" style="font-size: 20px;">arrow_back</i>
+                        Continue Shopping
+                    </a>
+                </div>
+            </div>
+
+            <!-- Summary Section -->
+            <aside class="basket-sidebar">
+                <div class="summary-card shadow-2xl animate__animated animate__fadeInRight">
+                    <h3>Review Summary</h3>
+                    
+                    <app-order-total></app-order-total>
+
+                    <!-- Checkout Divider / Progress can be added by app-order-total or here -->
+                    <div class="mt-4 border-top border-secondary border-opacity-10 pt-4">
+                        <button (click)="redirectToCheckout()" class="checkout-btn shadow-lg">
+                            Proceed to Checkout
+                            <i class="material-icons">arrow_forward</i>
+                        </button>
+                    </div>
+
+                    <!-- Trust Badges / Info -->
+                    <div class="mt-4 text-center">
+                        <p class="text-muted small d-flex align-items-center justify-content-center">
+                            <i class="material-icons me-1" style="font-size: 16px;">verified_user</i>
+                            Secure checkout powered by Stripe
+                        </p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        }
     </div>
 </div>
-}
-}
-@else {
-<div class="alert alert-warning text-center m-5 pt-4">
-    <h2>Your basket is empty</h2>
-</div>
+} @else {
+    <!-- Full Screen Loader for when basket is null/async -->
+    <div class="basket-wrapper py-5 text-center">
+        <div class="spinner-border text-info" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Loading checkout...</span>
+        </div>
+        <h4 class="text-muted mt-4">Retrieving your basket...</h4>
+    </div>
 }

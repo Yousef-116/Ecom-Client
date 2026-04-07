@@ -54,6 +54,11 @@ export class PaymentComponent implements OnInit {
       'pk_test_51T71GbB09F3xhT2MQdVRVlxVzZQDpObxOXnUzoTShs3v0ko7oIDAZDsNQyf3tB6Zp8dIASC2f12PGuAMC8K3V4x200jAKxb68i',
     );
 
+    if (!this.stripe) {
+      console.error('Stripe failed to load');
+      return;
+    }
+
     const elements = this.stripe!.elements();
 
     this.cardNumber = elements.create('cardNumber');
@@ -70,9 +75,9 @@ export class PaymentComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.cardCvc.destroy();
-    this.cardNumber.destroy();
-    this.cardExpiry.destroy();
+    this.cardCvc?.destroy();
+    this.cardNumber?.destroy();
+    this.cardExpiry?.destroy();
   }
   ngOnInit(): void {}
 

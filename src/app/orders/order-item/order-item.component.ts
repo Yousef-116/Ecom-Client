@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { IOrder } from '../../Models/Orders';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { OrdersService } from '../orders.service';
-import { CurrencyPipe, NgClass } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe, NgClass } from '@angular/common';
 import { OrderTotalComponent } from '../../Shared/order-total/order-total.component';
 
 @Component({
   selector: 'app-order-item',
   standalone: true,
-  imports: [RouterLink, CurrencyPipe, NgClass],
+  imports: [RouterLink, CommonModule],
   templateUrl: './order-item.component.html',
   styleUrl: './order-item.component.scss',
 })

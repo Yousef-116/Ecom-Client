@@ -1,40 +1,63 @@
-<div class="card h-100">
-    @if(product.photos.length>0){
-    <img src="http://localhost:5037/{{product.photos[0].imageName}}" class="card-img-top" alt="">
-    }
-    <div class="card-body">
-        <div class="thumbnails mb-3">
-            @for (item of product.photos; track $index) {
-            <img src="http://localhost:5037/{{item.imageName}}" alt="" class="thumbnail-img small-img">
+<div class="card h-100 shadow-lg">
+    <!-- Image Section -->
+    <div class="image-container">
+        @if(product.photos.length > 0){
+        <img src="http://localhost:5037/{{product.photos[0].imageName}}" class="card-img-top" alt="{{product.name}}">
+        } @else {
+        <div class="d-flex align-items-center justify-content-center h-100 bg-dark text-muted">
+            <i class="material-icons" style="font-size: 48px;">image</i>
+        </div>
+        }
+
+        <!-- Discount Badge if applicable (Simulated) -->
+        @if (product.oldPrice > product.newPrice) {
+        <span class="badge-discount">
+            -{{ ((product.oldPrice - product.newPrice) / product.oldPrice * 100) | number:'1.0-0' }}%
+        </span>
+        }
+
+        <!-- Thumbnails Overlay (Visible on Hover) -->
+        <div class="thumbnails">
+            @for (item of product.photos.slice(0, 4); track $index) {
+            <img src="http://localhost:5037/{{item.imageName}}" alt="" class="thumbnail-img">
             }
         </div>
-        <h5 class="card-title">{{product.name}}</h5>
-        <p class="card-text">{{product.description}}</p>
-        <p class="price">
-            <span class="old-price">{{product.oldPrice|currency}}</span>
-            {{product.newPrice|currency}}
-        </p>
-        <div class="rating mb-3">
-            <!-- @for (item of getArrayOfRating(Product.rating); track $index) {
+    </div>
 
-                } -->
-            <i class="fa fa-star " style="color: rgb(243, 255, 82); font-size: 15px;"></i>
-            <i class="fa fa-star " style="color: rgb(243, 255, 82); font-size: 15px;"></i>
-            <i class="fa fa-star " style="color: rgb(243, 255, 82); font-size: 15px;"></i>
-            <i class="fa fa-star " style="color: rgb(243, 255, 82); font-size: 15px;"></i>
+    <!-- Favorite Icon -->
+    <button class="favorite-icon btn" title="Add to Wishlist">
+        <i class="material-icons" style="font-size: 20px;">bookmark_border</i>
+    </button>
+
+    <!-- Body Section -->
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-1">
+            <h5 class="card-title">{{product.name}}</h5>
+            <!-- <div class="rating d-flex align-items-center">
+                <i class="material-icons text-warning" style="font-size: 16px;">star</i>
+                <span class="ms-1 text-muted small" style="font-size: 12px;">4.8</span>
+            </div> -->
         </div>
-        <button class="btn btn-outline-primary favorite-icon">
-            <i class="fa fa-bookmark"></i>
-        </button>
-        <div class="d-flex justify-content-between align-items-start">
-            <button (click)="SetBasketValue()" class="btn btn-dark">
-                <i class="fa fa-shopping-cart"></i>Add to Cart
+
+        <p class="card-text">{{product.description}}</p>
+
+        <div class="price-wrapper">
+            <span class="current-price">{{product.newPrice | currency}}</span>
+            @if (product.oldPrice > 0) {
+            <span class="old-price">{{product.oldPrice | currency}}</span>
+            }
+        </div>
+
+        <div class="btn-actions mt-3">
+            <button (click)="SetBasketValue()" class="btn btn-cart">
+                <i class="material-icons">shopping_cart</i>
+                Add to Cart
             </button>
 
-            <button [routerLink]="['/product-details', product.id]" class="btn btn-success">
-                <i class="fa fa-info-circle"></i> Details
+            <button [routerLink]="['/product-details', product.id]"
+                class="btn btn-details d-flex align-items-center justify-content-center" title="View Details">
+                <i class="material-icons">visibility</i>
             </button>
-
         </div>
     </div>
 </div>
