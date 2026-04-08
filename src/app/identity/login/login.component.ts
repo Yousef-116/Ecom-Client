@@ -19,6 +19,8 @@ import { IAuthResponse } from '../../Models/Account';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  showPassword = false;
+  showConfirmPassword = false; // specifically for the reset page
   showForgotModal = false;
   emailValue: string = '';
   constructor(

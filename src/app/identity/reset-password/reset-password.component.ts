@@ -21,6 +21,8 @@ import { IResetPassword } from '../../Models/Account';
 export class ResetPasswordComponent {
   //email: string;
   //token: string;
+  showPassword = false;
+  showConfirmPassword = false; // specifically for the reset page
   resetPassword: IResetPassword;
   constructor(
     private router: ActivatedRoute,

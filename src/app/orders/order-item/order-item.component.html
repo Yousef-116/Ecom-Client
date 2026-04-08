@@ -1,5 +1,5 @@
 @if (order) {
-<div class="invoice-wrapper py-5">
+<div class="invoice-wrapper py-4">
     <div class="container">
         <!-- Back Link -->
         <div class="mb-4">
@@ -20,30 +20,6 @@
                     <div class="label text-uppercase small font-weight-700 opacity-50 mb-1">Invoice Number</div>
                     <div class="invoice-id">#ORD-{{order.id}}</div>
                     <div class="date mt-2">Placed on: <strong class="text-white">{{order.orderDate | date:'longDate'}}</strong></div>
-                </div>
-            </div>
-
-            <!-- Billing / Shipping Info -->
-            <div class="info-grid">
-                <div class="info-block glass-sm">
-                    <h4>Billing & Shipping Details</h4>
-                    <p class="font-weight-700 fs-5 mb-2">{{order.shippingAddress.firstName}} {{order.shippingAddress.lastName}}</p>
-                    <p class="text-muted small">
-                        {{order.shippingAddress.street}}, {{order.shippingAddress.city}}<br>
-                        {{order.shippingAddress.state}}, {{order.shippingAddress.zipCode}}
-                    </p>
-                </div>
-                <div class="info-block text-lg-end">
-                    <h4>Payment Information</h4>
-                    <div class="status-badge" [ngClass]="{
-                        'pending': order.status == 'Pending',
-                        'success': order.status == 'PaymentReceived',
-                        'failed': order.status == 'PaymentFailed'
-                    }">
-                        <span class="dot"></span>
-                        <span class="status-text">{{order.status}}</span>
-                    </div>
-                    <p class="text-muted small mt-3">Transaction ID: <strong class="text-white">TXN-{{order.id * 881}}</strong></p>
                 </div>
             </div>
 
@@ -86,7 +62,7 @@
             </div>
 
             <!-- Summary Box -->
-            <div class="invoice-summary mt-5">
+            <div class="invoice-summary mt-4">
                 <div class="summary-box shadow-lg">
                     <div class="row-item">
                         <span>Subtotal</span>
@@ -100,6 +76,30 @@
                         <div class="label">Amount Paid</div>
                         <h3>{{order.total | currency}}</h3>
                     </div>
+                </div>
+            </div>
+
+            <!-- Billing / Shipping Info -->
+            <div class="info-grid">
+                <div class="info-block glass-sm">
+                    <h4>Billing & Shipping Details</h4>
+                    <p class="font-weight-700 fs-5 mb-2">{{order.shippingAddress.firstName}} {{order.shippingAddress.lastName}}</p>
+                    <p class="text-muted small">
+                        {{order.shippingAddress.street}}, {{order.shippingAddress.city}}<br>
+                        {{order.shippingAddress.state}}, {{order.shippingAddress.zipCode}}
+                    </p>
+                </div>
+                <div class="info-block text-lg-end">
+                    <h4>Payment Information</h4>
+                    <div class="status-badge" [ngClass]="{
+                        'pending': order.status == 'Pending',
+                        'success': order.status == 'PaymentReceived',
+                        'failed': order.status == 'PaymentFailed'
+                    }">
+                        <span class="dot"></span>
+                        <span class="status-text">{{order.status}}</span>
+                    </div>
+                    <p class="text-muted small mt-3">Transaction ID: <strong class="text-white">TXN-{{order.id * 881}}</strong></p>
                 </div>
             </div>
 

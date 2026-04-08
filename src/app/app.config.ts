@@ -17,8 +17,8 @@ import { authInterceptor } from './core/Interceptor/auth.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideToastr({
-      positionClass: 'toast-top-right',
-      timeOut: 1500,
+      positionClass: 'toast-bottom-right',
+      timeOut: 2000, // Increased slightly for readability
       extendedTimeOut: 1000,
       progressBar: true,
       closeButton: true,

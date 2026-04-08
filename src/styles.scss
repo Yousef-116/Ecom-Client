@@ -5,3 +5,89 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Modern Dark Glass Toastr Overrides */
+.toast-container {
+  .ngx-toastr {
+    background: rgba(25, 25, 25, 0.8) !important;
+    backdrop-filter: blur(25px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5) !important;
+    padding: 20px 20px 20px 70px !important;
+    min-width: 350px !important;
+    max-width: 450px !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    overflow: hidden !important;
+    
+    &:hover {
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6) !important;
+      transform: translateY(-5px) scale(1.02) !important;
+      border-color: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    .toast-title {
+      font-weight: 800 !important;
+      font-size: 1.1rem !important;
+      letter-spacing: 0.5px !important;
+      margin-bottom: 6px !important;
+      color: #fff !important;
+    }
+
+    .toast-message {
+      font-size: 0.9rem !important;
+      color: rgba(255, 255, 255, 0.7) !important;
+      line-height: 1.4 !important;
+      font-weight: 500 !important;
+    }
+
+    .toast-close-button {
+      top: 15px !important;
+      right: 15px !important;
+      color: #fff !important;
+      text-shadow: none !important;
+      opacity: 0.4 !important;
+      transition: all 0.2s !important;
+      
+      &:hover {
+        opacity: 1 !important;
+        transform: rotate(90deg) !important;
+      }
+    }
+
+    .toast-progress {
+      background-color: #fff !important;
+      opacity: 0.25 !important;
+      height: 4px !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      border-radius: 0 0 20px 20px !important;
+    }
+    
+    // Icon Overrides
+    background-repeat: no-repeat !important;
+    background-position: 22px center !important;
+    background-size: 32px !important;
+
+    &.toast-success {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300ffa3'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'%3E%3C/path%3E%3C/svg%3E") !important;
+      border-left: 6px solid #00ffa3 !important;
+    }
+
+    &.toast-error {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff4d4d'%3E%3Cpath d='M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z'%3E%3C/path%3E%3C/svg%3E") !important;
+      border-left: 6px solid #ff4d4d !important;
+    }
+
+    &.toast-info {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230dcaf0'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'%3E%3C/path%3E%3C/svg%3E") !important;
+      border-left: 6px solid #0dcaf0 !important;
+    }
+
+    &.toast-warning {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffab00'%3E%3Cpath d='M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z'%3E%3C/path%3E%3C/svg%3E") !important;
+      border-left: 6px solid #ffab00 !important;
+    }
+  }
+}

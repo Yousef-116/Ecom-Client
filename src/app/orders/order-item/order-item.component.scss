@@ -1,28 +1,54 @@
 $info-color: #0dcaf0;
-$dark-bg: #121212;
-$card-bg: rgba(255, 255, 255, 0.03);
-$border-color: rgba(255, 255, 255, 0.08);
-$text-muted: rgba(255, 255, 255, 0.5);
+$dark-bg: #0a0a0a;
+$card-bg: rgba(20, 20, 20, 0.6);
+$border-color: rgba(255, 255, 255, 0.1);
+$text-muted: rgba(255, 255, 255, 0.85); // Increased from 0.7 for even better contrast
 $transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+.text-muted {
+    color: $text-muted !important;
+}
+
+.opacity-50 {
+    opacity: 0.8 !important; // Further increased
+}
+
+.opacity-75 {
+    opacity: 0.9 !important; // Further increased
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div,
+td,
+th {
+    color: #fff; // Default all text to white
+}
 
 :host {
     background-color: $dark-bg;
     color: #fff;
     display: block;
     min-height: 100vh;
-    padding-bottom: 5rem;
+    padding-bottom: 3rem;
 }
 
 .invoice-wrapper {
-    padding-top: 3rem;
+    padding-top: 2rem;
 }
 
 .invoice-card {
     background: $card-bg;
     backdrop-filter: blur(20px);
     border: 1px solid $border-color;
-    border-radius: 40px;
-    padding: 4rem;
+    border-radius: 24px;
+    padding: 2.5rem;
     position: relative;
     box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
     overflow: hidden;
@@ -43,13 +69,13 @@ $transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 4rem;
+    margin-bottom: 2.5rem;
     border-bottom: 1px solid $border-color;
-    padding-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
 
     .brand-section {
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 800;
             background: linear-gradient(45deg, #fff, $info-color);
             -webkit-background-clip: text;
@@ -57,44 +83,110 @@ $transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             -webkit-text-fill-color: transparent;
             margin: 0;
         }
-        p { color: $text-muted; margin-top: 5px; font-weight: 600; letter-spacing: 1px; }
+
+        p {
+            color: $text-muted;
+            margin-top: 5px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
     }
 
     .meta-section {
         text-align: right;
-        .invoice-id { font-size: 1.2rem; font-weight: 800; color: $info-color; }
-        .date { color: $text-muted; font-size: 0.9rem; margin-top: 5px; }
+
+        .invoice-id {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: $info-color;
+        }
+
+        .date {
+            color: $text-muted;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
     }
 }
 
 .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 4rem;
+    gap: 30px;
+    margin-bottom: 2.5rem;
 
     .info-block {
-        h4 { font-size: 0.8rem; text-transform: uppercase; color: $info-color; letter-spacing: 2px; font-weight: 800; margin-bottom: 1.2rem; }
-        p { margin: 0; color: #fff; line-height: 1.6; }
-        .label { color: $text-muted; font-size: 0.85rem; }
+        padding: 1.5rem;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+
+        h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: $info-color;
+            letter-spacing: 2px;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin: 0;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        .label {
+            color: $text-muted;
+            font-size: 0.8rem;
+        }
     }
 }
 
 .invoice-table-container {
-    margin-bottom: 4rem;
+    margin-bottom: 2.5rem;
 
     .table {
         color: #fff;
         margin-bottom: 0;
+        background: transparent !important;
 
         thead {
-            background: rgba(255, 255, 255, 0.03);
-            th { border: none; padding: 1.5rem; font-size: 0.8rem; text-transform: uppercase; color: $text-muted; letter-spacing: 1px; }
+            background: rgba(0, 0, 0, 0.3);
+
+            th {
+                background: transparent !important;
+                border: none;
+                padding: 1rem;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                color: $info-color;
+                letter-spacing: 1px;
+                font-weight: 800;
+            }
         }
 
         tbody {
-            tr { border-bottom: 1px solid $border-color; }
-            td { padding: 1.5rem; vertical-align: middle; }
+            background: transparent !important;
+
+            tr {
+                background: transparent !important;
+                border-bottom: 1px solid $border-color;
+
+                &:last-child {
+                    border: none;
+                }
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.02) !important;
+                }
+            }
+
+            td {
+                background: transparent !important;
+                padding: 1rem;
+                vertical-align: middle;
+            }
         }
     }
 }
@@ -105,48 +197,66 @@ $transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     gap: 15px;
 
     .item-img {
-        width: 60px;
-        height: 60px;
-        border-radius: 12px;
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
         object-fit: cover;
         background: #000;
         border: 1px solid $border-color;
     }
 
-    .item-name { font-weight: 700; color: #fff; text-decoration: none; &:hover { color: $info-color; } }
+    .item-name {
+        font-weight: 700;
+        color: #fff;
+        text-decoration: none;
+        transition: $transition;
+
+        &:hover {
+            color: $info-color;
+        }
+    }
 }
 
 .invoice-summary {
     display: flex;
     justify-content: flex-end;
+    //margin-top: 1rem !important;
+    margin-bottom: 1rem;
 
     .summary-box {
-        width: 350px;
+        width: 320px;
         background: rgba(255, 255, 255, 0.02);
         border-radius: 20px;
-        padding: 2rem;
+        padding: 1.5rem;
         border: 1px solid $border-color;
 
         .row-item {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             color: $text-muted;
+            font-size: 0.9rem;
 
             &.total {
-                margin-top: 1.5rem;
-                padding-top: 1.5rem;
-                border-top: 2px dashed $border-color;
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px dashed $border-color;
                 color: #fff;
-                h3 { font-size: 1.8rem; font-weight: 800; color: $info-color; margin: 0; }
+
+                h3 {
+                    font-size: 1.6rem;
+                    font-weight: 800;
+                    color: $info-color;
+                    margin: 0;
+                }
             }
         }
     }
 }
 
 .invoice-footer {
-    margin-top: 5rem;
-    padding-top: 3rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
     border-top: 1px solid $border-color;
     display: flex;
     justify-content: space-between;
@@ -156,29 +266,81 @@ $transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         display: flex;
         align-items: center;
         gap: 10px;
-        padding: 8px 20px;
+        padding: 6px 16px;
         border-radius: 30px;
         font-weight: 700;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         text-transform: uppercase;
 
-        &.pending { background: rgba(255, 193, 7, 0.1); color: #ffc107; }
-        &.success { background: rgba(46, 213, 115, 0.1); color: #2ed573; }
-        &.failed { background: rgba(255, 71, 87, 0.1); color: #ff4757; }
+        &.pending {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.2);
+        }
 
-        .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; }
+        &.success {
+            background: rgba(46, 213, 115, 0.1);
+            color: #2ed573;
+            border: 1px solid rgba(46, 213, 115, 0.2);
+        }
+
+        &.failed {
+            background: rgba(255, 71, 87, 0.1);
+            color: #ff4757;
+            border: 1px solid rgba(255, 71, 87, 0.2);
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+            box-shadow: 0 0 10px currentColor;
+        }
     }
 
     .barcode-section {
         text-align: right;
-        opacity: 0.5;
-        .barcode { font-family: 'Libre Barcode 39', cursive, sans-serif; font-size: 3rem; }
-        .serial { font-family: monospace; font-size: 0.75rem; letter-spacing: 2px; }
+        opacity: 0.4;
+
+        .barcode {
+            font-family: 'Libre Barcode 39', cursive, sans-serif;
+            font-size: 2.5rem;
+        }
+
+        .serial {
+            font-family: monospace;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+        }
     }
 }
 
 @media (max-width: 768px) {
-    .invoice-card { padding: 2rem; }
-    .info-grid { grid-template-columns: 1fr; gap: 20px; }
-    .invoice-header { flex-direction: column; gap: 20px; text-align: left; .meta-section { text-align: left; } }
+    .invoice-card {
+        padding: 1.5rem;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .invoice-header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: left;
+
+        .meta-section {
+            text-align: left;
+        }
+    }
+
+    .invoice-summary {
+        justify-content: center;
+
+        .summary-box {
+            width: 100%;
+        }
+    }
 }

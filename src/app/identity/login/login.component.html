@@ -20,18 +20,25 @@
             <div class="form-field animate__animated animate__fadeInUp delay-400">
                 <div class="label-row">
                     <label for="password">Password</label>
-                    <a href="javascript:void(0)" (click)="showForgotModal = true" class="forgot-link">Forgot Password?</a>
+                    <a href="javascript:void(0)" (click)="showForgotModal = true" class="forgot-link">Forgot
+                        Password?</a>
                 </div>
                 <div class="input-wrapper">
-                    <input type="password" id="password" formControlName="password" placeholder="••••••••"
-                        [class.is-invalid]="Password.invalid && Password.touched" />
+                    <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password"
+                        placeholder="••••••••" [class.is-invalid]="Password.invalid && Password.touched" />
+
+                    <button type="button" class="toggle-password" (click)="showPassword = !showPassword">
+                        <i class="material-icons">{{ showPassword ? 'visibility_off' : 'visibility' }}</i>
+                    </button>
+
                     @if (Password.invalid && Password.touched) {
                     <span class="error-message">Password must be at least 6 characters</span>
                     }
                 </div>
             </div>
 
-            <button type="submit" [disabled]="LoginData.invalid" class="submit-btn shadow-lg animate__animated animate__fadeInUp delay-500">
+            <button type="submit" [disabled]="LoginData.invalid"
+                class="submit-btn shadow-lg animate__animated animate__fadeInUp delay-500">
                 Sign In
             </button>
 
@@ -40,26 +47,4 @@
             </p>
         </form>
     </div>
-
-    @if (showForgotModal) {
-    <div class="modal-overlay animate__animated animate__fadeIn" (click)="showForgotModal = false">
-        <div class="modal-content animate__animated animate__zoomIn" (click)="$event.stopPropagation()">
-            <button class="close-btn" (click)="showForgotModal = false">
-                <i class="material-icons">close</i>
-            </button>
-            <h3>Reset Password</h3>
-            <p>Enter your email and we'll send you a recovery link.</p>
-            <form class="modern-form" (ngSubmit)="onForgotPassword()">
-                <div class="form-field">
-                    <div class="input-wrapper">
-                        <input type="email" name="forgotEmail" placeholder="Enter your registered email" 
-                            class="modal-input text-center" [(ngModel)]="emailValue" />
-                    </div>
-                </div>
-
-                <button class="submit-btn shadow-md mt-4">Send Reset Link</button>
-            </form>
-        </div>
-    </div>
-    }
 </section>
