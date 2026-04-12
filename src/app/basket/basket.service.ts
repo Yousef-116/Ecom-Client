@@ -16,11 +16,11 @@ export class BasketService {
   //BaseURL = 'https://localhost:7097/api/';
   BaseURL = Environment.baseURL;
 
-  private basketSource = new BehaviorSubject<IBasket>(null);
-  // private basketSource = new BehaviorSubject<IBasket>({
-  //   id: '',
-  //   basketItems: []
-  // });
+  //private basketSource = new BehaviorSubject<IBasket>(null);
+  private basketSource = new BehaviorSubject<IBasket>({
+    id: '',
+    basketItems: []
+  });
   basket$ = this.basketSource.asObservable();
   private basketTotalSource = new BehaviorSubject<IBasketTotal>(null);
   basketTotal$ = this.basketTotalSource.asObservable();
@@ -52,10 +52,15 @@ export class BasketService {
   GetBasket(id: string) {
     return this.http.get(this.BaseURL + '/Baskets/get-basket?id=' + id).pipe(
       map((value: IBasket) => {
-        this.basketSource.next(value);
-        //console.log(value);
-        this.calculateTotal();
-        return value;
+        if (value) {
+          this.basketSource.next(value);
+          this.calculateTotal();
+          return value;
+        } else {
+          const emptyBasket: IBasket = { id: '', basketItems: [] };
+          this.basketSource.next(emptyBasket);
+          return emptyBasket;
+        }
       }),
     );
   }
@@ -98,7 +103,7 @@ export class BasketService {
 
   calculateTotal() {
     const basket = this.GetCurrentValue();
-    const shipping = this.ShippingCost;
+    const shipping = this.ShippingCost || 0;
     const subtotal = basket.basketItems.reduce((acc, item) => {
       return item.price * item.quantity + acc;
     }, 0);
@@ -155,7 +160,7 @@ export class BasketService {
 
     let basket = this.GetCurrentValue();
 
-    if (!basket) {
+    if (!basket || basket.id === '') {
       basket = this.CreateBasket();
     }
 

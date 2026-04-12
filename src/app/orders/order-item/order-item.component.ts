@@ -18,7 +18,7 @@ export class OrderItemComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private orderService: OrdersService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((param) => {
@@ -34,5 +34,13 @@ export class OrderItemComponent implements OnInit {
         },
       });
     });
+  }
+
+  getImageUrl(imageName: string): string {
+    if (!imageName) return '';
+    if (imageName.toLowerCase().startsWith('/images/')) {
+      return 'http://localhost:5037' + imageName;
+    }
+    return imageName;
   }
 }

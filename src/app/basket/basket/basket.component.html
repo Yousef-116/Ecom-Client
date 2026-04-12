@@ -43,7 +43,7 @@
                                 <td>
                                     <div class="product-cell">
                                         <div class="img-wrapper shadow-sm">
-                                            <img [src]="'http://localhost:5037/' + item.imageName" [alt]="item.name">
+                                            <img [src]="getImageUrl(item.imageName)" [alt]="item.name">
                                         </div>
                                         <div class="info">
                                             <a [routerLink]="['/product-details', item.id]"

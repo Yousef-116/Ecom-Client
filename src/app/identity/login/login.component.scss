@@ -85,10 +85,12 @@ $transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     .input-wrapper {
         position: relative;
+        display: flex;
+        flex-direction: column;
 
         input {
             width: 100%;
-            padding: 1rem 1.2rem;
+            padding: 1rem 3.5rem 1rem 1.2rem;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid $border-color;
             border-radius: 15px;
@@ -110,6 +112,32 @@ $transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             &.is-invalid {
                 border-color: rgba(255, 71, 87, 0.4);
                 background: rgba(255, 71, 87, 0.05);
+            }
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 1.2rem;
+            top: 0;
+            height: 52px;
+            background: none;
+            border: none;
+            color: $text-muted;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+
+            &:hover {
+                color: $info-color;
+                transform: scale(1.1);
+            }
+
+            i {
+                font-size: 1.25rem;
             }
         }
 
@@ -216,62 +244,6 @@ $transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
         &:hover {
             opacity: 1;
-        }
-    }
-}
-
-// ... keep your existing variables ...
-
-.input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-
-    input {
-        width: 100%;
-        padding: 1rem 3.5rem 1rem 1.2rem; // Added right padding (3.5rem) for the icon
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid $border-color;
-        border-radius: 15px;
-        color: #fff;
-        font-size: 1rem;
-        transition: $transition;
-
-        &::placeholder {
-            color: rgba(255, 255, 255, 0.2);
-        }
-
-        &:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(13, 202, 240, 0.4);
-            box-shadow: 0 0 15px rgba(13, 202, 240, 0.1);
-        }
-    }
-
-    // The Icon Style
-    .toggle-password {
-        position: absolute;
-        right: 1.2rem;
-        background: none;
-        border: none;
-        color: $text-muted;
-        cursor: pointer;
-        padding: 0;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-        z-index: 10;
-
-        &:hover {
-            color: $info-color;
-            transform: scale(1.1);
-        }
-
-        i {
-            font-size: 1.25rem; // Adjust size as needed
         }
     }
 }

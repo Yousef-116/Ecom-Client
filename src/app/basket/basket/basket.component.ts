@@ -23,7 +23,7 @@ export class BasketComponent implements OnInit {
     private identityService: IdentityService,
     private router: Router,
     private toastr: ToastrService
-  ) {}
+  ) { }
   basket$!: Observable<IBasket | null>;
 
   ngOnInit(): void {
@@ -54,5 +54,13 @@ export class BasketComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+  getImageUrl(imageName: string): string {
+    if (!imageName) return '';
+    if (imageName.toLowerCase().startsWith('/images/')) {
+      return 'http://localhost:5037' + imageName;
+    }
+    return imageName;
   }
 }

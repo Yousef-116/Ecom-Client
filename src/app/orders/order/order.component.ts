@@ -16,7 +16,7 @@ export class OrderComponent implements OnInit {
   constructor(
     private orderService: OrdersService,
     private toaster: ToastrService,
-  ) {}
+  ) { }
   ngOnInit(): void {
     this.orderService.getAllOrdersForUser().subscribe({
       next: (value) => {
@@ -44,5 +44,13 @@ export class OrderComponent implements OnInit {
   orders: IOrder[] = [];
   getFirstImageOrderItem(order: IOrderItem[]) {
     return order.length > 0 ? order[0].mainImage : null;
+  }
+
+  getImageUrl(imageName: string): string {
+    if (!imageName) return '';
+    if (imageName.toLowerCase().startsWith('/images/')) {
+      return 'http://localhost:5037' + imageName;
+    }
+    return imageName;
   }
 }

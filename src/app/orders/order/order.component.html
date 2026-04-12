@@ -39,7 +39,7 @@
                                             (click)="openImageModal(item.orderItems)" data-bs-toggle="modal"
                                             data-bs-target="#ImageModal">
                                             <img class="main-img"
-                                                src="http://localhost:5037/{{getFirstImageOrderItem(item.orderItems)}}"
+                                                [src]="getImageUrl(getFirstImageOrderItem(item.orderItems))"
                                                 alt="Product">
                                             @if (item.orderItems.length > 1) {
                                             <div class="stack-badge">+{{item.orderItems.length - 1}}</div>
@@ -89,8 +89,7 @@
                 <div class="image-gallery-grid">
                     @for (img of urlImageModal; track $index) {
                     <div class="gallery-item">
-                        <img [src]="'http://localhost:5037/' + img" class="img-fluid rounded shadow-sm"
-                            alt="Order Item">
+                        <img [src]="getImageUrl(img)" class="img-fluid rounded shadow-sm" alt="Order Item">
                     </div>
                     } @empty {
                     <p class="text-center text-muted">No images found for this order.</p>

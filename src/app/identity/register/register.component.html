@@ -12,6 +12,9 @@
                 <div class="input-wrapper">
                     <input type="text" id="userName" formControlName="userName" placeholder="David123"
                         [class.is-invalid]="userName.invalid && userName.touched" />
+                    @if (userName.invalid && userName.touched) {
+                    <span class="error-message">Please enter a valid username</span>
+                    }
                 </div>
             </div>
 
@@ -20,6 +23,9 @@
                 <div class="input-wrapper">
                     <input type="text" id="displayName" formControlName="displayName" placeholder="John Doe"
                         [class.is-invalid]="DisplayName.invalid && DisplayName.touched" />
+                    @if (DisplayName.invalid && DisplayName.touched) {
+                    <span class="error-message">Please enter a display name</span>
+                    }
                 </div>
             </div>
 
@@ -28,6 +34,9 @@
                 <div class="input-wrapper">
                     <input type="email" id="userEmail" formControlName="Email" placeholder="name@company.com"
                         [class.is-invalid]="email.invalid && email.touched" />
+                    @if (email.invalid && email.touched) {
+                    <span class="error-message">Please enter a valid email address</span>
+                    }
                 </div>
             </div>
 
@@ -40,6 +49,10 @@
                     <button type="button" class="toggle-password" (click)="showPassword = !showPassword">
                         <i class="material-icons">{{ showPassword ? 'visibility_off' : 'visibility' }}</i>
                     </button>
+
+                    @if (Password.invalid && Password.touched) {
+                    <span class="error-message">Password must be at least 6 characters</span>
+                    }
                 </div>
             </div>
 
@@ -53,10 +66,14 @@
                     <button type="button" class="toggle-password" (click)="showConfirmPassword = !showConfirmPassword">
                         <i class="material-icons">{{ showConfirmPassword ? 'visibility_off' : 'visibility' }}</i>
                     </button>
+
+                    @if (confirmPassword.hasError('passwordMismatch') && confirmPassword.touched) {
+                    <span class="error-message">Passwords do not match</span>
+                    }
+                    @else if (confirmPassword.invalid && confirmPassword.touched) {
+                    <span class="error-message">Please confirm your password</span>
+                    }
                 </div>
-                @if (confirmPassword.hasError('passwordMismatch') && confirmPassword.touched) {
-                <span class="error-message">Passwords do not match</span>
-                }
             </div>
 
             <button type="submit" [disabled]="RegisterData.invalid"
