@@ -2,28 +2,27 @@
     <!-- Image Section -->
     <div class="image-container">
         @if(product.photos.length > 0){
-        <!-- <img src="http://localhost:5037/{{product.photos[0].imageName}}" class="card-img-top" alt="{{product.name}}"> -->
-        <img src="http://localhost:5037/{{selectedImage}}" class="card-img-top" alt="{{product.name}}">
+        <img [src]="getImageUrl(selectedImage)" class="card-img-top" alt="{{product.name}}">
         } @else {
         <div class="d-flex align-items-center justify-content-center h-100 bg-dark text-muted">
             <i class="material-icons" style="font-size: 48px;">image</i>
         </div>
         }
 
-        <!-- Discount Badge if applicable (Simulated) -->
+        <!-- Discount Badge -->
         @if (product.oldPrice > product.newPrice) {
         <span class="badge-discount">
             -{{ ((product.oldPrice - product.newPrice) / product.oldPrice * 100) | number:'1.0-0' }}%
         </span>
         }
 
-        <!-- Thumbnails Overlay (Visible on Hover) -->
+        <!-- Thumbnails -->
         <div class="thumbnails">
             @for (item of product.photos.slice(0, 4); track $index) {
-            <img src="http://localhost:5037/{{item.imageName}}" alt="" class="thumbnail-img"
-                (click)="changeImage(item.imageName)">
+            <img [src]="getImageUrl(item.imageName)" alt="" class="thumbnail-img" (click)="changeImage(item.imageName)">
             }
         </div>
+
     </div>
 
     <!-- Favorite Icon -->

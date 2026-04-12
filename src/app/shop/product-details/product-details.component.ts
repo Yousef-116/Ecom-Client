@@ -14,20 +14,25 @@ import { ProductParams } from '../../Models/ProductParams';
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule, NgxImageZoomModule, ToastrModule, RouterLink, RatingComponent, ShopItemComponent],
+  imports: [
+    CommonModule,
+    NgxImageZoomModule,
+    ToastrModule,
+    RouterLink,
+    RatingComponent,
+    ShopItemComponent,
+  ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })
 export class ProductDetailsComponent implements OnInit {
+  averageRating: number = 0;
+  reviewsCount: number = 0;
 
-averageRating: number = 0;
-reviewsCount: number = 0;
-
-onRatingChanged(event: any) {
-  this.averageRating = event.avg;
-  this.reviewsCount = event.count;
-}
-
+  onRatingChanged(event: any) {
+    this.averageRating = event.avg;
+    this.reviewsCount = event.count;
+  }
 
   CalculateDiscountPercentage(oldPrice: number, newPrice: number) {
     if (oldPrice === 0) return 0;
@@ -68,7 +73,7 @@ onRatingChanged(event: any) {
   Quantity: number = 1;
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.id = +params['id'];
       this.loadProduct(this.id);
     });
@@ -91,15 +96,25 @@ onRatingChanged(event: any) {
     this.shopService.getProduct(params).subscribe({
       next: (response) => {
         // Filter out the current product from related products
-        this.relatedProducts = response.data.filter(p => p.id !== this.id).slice(0, 4);
-      }
+        this.relatedProducts = response.data
+          .filter((p) => p.id !== this.id)
+          .slice(0, 4);
+      },
     });
   }
 
   ReplaceImage(image: string) {
-  this.MainImage = '';
-  setTimeout(() => {
-    this.MainImage = image;
-  }, 50);
-}
+    this.MainImage = '';
+    setTimeout(() => {
+      this.MainImage = image;
+    }, 50);
+  }
+
+  getImageUrl(imageName: string): string {
+    if (!imageName) return '';
+    if (imageName.toLowerCase().startsWith('/images/')) {
+      return 'http://localhost:5037' + imageName;
+    }
+    return imageName;
+  }
 }

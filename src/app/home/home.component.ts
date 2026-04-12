@@ -13,12 +13,12 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
   standalone: true,
   imports: [CommonModule, ShopItemComponent, RouterLink, CarouselModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
   featuredProducts: IProduct[] = [];
   categories: ICategory[] = [];
-  
+
   constructor(private shopService: ShopService) {}
 
   ngOnInit(): void {
@@ -29,12 +29,12 @@ export class HomeComponent implements OnInit {
   loadFeaturedProducts() {
     const params = new ProductParams();
     params.pageSize = 4; // Only show 4 featured products
-    
+
     this.shopService.getProduct(params).subscribe({
       next: (response) => {
         this.featuredProducts = response.data;
       },
-      error: (error) => console.log(error)
+      error: (error) => console.log(error),
     });
   }
 
@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
       next: (response) => {
         this.categories = response.slice(0, 6); // Show up to 6 categories
       },
-      error: (error) => console.log(error)
+      error: (error) => console.log(error),
     });
   }
 }

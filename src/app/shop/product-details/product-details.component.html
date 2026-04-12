@@ -16,9 +16,9 @@
             <!-- Left Column: Image Gallery -->
             <div class="col-lg-6">
                 <div class="main-img-container shadow-2xl">
-                    <lib-ngx-image-zoom *ngIf="MainImage" [thumbImage]="'http://localhost:5037/' + MainImage"
-                        [fullImage]="'http://localhost:5037/' + MainImage" [magnification]="1.5"
-                        [enableScrollZoom]="true" [lensWidth]="180" [lensHeight]="180" [enableLens]="true">
+                    <lib-ngx-image-zoom *ngIf="MainImage" [thumbImage]="getImageUrl(MainImage)"
+                        [fullImage]="getImageUrl(MainImage)" [magnification]="1.5" [enableScrollZoom]="true"
+                        [lensWidth]="180" [lensHeight]="180" [enableLens]="true">
                     </lib-ngx-image-zoom>
 
                     <!-- Previews / Thumbnails -->
@@ -26,7 +26,7 @@
                         @for (item of product.photos; track item.imageName) {
                         <div class="preview-item" [class.active]="MainImage === item.imageName"
                             (click)="ReplaceImage(item.imageName)">
-                            <img src="http://localhost:5037/{{item.imageName}}" alt="{{product.name}} thumbnail">
+                            <img [src]="getImageUrl(item.imageName)" alt="{{product.name}} thumbnail">
                         </div>
                         }
                     </div>
@@ -120,7 +120,7 @@
         </div>
 
         <!-- Rating Section -->
-        <div class="mt-5 border-top border-secondary border-opacity-10 pt-5">
+        <div class="">
             <app-rating [productId]="product.id" (ratingChanged)="onRatingChanged($event)">
             </app-rating>
         </div>

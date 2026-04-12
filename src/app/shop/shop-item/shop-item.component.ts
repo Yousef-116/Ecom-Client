@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core'; // 1. Import OnChanges and SimpleChanges
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { BasketService } from '../../basket/basket.service';
 import { IProduct } from '../../Models/Product';
 import { RouterModule } from '@angular/router';
-import { BasketService } from '../../basket/basket.service';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-shop-item',
@@ -12,9 +12,9 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
   templateUrl: './shop-item.component.html',
   styleUrls: ['./shop-item.component.scss'],
 })
-export class ShopItemComponent {
+export class ShopItemComponent implements OnChanges {
+  // 2. Implement OnChanges
   @Input({ required: true }) product!: IProduct;
-
   selectedImage: string = '';
 
   constructor(
@@ -22,10 +22,27 @@ export class ShopItemComponent {
     private toastr: ToastrService,
   ) {}
 
-  ngOnInit() {
-    if (this.product?.photos?.length > 0) {
+  // 3. Add this method to handle Input updates
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['product'] && this.product?.photos?.length > 0) {
+      // Whenever the product object changes (on pagination), update the image
       this.selectedImage = this.product.photos[0].imageName;
     }
+  }
+
+  // You can keep ngOnInit or remove it, as ngOnChanges handles the initial load too
+  ngOnInit() {
+    if (!this.selectedImage && this.product?.photos?.length > 0) {
+      this.selectedImage = this.product.photos[0].imageName;
+    }
+  }
+
+  getImageUrl(imageName: string): string {
+    if (!imageName) return '';
+    if (imageName.toLowerCase().startsWith('/images/')) {
+      return 'http://localhost:5037' + imageName;
+    }
+    return imageName;
   }
 
   changeImage(imageName: string) {
@@ -33,18 +50,7 @@ export class ShopItemComponent {
   }
 
   SetBasketValue() {
-    console.log('Adding to basket: ', this.product.name);
     this.service.addItemToBasket(this.product);
-    this.toastr.success('Item added to basket', 'Success');
+    this.toastr.success('Item added to basket');
   }
 }
-  //   constructor(private _service: BasketService) {}
-  //   @Input() Product: IProduct;
-  //   SetBasketValue() {
-  //     this._service.addItemToBasket(this.Product);
-  //   }
-  //   getArrayofRating(rateOfnumber:number):number[]{
-  //     return Array(rateOfnumber).fill(0).map((x,i)=>i);
-  //   }
-  // }
-//}
