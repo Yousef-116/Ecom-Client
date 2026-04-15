@@ -2,7 +2,16 @@ $info-color: #0dcaf0;
 $dark-bg: #121212;
 $card-bg: rgba(255, 255, 255, 0.05);
 $glass-bg: rgba(30, 30, 30, 0.8);
-$text-muted: rgba(255, 255, 255, 0.6);
+$text-muted: rgba(255, 255, 255, 0.7); // instead of 0.5
+
+.text-muted {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.uppercase {
+  color: rgba(255, 255, 255, 0.85); // for labels like Quantity
+}
+
 $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 :host {
@@ -10,13 +19,13 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   min-height: 100vh;
   display: block;
   color: #fff;
-  padding-bottom: 3rem;
+  padding-bottom: 1rem;
 }
 
 .main-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 800;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   background: linear-gradient(45deg, #fff, $info-color);
   -webkit-background-clip: text;
   background-clip: text;
@@ -29,18 +38,18 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
-  padding: 1.5rem;
+  padding: 1rem;
   position: sticky;
   top: 100px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 
   .section-title {
-    font-size: 1.1rem;
+    font-size: 0.5rem;
     font-weight: 700;
     color: $info-color;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    //letter-spacing: 1px;
   }
 }
 
@@ -50,7 +59,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #fff;
     border-radius: 10px;
-    padding: 0.6rem 1rem;
+    padding: 0.3rem 0.5rem;
     transition: $transition;
 
     &:focus {
@@ -116,7 +125,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       border: none;
       color: #fff;
       padding: 0.6rem 1rem;
-      font-size: 1rem;
+      font-size: 0.8rem;
 
       &::placeholder {
         color: rgba(255, 255, 255, 0.4);
@@ -209,7 +218,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: static;
     margin-bottom: 2rem;
   }
-  
+
   .d-flex.justify-content-between {
     flex-direction: column;
     gap: 1.5rem;

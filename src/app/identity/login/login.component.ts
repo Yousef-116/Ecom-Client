@@ -23,6 +23,11 @@ export class LoginComponent {
   showConfirmPassword = false; // specifically for the reset page
   showForgotModal = false;
   emailValue: string = '';
+
+  openForgotModal() {
+    this.emailValue = this.email.value || '';
+    this.showForgotModal = true;
+  }
   constructor(
     private identityService: IdentityService,
     private toast: ToastrService,

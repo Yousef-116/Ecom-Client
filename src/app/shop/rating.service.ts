@@ -12,11 +12,11 @@ export class RatingService {
   constructor(private http: HttpClient) { }
 
   getRatingsByProductId(productId: number) {
-    return this.http.get<ProductRatingDTO[]>(this.baseURL + `/ProductRatings/get-by-product/${productId}`);
+    return this.http.get<ProductRatingDTO[]>(this.baseURL + `/ProductRatings/product/${productId}`);
   }
 
   addRating(rating: AddProductRatingDTO) {
-    return this.http.post(this.baseURL + '/ProductRatings/add-rating', rating, {
+    return this.http.post(this.baseURL + '/ProductRatings', rating, {
       responseType: 'text'
     });
   }

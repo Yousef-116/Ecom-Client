@@ -12,8 +12,6 @@ import { IDelivery } from '../Models/Delivery';
 export class BasketService {
   constructor(private http: HttpClient) { }
 
-  //BaseURL = 'http://localhost:5037/api/';
-  //BaseURL = 'https://localhost:7097/api/';
   BaseURL = Environment.baseURL;
 
   //private basketSource = new BehaviorSubject<IBasket>(null);
@@ -50,7 +48,7 @@ export class BasketService {
   }
 
   GetBasket(id: string) {
-    return this.http.get(this.BaseURL + '/Baskets/get-basket?id=' + id).pipe(
+    return this.http.get<IBasket>(this.BaseURL + '/Baskets/' + id).pipe(
       map((value: IBasket) => {
         if (value) {
           this.basketSource.next(value);
@@ -66,22 +64,21 @@ export class BasketService {
   }
   SetBasket(basket: IBasket) {
     return this.http
-      .post(this.BaseURL + '/Baskets/update-basket', basket)
+      .put<IBasket>(this.BaseURL + '/Baskets/' + basket.id, basket)
       .subscribe({
         next: (value: IBasket) => {
           this.basketSource.next(value);
           this.calculateTotal();
-          // console.log(value);
         },
         error(err) {
-          // console.log(err);
+          console.error('Error setting basket', err);
         },
       });
   }
 
   DeleteBasketItem(basket: IBasket) {
     return this.http
-      .delete(this.BaseURL + '/Baskets/delete-basket/' + basket.id)
+      .delete(this.BaseURL + '/Baskets/' + basket.id)
       .subscribe({
         next: (value) => {
           this.basketSource.next({

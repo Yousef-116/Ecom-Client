@@ -10,12 +10,12 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     min-height: 100vh;
     color: #fff;
     background-color: $dark-bg;
-    padding-top: 5rem;
+    padding-top: 1rem;
 }
 
 /* Container & Header */
 .header-section {
-    padding-top: 2rem;
+    padding-top: 1rem;
     
     .header-icon {
         width: 60px;
@@ -295,4 +295,4 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: block;
         }
     }
-}
+}

@@ -20,7 +20,7 @@
             <div class="form-field animate__animated animate__fadeInUp delay-400">
                 <div class="label-row">
                     <label for="password">Password</label>
-                    <a href="javascript:void(0)" (click)="showForgotModal = true" class="forgot-link">Forgot
+                    <a href="javascript:void(0)" (click)="openForgotModal()" class="forgot-link">Forgot
                         Password?</a>
                 </div>
                 <div class="input-wrapper">
@@ -48,3 +48,28 @@
         </form>
     </div>
 </section>
+
+<!-- Forgot Password Modal -->
+@if (showForgotModal) {
+<div class="modal-overlay animate__animated animate__fadeIn">
+    <div class="modal-content animate__animated animate__zoomIn">
+        <button class="close-btn" (click)="showForgotModal = false">
+            <i class="material-icons">close</i>
+        </button>
+        <div class="modal-header">
+            <h3>Reset Password</h3>
+            <p>Enter your email and we'll send you a link to reset your password.</p>
+        </div>
+        <div class="modern-form">
+            <div class="form-field">
+                <div class="input-wrapper">
+                    <input type="email" [(ngModel)]="emailValue" placeholder="name@company.com" />
+                </div>
+            </div>
+            <button class="submit-btn" (click)="onForgotPassword()" [disabled]="!emailValue">
+                Send Reset Link
+            </button>
+        </div>
+    </div>
+</div>
+}
