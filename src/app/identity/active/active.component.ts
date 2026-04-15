@@ -1,5 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { IActive } from '../../Models/Account';
+import { IActive } from '../../Shared/models/Account';
 import { IdentityService } from '../identity.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Route, Router } from '@angular/router';
@@ -18,7 +18,7 @@ export class ActiveComponent implements AfterViewInit {
     private toaster: ToastrService,
     private router: ActivatedRoute,
     private route: Router,
-  ) {}
+  ) { }
   ngAfterViewInit(): void {
     this.router.queryParams.subscribe((params) => {
       const email = params['email'];
@@ -48,3 +48,5 @@ export class ActiveComponent implements AfterViewInit {
     });
   }
 }
+
+

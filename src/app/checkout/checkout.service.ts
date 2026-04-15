@@ -1,24 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Environment } from '../environment';
-import { IDelivery } from '../Models/Delivery';
-import { ICreateOrder, IOrder } from '../Models/Orders';
+import { IDelivery } from '../Shared/models/Delivery';
+import { ICreateOrder, IOrder } from '../Shared/models/Orders';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CheckoutService {
   baseURL = Environment.baseURL;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   updateAddress(form: any) {
-    return this.http.put(this.baseURL + '/Account/update-address', form, {
+    return this.http.put(this.baseURL + '/Account/address', form, {
       withCredentials: true,
     });
   }
 
   getAddress() {
-    return this.http.get(this.baseURL + '/Account/get-address-for-user', {
+    return this.http.get(this.baseURL + '/Account/address', {
       withCredentials: true,
     });
   }
@@ -30,31 +30,15 @@ export class CheckoutService {
   }
 
   CreateOrder(order: ICreateOrder) {
-    return this.http.post<IOrder>(this.baseURL + '/Orders/create-order', order);
+    return this.http.post<IOrder>(this.baseURL + '/Orders', order);
   }
 
   updateOrderStatus(orderId: number, status: number) {
-    return this.http.put(`${this.baseURL}/Orders/update-status/${orderId}`, {
+    return this.http.put(`${this.baseURL}/Orders/${orderId}/status`, {
       status,
     });
   }
 
-  // updateAddress(form: any) {
-  //   return this.http.put(this.baseURL + '/Account/update-address', form, {
-  //     withCredentials: true,
-  //   });
-  // }
-
-  // updateAddress(form: an) {
-  //   return this.http.put(this.baseURL + 'Account/update-address', form);
-  // }
-  // getAddress() {
-  //   return this.http.get(this.baseURL + 'Account/get-address-for-user');
-  // }
-  // getDeliveryMethod() {
-  //   return this.http.get<Delivery[]>(this.baseURL + 'Orders/get-delivery');
-  // }
-  // CreateOrder(order: ICreateOrder) {
-  //   return this.http.post<IOrder>(this.baseURL + 'Orders/create-order', order);
-  // }
 }
+
+

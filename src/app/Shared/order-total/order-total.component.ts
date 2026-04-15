@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IBasketTotal } from '../../Models/Basket';
+import { IBasketTotal } from '../models/Basket';
 import { BasketService } from '../../basket/basket.service';
 import { CurrencyPipe } from '@angular/common';
 
@@ -12,7 +12,7 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class OrderTotalComponent implements OnInit {
   basketTotal: IBasketTotal;
-  constructor(private basketService: BasketService) {}
+  constructor(private basketService: BasketService) { }
   ngOnInit(): void {
     this.basketService.basketTotal$.subscribe({
       next: (value) => {
@@ -24,3 +24,5 @@ export class OrderTotalComponent implements OnInit {
     });
   }
 }
+
+

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Environment } from '../environment';
-import { AddProductRatingDTO, ProductRatingDTO } from '../Models/rating';
+import { AddProductRatingDTO, ProductRatingDTO } from '../Shared/models/rating';
 
 @Injectable({
   providedIn: 'root'
@@ -21,3 +21,5 @@ export class RatingService {
     });
   }
 }
+
+

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShopService } from '../shop/shop.service';
-import { IProduct } from '../Models/Product';
-import { ICategory } from '../Models/Category';
-import { ProductParams } from '../Models/ProductParams';
+import { IProduct } from '../Shared/models/Product';
+import { ICategory } from '../Shared/models/Category';
+import { ProductParams } from '../Shared/models/ProductParams';
 import { ShopItemComponent } from '../shop/shop-item/shop-item.component';
 import { RouterLink } from '@angular/router';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   featuredProducts: IProduct[] = [];
   categories: ICategory[] = [];
 
-  constructor(private shopService: ShopService) {}
+  constructor(private shopService: ShopService) { }
 
   ngOnInit(): void {
     this.loadFeaturedProducts();
@@ -47,3 +47,5 @@ export class HomeComponent implements OnInit {
     });
   }
 }
+
+

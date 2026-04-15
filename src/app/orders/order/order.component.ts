@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IOrder, IOrderItem } from '../../Models/Orders';
+import { IOrder, IOrderItem } from '../../Shared/models/Orders';
 import { RouterLink } from '@angular/router';
 import { CurrencyPipe, DatePipe, NgClass } from '@angular/common';
 import { OrdersService } from '../orders.service';
@@ -54,3 +54,5 @@ export class OrderComponent implements OnInit {
     return imageName;
   }
 }
+
+

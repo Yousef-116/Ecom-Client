@@ -10,7 +10,7 @@ import {
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IdentityService } from '../identity.service';
 import { ToastrService } from 'ngx-toastr';
-import { IResetPassword } from '../../Models/Account';
+import { IResetPassword } from '../../Shared/models/Account';
 @Component({
   selector: 'app-reset-password',
   standalone: true,
@@ -120,3 +120,5 @@ export class ResetPasswordComponent {
     }
   }
 }
+
+

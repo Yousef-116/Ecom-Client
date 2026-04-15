@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IProduct } from '../Models/Product';
-import { ICategory } from '../Models/Category';
-import { ProductParams } from '../Models/ProductParams';
-import { IPagination } from '../Models/Pagination';
+import { IProduct } from '../Shared/models/Product';
+import { ICategory } from '../Shared/models/Category';
+import { ProductParams } from '../Shared/models/ProductParams';
+import { IPagination } from '../Shared/models/Pagination';
 import { Environment } from '../environment';
 
 @Injectable({
@@ -43,3 +43,5 @@ export class ShopService {
   }
 
 }
+
+

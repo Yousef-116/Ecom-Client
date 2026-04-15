@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import { Basket, IBasket, IBasketItem, IBasketTotal } from '../Models/Basket';
-import { IProduct } from '../Models/Product';
+import { Basket, IBasket, IBasketItem, IBasketTotal } from '../Shared/models/Basket';
+import { IProduct } from '../Shared/models/Product';
 import { Environment } from '../environment';
-import { IDelivery } from '../Models/Delivery';
+import { IDelivery } from '../Shared/models/Delivery';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +35,7 @@ export class BasketService {
     return this.http
       .post(
         this.BaseURL +
-        `/Payments/Create?basketId=${this.GetCurrentValue().id}&deliveryId=${deliveryMethodId}`,
+        `/Payments?basketId=${this.GetCurrentValue().id}&deliveryId=${deliveryMethodId}`,
         {},
       )
       .pipe(
@@ -205,3 +205,5 @@ export class BasketService {
     };
   }
 }
+
+

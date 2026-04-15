@@ -2,11 +2,11 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitte
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 // import { RatingService } from '../../../rating.service';
-// import { ProductRatingDTO } from '../../../../Models/rating';
+// import { ProductRatingDTO } from '../../../../shared/models/rating';
 // import { IdentityService } from '../../../../identity/identity.service';
 import { ToastrService } from 'ngx-toastr';
 import { RouterLink } from '@angular/router';
-import { ProductRatingDTO } from '../../../Models/rating';
+import { ProductRatingDTO } from '../../../Shared/models/rating';
 import { RatingService } from '../../rating.service';
 import { IdentityService } from '../../../identity/identity.service';
 
@@ -20,11 +20,11 @@ import { IdentityService } from '../../../identity/identity.service';
 export class RatingComponent implements OnInit, OnChanges {
   @Input() productId!: number;
   @Output() ratingChanged = new EventEmitter<{ avg: number, count: number }>();
-  
+
   ratings: ProductRatingDTO[] = [];
   userName: string | null = null;
   averageRating: number = 0;
-  
+
   newRatingMessage: string = '';
   newRatingScore: number = 0;
   hoverScore: number = 0;
@@ -34,7 +34,7 @@ export class RatingComponent implements OnInit, OnChanges {
     private ratingService: RatingService,
     private identityService: IdentityService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.identityService.userName$.subscribe(name => {
@@ -91,7 +91,7 @@ export class RatingComponent implements OnInit, OnChanges {
       this.toastr.warning('Please select a star rating.', 'Warning');
       return;
     }
-    
+
     if (!this.userName) {
       this.toastr.error('You must be logged in to leave a rating.', 'Error');
       return;
@@ -118,3 +118,5 @@ export class RatingComponent implements OnInit, OnChanges {
     });
   }
 }
+
+

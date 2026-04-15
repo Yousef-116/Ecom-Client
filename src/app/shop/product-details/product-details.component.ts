@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShopService } from '../shop.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { IProduct } from '../../Models/Product';
+import { IProduct } from '../../Shared/models/Product';
 import { CommonModule } from '@angular/common';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
@@ -9,7 +9,7 @@ import { BasketService } from '../../basket/basket.service';
 
 import { RatingComponent } from './rating/rating.component';
 import { ShopItemComponent } from '../shop-item/shop-item.component';
-import { ProductParams } from '../../Models/ProductParams';
+import { ProductParams } from '../../Shared/models/ProductParams';
 
 @Component({
   selector: 'app-product-details',
@@ -65,7 +65,7 @@ export class ProductDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private basketService: BasketService,
-  ) {}
+  ) { }
   id: number;
   product: IProduct;
   relatedProducts: IProduct[] = [];
@@ -118,3 +118,5 @@ export class ProductDetailsComponent implements OnInit {
     return imageName;
   }
 }
+
+

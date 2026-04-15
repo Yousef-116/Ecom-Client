@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ShopService } from './shop.service';
-import { IPagination } from '../Models/Pagination';
-import { IProduct } from '../Models/Product';
+import { IPagination } from '../Shared/models/Pagination';
+import { IProduct } from '../Shared/models/Product';
 import { CommonModule } from '@angular/common';
 import { ShopItemComponent } from './shop-item/shop-item.component';
-import { ICategory } from '../Models/Category';
+import { ICategory } from '../Shared/models/Category';
 import { FormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { ProductParams } from '../Models/ProductParams';
+import { ProductParams } from '../Shared/models/ProductParams';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -46,7 +46,7 @@ export class ShopComponent implements OnInit {
     private tost: ToastrService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   //Get All Product
   ListProduct: IProduct[];
@@ -196,3 +196,5 @@ export class ShopComponent implements OnInit {
 
 //   this.getAllProduct();
 // }
+
+

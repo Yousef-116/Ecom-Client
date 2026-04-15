@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core'; // 1. Import OnChanges and SimpleChanges
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { BasketService } from '../../basket/basket.service';
-import { IProduct } from '../../Models/Product';
+import { IProduct } from '../../Shared/models/Product';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -20,7 +20,7 @@ export class ShopItemComponent implements OnChanges {
   constructor(
     private service: BasketService,
     private toastr: ToastrService,
-  ) {}
+  ) { }
 
   // 3. Add this method to handle Input updates
   ngOnChanges(changes: SimpleChanges) {
@@ -54,3 +54,5 @@ export class ShopItemComponent implements OnChanges {
     this.toastr.success('Item added to basket');
   }
 }
+
+

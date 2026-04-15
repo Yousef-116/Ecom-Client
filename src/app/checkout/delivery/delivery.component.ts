@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { CheckoutService } from '../checkout.service';
-import { IDelivery } from '../../Models/Delivery';
+import { IDelivery } from '../../Shared/models/Delivery';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -42,7 +42,7 @@ export class DeliveryComponent implements OnInit {
     private checkoutService: CheckoutService,
     private basketService: BasketService,
     private toaster: ToastrService,
-  ) {}
+  ) { }
 
   CreatePayment() {
     const id = this.deliveryMethods.find(
@@ -82,3 +82,5 @@ export class DeliveryComponent implements OnInit {
   //   throw new Error('Method not implemented.');
   // }
 }
+
+

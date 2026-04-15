@@ -9,7 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IAuthResponse } from '../../Models/Account';
+import { IAuthResponse } from '../../Shared/models/Account';
 
 @Component({
   selector: 'app-login',
@@ -114,3 +114,5 @@ export class LoginComponent {
     });
   }
 }
+
+

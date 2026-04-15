@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from '../basket.service';
 import { RouterLink } from '@angular/router';
-import { IBasket, IBasketItem } from '../../Models/Basket';
+import { IBasket, IBasketItem } from '../../Shared/models/Basket';
 import { CommonModule, CurrencyPipe, AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { OrderTotalComponent } from '../../Shared/order-total/order-total.component';
 import { IdentityService } from '../../identity/identity.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-// import { IBasket, IBasketItem } from '../../shared/Models/Basket';
+// import { IBasket, IBasketItem } from '../../shared/models/Basket';
 
 @Component({
   selector: 'app-basket',
@@ -64,3 +64,6 @@ export class BasketComponent implements OnInit {
     return imageName;
   }
 }
+
+
+

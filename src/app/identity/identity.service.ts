@@ -6,8 +6,7 @@ import {
   ILogin,
   IRegister,
   IResetPassword,
-} from '../Models/Account';
-import { cwd } from 'node:process';
+} from '../Shared/models/Account';
 import { Environment } from '../environment';
 import { BehaviorSubject, catchError, map, tap, throwError } from 'rxjs';
 
@@ -15,13 +14,12 @@ import { BehaviorSubject, catchError, map, tap, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class IdentityService {
-  //baseURL = 'http://localhost:5037/api/';
-  //baseURL = 'https://localhost:7097/api/';
+
   baseURL = Environment.baseURL;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   register(values: IRegister) {
-    return this.http.post(this.baseURL + '/Account/Register', values, {
+    return this.http.post(this.baseURL + '/Account/register', values, {
       responseType: 'text',
     });
   }
@@ -29,7 +27,7 @@ export class IdentityService {
   active(values: IActive) {
     console.log('Sending activation request with:', values);
     return this.http
-      .post(this.baseURL + '/Account/active-account', values, {
+      .post(this.baseURL + '/Account/activate', values, {
         responseType: 'text',
         withCredentials: true,
       })
@@ -44,7 +42,7 @@ export class IdentityService {
 
   login(values: ILogin) {
     return this.http.post<IAuthResponse>(
-      this.baseURL + '/Account/Login',
+      this.baseURL + '/Account/login',
       values,
       {
         withCredentials: true,
@@ -59,7 +57,7 @@ export class IdentityService {
 
     param = param.append('email', email);
 
-    return this.http.get(this.baseURL + '/Account/send-email-forget-password', {
+    return this.http.get(this.baseURL + '/Account/forgot-password', {
       params: param,
       responseType: 'text',
     });
@@ -85,7 +83,7 @@ export class IdentityService {
   }
 
   isAuthenticated() {
-    return this.http.get(this.baseURL + '/Account/IsUserAuth', {
+    return this.http.get(this.baseURL + '/Account/is-auth', {
       withCredentials: true,
       responseType: 'text'
     });
@@ -93,7 +91,7 @@ export class IdentityService {
 
   loadUserName() {
     this.http
-      .get(this.baseURL + '/Account/get-user-name', { withCredentials: true })
+      .get(this.baseURL + '/account/user-name', { withCredentials: true })
       .subscribe({
         next: (res) => {
           console.log('Full loadUserName response:', res); // 👈 Add this log
@@ -119,7 +117,7 @@ export class IdentityService {
 
   logout() {
     return this.http
-      .get(this.baseURL + '/Account/Logout', { withCredentials: true })
+      .get(this.baseURL + '/Account/logout', { withCredentials: true })
       .pipe(
         tap(() => {
           this.userNameSource.next(null);
@@ -127,3 +125,5 @@ export class IdentityService {
       );
   }
 }
+
+

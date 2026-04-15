@@ -2,8 +2,8 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { CheckoutService } from '../checkout.service';
 import { BasketService } from '../../basket/basket.service';
 import { ToastrService } from 'ngx-toastr';
-import { IBasket } from '../../Models/Basket';
-import { ICreateOrder } from '../../Models/Orders';
+import { IBasket } from '../../Shared/models/Basket';
+import { ICreateOrder } from '../../Shared/models/Orders';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -38,7 +38,7 @@ export class PaymentComponent implements OnInit {
     private toast: ToastrService,
     private basketService: BasketService,
     private router: Router,
-  ) {}
+  ) { }
   onChange({ error }) {
     if (error) {
       this.cardErrors = error.message;
@@ -95,7 +95,7 @@ export class PaymentComponent implements OnInit {
     this.cardNumber?.destroy();
     this.cardExpiry?.destroy();
   }
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   async submitOrder() {
     this.loader = true;
@@ -210,3 +210,5 @@ export class PaymentComponent implements OnInit {
     };
   }
 }
+
+
