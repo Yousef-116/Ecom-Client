@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IBasketTotal } from '../models/Basket';
+import { IBasketTotal } from '../models';
 import { BasketService } from '../../basket/basket.service';
 import { CurrencyPipe } from '@angular/common';
 

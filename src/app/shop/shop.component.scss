@@ -1,8 +1,4 @@
-$info-color: #0dcaf0;
-$dark-bg: #121212;
-$card-bg: rgba(255, 255, 255, 0.05);
-$glass-bg: rgba(30, 30, 30, 0.8);
-$text-muted: rgba(255, 255, 255, 0.7); // instead of 0.5
+@import "../../styles/mixins";
 
 .text-muted {
   color: rgba(255, 255, 255, 0.7) !important;
@@ -11,8 +7,6 @@ $text-muted: rgba(255, 255, 255, 0.7); // instead of 0.5
 .uppercase {
   color: rgba(255, 255, 255, 0.85); // for labels like Quantity
 }
-
-$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 :host {
   background-color: $dark-bg;
@@ -23,13 +17,10 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .main-title {
+  @include text-gradient;
   font-size: 2rem;
   font-weight: 800;
   margin-bottom: 1rem;
-  background: linear-gradient(45deg, #fff, $info-color);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
   letter-spacing: -1px;
 }
 

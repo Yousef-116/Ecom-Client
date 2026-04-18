@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core'; // 1. Import OnChanges and SimpleChanges
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { BasketService } from '../../basket/basket.service';
-import { IProduct } from '../../Shared/models/Product';
+import { IProduct } from '../../shared/models';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 

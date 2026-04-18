@@ -1,0 +1,65 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scale {
+
+  0%,
+  100% {
+    transform: none;
+  }
+
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 60px #2ed573;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Success Particles
+@for $i from 1 through 12 {
+  $angle: (
+    $i - 1) * 30deg;
+
+  @keyframes particle-anim-#{$i} {
+    0% {
+      transform: translate(0, 0) scale(1
+      );
+    opacity: 1;
+  }
+
+  100% {
+    // Using calc for division to avoid Dart Sass deprecation warnings
+    transform: translate(calc(150px * ($i / 12)), calc(150px * ((12 - $i) / 12))) scale(0);
+    opacity: 0;
+  }
+}
+}

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ShopService } from './shop.service';
-import { IPagination } from '../Shared/models/Pagination';
-import { IProduct } from '../Shared/models/Product';
+import { IPagination } from '../shared/models';
+import { IProduct } from '../shared/models';
 import { CommonModule } from '@angular/common';
 import { ShopItemComponent } from './shop-item/shop-item.component';
-import { ICategory } from '../Shared/models/Category';
+import { ICategory } from '../shared/models';
 import { FormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { ProductParams } from '../Shared/models/ProductParams';
+import { ProductParams } from '../shared/models';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 

@@ -1,27 +1,10 @@
-$info-color: #0dcaf0;
-$dark-bg: #121212;
-$success-color: #2ed573;
-$card-bg: rgba(255, 255, 255, 0.03);
-$border-color: rgba(255, 255, 255, 0.08);
-$text-muted: rgba(255, 255, 255, 0.5);
-
-:host {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 80vh;
-    background-color: $dark-bg;
-    color: #fff;
-}
+@import "../../../styles/mixins";
 
 .success-container {
+    @include glass-card;
     text-align: center;
     max-width: 600px;
     padding: 4rem;
-    background: $card-bg;
-    backdrop-filter: blur(20px);
-    border: 1px solid $border-color;
-    border-radius: 40px;
     box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
 }
 
@@ -62,39 +45,12 @@ $text-muted: rgba(255, 255, 255, 0.5);
     }
 }
 
-@keyframes stroke {
-    100% {
-        stroke-dashoffset: 0;
-    }
-}
-
-@keyframes scale {
-
-    0%,
-    100% {
-        transform: none;
-    }
-
-    50% {
-        transform: scale3d(1.1, 1.1, 1);
-    }
-}
-
-@keyframes fill {
-    100% {
-        box-shadow: inset 0px 0px 0px 60px $success-color;
-    }
-}
-
 // Text & Buttons
 h1 {
+    @include text-gradient(#fff, $success-color);
     font-size: 3rem;
     font-weight: 800;
     padding: 0.5rem;
-    background: linear-gradient(45deg, #fff, $success-color);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 .order-id {
@@ -167,22 +123,4 @@ p {
             }
         }
     }
-}
-
-@for $i from 1 through 12 {
-    $angle: (
-        $i - 1) * 30deg;
-
-    @keyframes particle-anim-#{$i} {
-        0% {
-            transform: translate(0, 0) scale(1
-            );
-        opacity: 1;
-    }
-
-    100% {
-        transform: translate(cos($angle) * 150px, sin($angle) * 150px) scale(0);
-        opacity: 0;
-    }
-}
 }

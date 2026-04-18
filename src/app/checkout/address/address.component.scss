@@ -1,17 +1,28 @@
 .address-container {
   max-width: 900px;
   margin: 30px auto;
-  padding: 0;
   color: #fff;
 }
 
 .section-title {
-  margin-bottom: 30px;
+  margin-bottom: 35px;
   font-size: 1.25rem;
   font-weight: 800;
   color: #0dcaf0;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: #0dcaf0;
+    border-radius: 2px;
+  }
 }
 
 .address-grid {
@@ -28,11 +39,11 @@
   }
 
   .city-field {
-    grid-column: span 3;
+    grid-column: span 2;
   }
 
   .state-field {
-    grid-column: span 1;
+    grid-column: span 2;
   }
 
   .zip-field {
@@ -40,73 +51,68 @@
   }
 }
 
-// Deep styling for Mat Form Fields to make them dark
-::ng-deep {
-  .mat-mdc-form-field {
-    width: 100%;
-    margin-bottom: 5px;
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
-    // Transparent background for the wrapper
-    .mat-mdc-text-field-wrapper {
-      background-color: rgba(255, 255, 255, 0.03) !important;
-      border-radius: 12px !important;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  .input-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-left: 5px;
+  }
 
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.06) !important;
+  .input-inner {
+    position: relative;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 0 15px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    &:focus-within {
+      border-color: #0dcaf0;
+      background: rgba(13, 202, 240, 0.02);
+      box-shadow: 0 0 15px rgba(13, 202, 240, 0.1);
+      transform: translateY(-2px); // Focus lift
+
+      .prefix-icon {
+        color: #0dcaf0;
+        transform: scale(1.1);
       }
     }
 
-    // Label styling (Normal state)
-    .mat-mdc-form-field-label {
-      color: rgba(255, 255, 255, 0.6) !important; // Lighter and more visible
-      font-weight: 500 !important;
+    .prefix-icon {
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.3);
+      margin-right: 12px;
+      transition: all 0.3s ease;
     }
 
-    // Outline colors (Normal state)
-    .mdc-notched-outline__leading,
-    .mdc-notched-outline__notch,
-    .mdc-notched-outline__trailing {
-      border-color: rgba(255, 255, 255, 0.15) !important;
-      border-width: 1.5px !important;
-    }
+    .custom-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      width: 100%;
 
-    // Focused state overrides
-    &.mat-focused {
-      .mat-mdc-form-field-label {
-        color: #0dcaf0 !important;
-      }
-
-      .mdc-notched-outline__leading,
-      .mdc-notched-outline__notch,
-      .mdc-notched-outline__trailing {
-        border-color: #0dcaf0 !important;
-        border-width: 2px !important;
-      }
-
-      .mat-icon {
-        color: #0dcaf0 !important;
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.2);
       }
     }
-
-    // Input text color
-    input.mat-mdc-input-element {
-      color: #fff !important;
-      caret-color: #0dcaf0 !important;
-    }
-
-    // Icons
-    .mat-icon {
-      color: rgba(255, 255, 255, 0.4) !important;
-      transition: color 0.3s ease;
-    }
-
-    // CSS Variable overrides for MDC internal focus logic
-    --mdc-outlined-text-field-focus-outline-color: #0dcaf0;
-    --mdc-outlined-text-field-outline-color: rgba(255, 255, 255, 0.15);
-    --mdc-outlined-text-field-hover-outline-color: rgba(255, 255, 255, 0.25);
-    --mdc-outlined-text-field-label-text-color: rgba(255, 255, 255, 0.6);
-    --mdc-outlined-text-field-focus-label-text-color: #0dcaf0;
   }
 }
 
@@ -124,25 +130,19 @@
   color: #1a1a1a !important;
   font-weight: 800 !important;
   font-size: 1.1rem !important;
-  letter-spacing: 1px;
+  text-transform: uppercase;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   box-shadow: 0 10px 20px rgba(13, 202, 240, 0.2) !important;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: #fff !important;
     transform: translateY(-3px) !important;
     box-shadow: 0 15px 30px rgba(13, 202, 240, 0.3) !important;
   }
 
   &:disabled {
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    color: rgba(255, 255, 255, 0.3) !important;
-    box-shadow: none !important;
-  }
-
-  mat-icon {
-    margin-left: 10px;
-    font-size: 20px;
-    vertical-align: middle;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: rgba(255, 255, 255, 0.2) !important;
+    cursor: not-allowed;
   }
 }

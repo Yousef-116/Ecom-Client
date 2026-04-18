@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { Observable } from 'rxjs';
-import { IBasket } from '../../Shared/models/Basket';
+import { IBasket } from '../../shared/models';
 import { isPlatformBrowser } from '@angular/common';
 import { IdentityService } from '../../identity/identity.service';
 

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { IActive } from '../../Shared/models/Account';
+import { IActive } from '../../shared/models';
 import { IdentityService } from '../identity.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Route, Router } from '@angular/router';

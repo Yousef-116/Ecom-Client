@@ -2,14 +2,14 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { CheckoutService } from '../checkout.service';
 import { BasketService } from '../../basket/basket.service';
 import { ToastrService } from 'ngx-toastr';
-import { IBasket } from '../../Shared/models/Basket';
-import { ICreateOrder } from '../../Shared/models/Orders';
+
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { firstValueFrom } from 'rxjs';
+import { IBasket, ICreateOrder } from '../../shared/models';
 
 @Component({
   selector: 'app-payment',
@@ -33,6 +33,9 @@ export class PaymentComponent implements OnInit {
   orderId: number;
   cardHandler = this.onChange.bind(this);
   loader: boolean = false;
+  isCardNumberFocused = false;
+  isCardExpiryFocused = false;
+  isCardCvcFocused = false;
   constructor(
     private checkoutService: CheckoutService,
     private toast: ToastrService,
@@ -88,6 +91,24 @@ export class PaymentComponent implements OnInit {
     this.cardCvc = elements.create('cardCvc', { style: elementStyles });
     this.cardCvc.mount(this.cardCvcElement.nativeElement);
     this.cardCvc.addEventListener('change', this.cardHandler);
+
+    this.cardNumber = elements.create('cardNumber', { style: elementStyles });
+    this.cardNumber.mount(this.cardNumberElement.nativeElement);
+    this.cardNumber.on('change', this.cardHandler);
+    this.cardNumber.on('focus', () => this.isCardNumberFocused = true);
+    this.cardNumber.on('blur', () => this.isCardNumberFocused = false);
+
+    this.cardExpiry = elements.create('cardExpiry', { style: elementStyles });
+    this.cardExpiry.mount(this.cardExpiryElement.nativeElement);
+    this.cardExpiry.on('change', this.cardHandler);
+    this.cardExpiry.on('focus', () => this.isCardExpiryFocused = true);
+    this.cardExpiry.on('blur', () => this.isCardExpiryFocused = false);
+
+    this.cardCvc = elements.create('cardCvc', { style: elementStyles });
+    this.cardCvc.mount(this.cardCvcElement.nativeElement);
+    this.cardCvc.on('change', this.cardHandler);
+    this.cardCvc.on('focus', () => this.isCardCvcFocused = true);
+    this.cardCvc.on('blur', () => this.isCardCvcFocused = false);
   }
 
   ngOnDestroy(): void {
@@ -136,7 +157,7 @@ export class PaymentComponent implements OnInit {
           queryParams: { orderId: this.orderId },
         });
 
-        this.basketService.deleteBasket();
+        this.basketService.DeleteBasketItem(basket);
       }
 
       // 4️⃣ payment failed
@@ -155,31 +176,7 @@ export class PaymentComponent implements OnInit {
     this.loader = false;
   }
 
-  // async SubmetOrder() {
-  //   this.loader = true;
 
-  //   const basket = this.basketService.GetCurrentValue();
-  //   const order = this.getOrderCreate(basket);
-
-  //   await this.CreateOrder(order);
-
-  //   const PaymentDetials = await this.confirmPaymentWithStripe(basket);
-
-  //   if (PaymentDetials.paymentIntent) {
-  //     this.loader = false;
-
-  //     this.toast.success('Order Created Successfuly', 'SUCCESS');
-
-  //     this.router.navigate(['/checkout/success'], {
-  //       queryParams: { orderId: this.orderId },
-  //     });
-
-  //     this.basketService.deleteBasket();
-  //   } else {
-  //     this.loader = false;
-  //     this.toast.error(PaymentDetials.error.message, 'ERROR');
-  //   }
-  // }
 
   async confirmPaymentWithStripe(basket: IBasket) {
     return this.stripe.confirmCardPayment(basket.clientSecret, {

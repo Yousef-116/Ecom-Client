@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { StepperComponent } from '../stepper/stepper.component';
-import { OrderTotalComponent } from '../../Shared/order-total/order-total.component';
+import { OrderTotalComponent } from '../../shared/order-total/order-total.component';
 
 @Component({
   selector: 'app-checkout',

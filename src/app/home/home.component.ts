@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShopService } from '../shop/shop.service';
-import { IProduct } from '../Shared/models/Product';
-import { ICategory } from '../Shared/models/Category';
-import { ProductParams } from '../Shared/models/ProductParams';
+import { IProduct } from '../shared/models';
+import { ICategory } from '../shared/models';
+import { ProductParams } from '../shared/models';
 import { ShopItemComponent } from '../shop/shop-item/shop-item.component';
 import { RouterLink } from '@angular/router';
 import { CarouselModule } from 'ngx-bootstrap/carousel';

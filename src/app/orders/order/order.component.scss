@@ -1,9 +1,4 @@
-$info-color: #0dcaf0;
-$dark-bg: #0a0a0a;
-$card-bg: rgba(20, 20, 20, 0.6);
-$border-color: rgba(255, 255, 255, 0.1);
-$text-muted: rgba(255, 255, 255, 0.6);
-$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+@import "../../../styles/mixins";
 
 :host {
     display: block;
@@ -47,12 +42,9 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 /* Table Card Design */
 .premium-table-card {
-    background: $card-bg;
-    backdrop-filter: blur(20px);
-    border-radius: 24px;
+    @include glass-card;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     overflow: hidden;
-    border: 1px solid $border-color;
 }
 
 .custom-table {

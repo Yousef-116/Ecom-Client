@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Environment } from '../environment';
-import { IDelivery } from '../Shared/models/Delivery';
-import { ICreateOrder, IOrder } from '../Shared/models/Orders';
+import { IDelivery } from '../shared/models';
+import { ICreateOrder, IOrder } from '../shared/models';
 
 @Injectable({
   providedIn: 'root',

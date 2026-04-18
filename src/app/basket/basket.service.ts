@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import { Basket, IBasket, IBasketItem, IBasketTotal } from '../Shared/models/Basket';
-import { IProduct } from '../Shared/models/Product';
+import { Basket, IBasket, IBasketItem, IBasketTotal } from '../shared/models';
+import { IProduct } from '../shared/models';
 import { Environment } from '../environment';
-import { IDelivery } from '../Shared/models/Delivery';
+import { IDelivery } from '../shared/models';
 
 @Injectable({
   providedIn: 'root',
@@ -23,14 +23,33 @@ export class BasketService {
   private basketTotalSource = new BehaviorSubject<IBasketTotal>(null);
   basketTotal$ = this.basketTotalSource.asObservable();
 
-  deleteBasket() {
-    this.basketSource.next({
-      id: '',
-      basketItems: []
-    });
-    this.basketTotalSource.next(null);
-    localStorage.removeItem('basketId');
+  DeleteBasketItem(basket: IBasket) {
+    return this.http
+      .delete(this.BaseURL + '/Baskets/' + basket.id)
+      .subscribe({
+        next: (value) => {
+          // Clear local state
+          this.basketSource.next({
+            id: '',
+            basketItems: []
+          });
+          this.basketTotalSource.next(null);
+          localStorage.removeItem('basketId');
+          console.log('Basket deleted successfully from backend');
+        },
+        error(err) {
+          console.error('Error deleting basket from backend:', err);
+          // Still clear local state even if backend delete fails
+          this.basketSource.next({
+            id: '',
+            basketItems: []
+          });
+          this.basketTotalSource.next(null);
+          localStorage.removeItem('basketId');
+        },
+      });
   }
+
   CreatePaymentIntent(deliveryMethodId: number) {
     return this.http
       .post(
@@ -76,22 +95,22 @@ export class BasketService {
       });
   }
 
-  DeleteBasketItem(basket: IBasket) {
-    return this.http
-      .delete(this.BaseURL + '/Baskets/' + basket.id)
-      .subscribe({
-        next: (value) => {
-          this.basketSource.next({
-            id: '',
-            basketItems: []
-          });
-          localStorage.removeItem('basketId');
-        },
-        error(err) {
-          console.log(err);
-        },
-      });
-  }
+  // DeleteBasketItem(basket: IBasket) {
+  //   return this.http
+  //     .delete(this.BaseURL + '/Baskets/' + basket.id)
+  //     .subscribe({
+  //       next: (value) => {
+  //         this.basketSource.next({
+  //           id: '',
+  //           basketItems: []
+  //         });
+  //         localStorage.removeItem('basketId');
+  //       },
+  //       error(err) {
+  //         console.log(err);
+  //       },
+  //     });
+  // }
   ShippingCost: number;
   SetDeliveryMethod(delivery: IDelivery) {
     this.ShippingCost = delivery.price;

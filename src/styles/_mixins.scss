@@ -1,0 +1,15 @@
+@import 'variables';
+
+@mixin glass-card {
+  background: $card-bg;
+  backdrop-filter: blur(20px);
+  border: 1px solid $border-color;
+  border-radius: 24px;
+}
+
+@mixin text-gradient($start: #fff, $end: $info-color) {
+  background: linear-gradient(45deg, $start, $end);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

@@ -1,14 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  IActive,
-  IAuthResponse,
-  ILogin,
-  IRegister,
-  IResetPassword,
-} from '../Shared/models/Account';
+
 import { Environment } from '../environment';
 import { BehaviorSubject, catchError, map, tap, throwError } from 'rxjs';
+import { IActive, IAuthResponse, ILogin, IRegister, IResetPassword } from '../shared/models';
 
 @Injectable({
   providedIn: 'root',
@@ -117,7 +112,7 @@ export class IdentityService {
 
   logout() {
     return this.http
-      .get(this.baseURL + '/Account/logout', { withCredentials: true })
+      .post(this.baseURL + '/Account/logout', {})
       .pipe(
         tap(() => {
           this.userNameSource.next(null);

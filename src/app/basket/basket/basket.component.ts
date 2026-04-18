@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from '../basket.service';
 import { RouterLink } from '@angular/router';
-import { IBasket, IBasketItem } from '../../Shared/models/Basket';
+import { IBasket, IBasketItem } from '../../shared/models';
 import { CommonModule, CurrencyPipe, AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
-import { OrderTotalComponent } from '../../Shared/order-total/order-total.component';
+import { OrderTotalComponent } from '../../shared/order-total/order-total.component';
 import { IdentityService } from '../../identity/identity.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';

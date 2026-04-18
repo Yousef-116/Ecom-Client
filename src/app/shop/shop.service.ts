@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IProduct } from '../Shared/models/Product';
-import { ICategory } from '../Shared/models/Category';
-import { ProductParams } from '../Shared/models/ProductParams';
-import { IPagination } from '../Shared/models/Pagination';
+import { IProduct } from '../shared/models';
+import { ICategory } from '../shared/models';
+import { ProductParams } from '../shared/models';
+import { IPagination } from '../shared/models';
 import { Environment } from '../environment';
 
 @Injectable({

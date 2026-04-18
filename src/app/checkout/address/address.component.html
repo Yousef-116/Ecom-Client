@@ -4,42 +4,67 @@
     <h3 class="section-title">Shipping Information</h3>
 
     <div class="address-grid">
-        <mat-form-field appearance="outline" class="half-width">
-            <mat-label>First Name</mat-label>
-            <input matInput placeholder="e.g. John" formControlName="firstName">
-            <mat-icon matPrefix>person</mat-icon>
-        </mat-form-field>
+        <div class="half-width">
+            <div class="input-wrapper">
+                <label class="input-label">First Name</label>
+                <div class="input-inner">
+                    <i class="material-icons prefix-icon">person</i>
+                    <input type="text" placeholder="e.g. John" formControlName="firstName" class="custom-input">
+                </div>
+            </div>
+        </div>
 
-        <mat-form-field appearance="outline" class="half-width">
-            <mat-label>Last Name</mat-label>
-            <input matInput placeholder="e.g. Doe" formControlName="lastName">
-        </mat-form-field>
+        <div class="half-width">
+            <div class="input-wrapper">
+                <label class="input-label">Last Name</label>
+                <div class="input-inner">
+                    <input type="text" placeholder="e.g. Doe" formControlName="lastName" class="custom-input">
+                </div>
+            </div>
+        </div>
 
-        <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Street Address</mat-label>
-            <input matInput placeholder="123 Main St" formControlName="street">
-            <mat-icon matPrefix>home</mat-icon>
-        </mat-form-field>
+        <div class="full-width">
+            <div class="input-wrapper">
+                <label class="input-label">Street Address</label>
+                <div class="input-inner">
+                    <i class="material-icons prefix-icon">home</i>
+                    <input type="text" placeholder="123 Main St" formControlName="street" class="custom-input">
+                </div>
+            </div>
+        </div>
 
-        <mat-form-field appearance="outline" class="city-field">
-            <mat-label>City</mat-label>
-            <input matInput placeholder="City" formControlName="city">
-        </mat-form-field>
+        <div class="city-field">
+            <div class="input-wrapper">
+                <label class="input-label">City</label>
+                <div class="input-inner">
+                    <i class="material-icons prefix-icon">location_city</i>
+                    <input type="text" placeholder="City" formControlName="city" class="custom-input">
+                </div>
+            </div>
+        </div>
 
-        <mat-form-field appearance="outline" class="state-field">
-            <mat-label>State</mat-label>
-            <input matInput placeholder="State" formControlName="state">
-        </mat-form-field>
+        <div class="state-field">
+            <div class="input-wrapper">
+                <label class="input-label">State</label>
+                <div class="input-inner">
+                    <input type="text" placeholder="ST" formControlName="state" class="custom-input">
+                </div>
+            </div>
+        </div>
 
-        <mat-form-field appearance="outline" class="zip-field">
-            <mat-label>Zip Code</mat-label>
-            <input matInput placeholder="Zip" formControlName="zipCode">
-        </mat-form-field>
+        <div class="zip-field">
+            <div class="input-wrapper">
+                <label class="input-label">Zip Code</label>
+                <div class="input-inner">
+                    <i class="material-icons prefix-icon">map</i>
+                    <input type="text" placeholder="Zip" formControlName="zipCode" class="custom-input">
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="actions">
-        <button mat-flat-button color="primary" (click)="UpdateAddress()" matStepperNext [disabled]="!address.valid"
-            class="next-btn">
+        <button mat-flat-button (click)="UpdateAddress()" matStepperNext [disabled]="!address.valid" class="next-btn">
             Save & Continue
             <mat-icon>arrow_forward</mat-icon>
         </button>

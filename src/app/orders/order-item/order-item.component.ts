@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IOrder } from '../../Shared/models/Orders';
+import { IOrder } from '../../shared/models';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { OrdersService } from '../orders.service';
 import { CommonModule, CurrencyPipe, DatePipe, NgClass } from '@angular/common';
-import { OrderTotalComponent } from '../../Shared/order-total/order-total.component';
+import { OrderTotalComponent } from '../../shared/order-total/order-total.component';
 
 @Component({
   selector: 'app-order-item',

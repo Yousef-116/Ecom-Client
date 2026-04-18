@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IOrder, IOrderItem } from '../../Shared/models/Orders';
+import { IOrder, IOrderItem } from '../../shared/models';
 import { RouterLink } from '@angular/router';
 import { CurrencyPipe, DatePipe, NgClass } from '@angular/common';
 import { OrdersService } from '../orders.service';

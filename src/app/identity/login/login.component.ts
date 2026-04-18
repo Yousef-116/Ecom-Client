@@ -9,7 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IAuthResponse } from '../../Shared/models/Account';
+import { IAuthResponse } from '../../shared/models';
 
 @Component({
   selector: 'app-login',

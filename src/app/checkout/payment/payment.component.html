@@ -22,7 +22,7 @@
             <div class="col-12">
                 <div class="input-wrapper">
                     <label class="input-label">Card Number</label>
-                    <div class="stripe-input-container">
+                    <div class="stripe-input-container" [class.is-focused]="isCardNumberFocused">
                         <i class="material-icons prefix-icon">credit_card</i>
                         <div #cardNumber class="stripe-element"></div>
                     </div>
@@ -33,7 +33,7 @@
             <div class="col-6">
                 <div class="input-wrapper">
                     <label class="input-label">Expiry Date</label>
-                    <div class="stripe-input-container">
+                    <div class="stripe-input-container" [class.is-focused]="isCardExpiryFocused">
                         <i class="material-icons prefix-icon">event</i>
                         <div #cardExpiry class="stripe-element"></div>
                     </div>
@@ -42,7 +42,7 @@
             <div class="col-6">
                 <div class="input-wrapper">
                     <label class="input-label">CVC</label>
-                    <div class="stripe-input-container">
+                    <div class="stripe-input-container" [class.is-focused]="isCardCvcFocused">
                         <i class="material-icons prefix-icon">lock</i>
                         <div #cardCvc class="stripe-element"></div>
                     </div>

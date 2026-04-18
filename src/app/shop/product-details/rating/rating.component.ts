@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 // import { IdentityService } from '../../../../identity/identity.service';
 import { ToastrService } from 'ngx-toastr';
 import { RouterLink } from '@angular/router';
-import { ProductRatingDTO } from '../../../Shared/models/rating';
+import { ProductRatingDTO } from '../../../shared/models';
 import { RatingService } from '../../rating.service';
 import { IdentityService } from '../../../identity/identity.service';
 
