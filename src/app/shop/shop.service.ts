@@ -15,22 +15,28 @@ export class ShopService {
   baseURL = Environment.baseURL;
 
   getProduct(productParam: ProductParams) {
-    let param = new HttpParams();
+    let params = new HttpParams();
 
-    if (productParam.SelectedCategoryId) {
-      param = param.append('CategoryId', productParam.SelectedCategoryId);
+    console.log('PARAMS:', productParam); // ✅ better debugging
+
+    // ✅ Only send category if it's NOT default (0)
+    if (productParam.SelectedCategoryId > 0) {
+      params = params.set('CategoryId', productParam.SelectedCategoryId.toString());
     }
+
     if (productParam.SortSelected) {
-      param = param.append('Sort', productParam.SortSelected);
+      params = params.set('Sort', productParam.SortSelected);
     }
-    if (productParam.Search) {
-      param = param.append('Search', productParam.Search);
-    }
-    param = param.append('PageNumber', productParam.pageNumber);
-    param = param.append('PageSize', productParam.pageSize);
 
-    return this.http.get<IPagination>(this.baseURL + '/Products', {
-      params: param,
+    if (productParam.Search && productParam.Search.trim().length > 0) {
+      params = params.set('Search', productParam.Search.trim());
+    }
+
+    params = params.set('PageNumber', productParam.pageNumber.toString());
+    params = params.set('PageSize', productParam.pageSize.toString());
+
+    return this.http.get<IPagination>(`${this.baseURL}/Products`, {
+      params,
     });
   }
 

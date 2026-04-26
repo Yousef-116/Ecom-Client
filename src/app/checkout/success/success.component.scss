@@ -1,10 +1,153 @@
-@import "../../../styles/mixins";
+// @import "../../../styles/mixins";
+
+// .success-container {
+//     @include glass-card;
+//     text-align: center;
+//     max-width: 600px;
+//     padding: 4rem;
+//     box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+// }
+
+// // Checkmark Animation
+// .checkmark-wrapper {
+//     width: 120px;
+//     height: 120px;
+//     position: relative;
+//     margin: 0 auto 3rem;
+
+//     .checkmark-circle {
+//         fill: none;
+//         stroke: $success-color;
+//         stroke-width: 2;
+//         stroke-dasharray: 166;
+//         stroke-dashoffset: 166;
+//         stroke-miterlimit: 10;
+//         animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+//     }
+
+//     .checkmark {
+//         width: 120px;
+//         height: 120px;
+//         border-radius: 50%;
+//         display: block;
+//         stroke-width: 2;
+//         stroke: #fff;
+//         stroke-miterlimit: 10;
+//         box-shadow: inset 0px 0px 0px $success-color;
+//         animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+//     }
+
+//     .checkmark-check {
+//         transform-origin: 50% 50%;
+//         stroke-dasharray: 48;
+//         stroke-dashoffset: 48;
+//         animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) .8s forwards;
+//     }
+// }
+
+// // Text & Buttons
+// h1 {
+//     @include text-gradient(#fff, $success-color);
+//     font-size: 3rem;
+//     font-weight: 800;
+//     padding: 0.5rem;
+// }
+
+// .order-id {
+//     font-size: 1.1rem;
+//     color: $info-color;
+//     font-weight: 700;
+//     margin-bottom: 2rem;
+//     letter-spacing: 1px;
+// }
+
+// p {
+//     color: $text-muted;
+//     font-size: 1.1rem;
+//     line-height: 1.6;
+//     margin-bottom: 3rem;
+// }
+
+// .btn-main {
+//     padding: 1rem 3rem;
+//     font-weight: 700;
+//     border-radius: 15px;
+//     transition: all 0.3s ease;
+
+//     &.btn-orders {
+//         background: $info-color;
+//         color: #121212;
+//         border: none;
+
+//         &:hover {
+//             transform: translateY(-5px);
+//             box-shadow: 0 10px 20px rgba(13, 202, 240, 0.3);
+//             background: #fff;
+//         }
+//     }
+
+//     &.btn-outline-light {
+//         background: transparent;
+//         color: #fff;
+//         border: 1px solid rgba(255, 255, 255, 0.3);
+//         text-decoration: none;
+
+//         &:hover {
+//             transform: translateY(-5px);
+//             background: rgba(255, 255, 255, 0.1);
+//             border-color: #fff;
+//         }
+//     }
+// }
+
+// // Confetti-like bits
+// .particles {
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     width: 0;
+//     height: 0;
+//     pointer-events: none;
+
+//     .particle {
+//         position: absolute;
+//         width: 8px;
+//         height: 8px;
+//         background: $success-color;
+//         border-radius: 50%;
+//         opacity: 0;
+
+//         @for $i from 1 through 12 {
+//             &:nth-child(#{$i}) {
+//                 animation: particle-anim-#{$i} 1s ease-out 1s forwards;
+//             }
+//         }
+//     }
+// }
+$info-color: #0dcaf0;
+$dark-bg: #121212;
+$success-color: #2ed573;
+$card-bg: rgba(255, 255, 255, 0.03);
+$border-color: rgba(255, 255, 255, 0.08);
+$text-muted: rgba(255, 255, 255, 0.5);
+
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    background-color: $dark-bg;
+    color: #fff;
+}
 
 .success-container {
-    @include glass-card;
     text-align: center;
     max-width: 600px;
     padding: 4rem;
+    background: $card-bg;
+    backdrop-filter: blur(20px);
+    border: 1px solid $border-color;
+    border-radius: 40px;
     box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
 }
 
@@ -45,12 +188,39 @@
     }
 }
 
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes scale {
+
+    0%,
+    100% {
+        transform: none;
+    }
+
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
+}
+
+@keyframes fill {
+    100% {
+        box-shadow: inset 0px 0px 0px 60px $success-color;
+    }
+}
+
 // Text & Buttons
 h1 {
-    @include text-gradient(#fff, $success-color);
     font-size: 3rem;
     font-weight: 800;
     padding: 0.5rem;
+    background: linear-gradient(45deg, #fff, $success-color);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .order-id {
@@ -123,4 +293,22 @@ p {
             }
         }
     }
+}
+
+@for $i from 1 through 12 {
+    $angle: (
+        $i - 1) * 30deg;
+
+    @keyframes particle-anim-#{$i} {
+        0% {
+            transform: translate(0, 0) scale(1
+            );
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(cos($angle) * 150px, sin($angle) * 150px) scale(0);
+        opacity: 0;
+    }
+}
 }
